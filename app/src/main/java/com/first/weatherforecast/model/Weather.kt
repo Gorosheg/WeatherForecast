@@ -9,13 +9,19 @@ class Weather(
     private val weather: Degrees,
 
     @SerializedName("weather")
-    private val sky: List<SkyConditions>
+    private val skies: List<SkyConditions>
 ) {
+
+    private val sky: SkyConditions
+        get() = skies.first()
 
     val degree: Int
         get() = (weather.degree - ABSOLUTE_ZERO).toInt()
 
     val skyCondition: SkyCondition
-        get() = SkyCondition.stringOf(sky.first().skyCondition)
+        get() = SkyCondition.buildSkyCondition(sky.skyCondition)
+
+    val skyImage: SkyImage
+        get() = SkyImage.buildSkyImage(sky.skyCondition)
 
 }

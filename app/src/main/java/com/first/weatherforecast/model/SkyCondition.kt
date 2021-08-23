@@ -29,7 +29,7 @@ enum class SkyCondition(@StringRes val text: Int) {
 
     companion object {
 
-        fun stringOf(skyCondition: String): SkyCondition {
+        fun buildSkyCondition(skyCondition: String): SkyCondition {
             return when (skyCondition) {
                 "Clear" -> CLEAR
                 "Snow" -> SNOW
