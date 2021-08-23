@@ -1,6 +1,6 @@
 package com.first.weatherforecast.network
 
-import com.first.weatherforecast.Weather
+import com.first.weatherforecast.model.Weather
 import retrofit2.Call
 import retrofit2.http.GET
 

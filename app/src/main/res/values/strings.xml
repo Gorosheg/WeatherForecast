@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Weather forecast</string>
+    <string name="clear">Ясно</string>
+    <string name="snow">Снег</string>
+    <string name="rain">Дождь</string>
+    <string name="drizzle">Морось</string>
+    <string name="thunderstorm">Гроза</string>
+    <string name="clouds">Облачно</string>
+    <string name="mist">Туман</string>
+    <string name="smoke">Дым</string>
+    <string name="haze">Легкий туман</string>
+    <string name="dust">Пыль</string>
+    <string name="fog">Туман</string>
+    <string name="sand">Песок</string>
+    <string name="ash">Пепел</string>
+    <string name="squall">Шквалистый ветер</string>
+    <string name="tornado">Торнадо</string>
 </resources>
