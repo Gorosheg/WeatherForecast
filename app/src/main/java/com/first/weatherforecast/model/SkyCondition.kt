@@ -3,12 +3,6 @@ package com.first.weatherforecast.model
 import androidx.annotation.StringRes
 import com.first.weatherforecast.R
 
-/**
- * enum - ограниченное перечисление.
- * Если перебирать его в when, то не нужна ветка else.
- * При вызове Enum не вызыается конструктор.
- * Enum - константа. При его вызове нельзя передавать свои параметры.
- */
 enum class SkyCondition(@StringRes val text: Int) {
 
     CLEAR(R.string.clear),

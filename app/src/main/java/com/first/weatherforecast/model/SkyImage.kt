@@ -9,17 +9,17 @@ enum class SkyImage(@DrawableRes val image: Int) {
     SNOW(R.drawable.snow),
     RAIN(R.drawable.rain),
     DRIZZLE(R.drawable.rain),
-    THUNDERSTORM(R.drawable.rain),
+    THUNDERSTORM(R.drawable.thunderstorm),
     CLOUDS(R.drawable.cloudy),
-    MIST(R.drawable.rain),
-    SMOKE(R.drawable.rain),
-    HAZE(R.drawable.rain),
-    DUST(R.drawable.rain),
-    FOG(R.drawable.rain),
-    SAND(R.drawable.rain),
-    ASH(R.drawable.rain),
-    SQUALL(R.drawable.rain),
-    TORNADO(R.drawable.rain);
+    MIST(R.drawable.mist),
+    SMOKE(R.drawable.mist),
+    HAZE(R.drawable.mist),
+    DUST(R.drawable.dust),
+    FOG(R.drawable.mist),
+    SAND(R.drawable.dust),
+    ASH(R.drawable.ash),
+    SQUALL(R.drawable.squall),
+    TORNADO(R.drawable.tornado);
 
     companion object {
 

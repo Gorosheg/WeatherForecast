@@ -25,11 +25,18 @@ class MainActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
                 val weather: Weather = response.body() ?: return
+                val town: TextView = findViewById(R.id.town)
                 val degrees: TextView = findViewById(R.id.degrees)
+                val maxMin: TextView = findViewById(R.id.minMax)
+
                 val skyCondition: TextView = findViewById(R.id.skyCondition)
                 val skyImage: ImageView = findViewById(R.id.SkyImage)
 
-                degrees.text = weather.degree.toString()
+                town.text = weather.city
+
+                degrees.text = weather.degree.toString() + "°C"
+                maxMin.text = "${weather.tempMax}/${weather.tempMin}"
+
                 skyCondition.setText(weather.skyCondition.text)
                 skyImage.setImageResource(weather.skyImage.image)
             }
