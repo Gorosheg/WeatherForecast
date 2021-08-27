@@ -12,13 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherForecast">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.CitiesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.WeatherActivity"
+            android:exported="true">
+
         </activity>
     </application>
 

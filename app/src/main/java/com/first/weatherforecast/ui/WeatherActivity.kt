@@ -1,24 +1,34 @@
 package com.first.weatherforecast.ui
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.first.weatherforecast.R
 import com.first.weatherforecast.model.Weather
 import com.first.weatherforecast.network.NetworkManager
+import com.first.weatherforecast.ui.CitiesActivity.Companion.CITY_KEY
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
-
         loadWeather()
+
+        val back: Button = findViewById(R.id.backButton)
+        back.setOnClickListener {
+            onBackPressed()
+        }
+
+        intent.getSerializableExtra(CITY_KEY)
     }
 
     private fun loadWeather() {
@@ -30,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<Weather>, t: Throwable) {
-                Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@WeatherActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         }
 
