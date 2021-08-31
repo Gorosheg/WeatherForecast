@@ -69,5 +69,6 @@ class WeatherActivity : AppCompatActivity() {
 
         skyCondition.setText(weather.skyCondition.text)
         skyImage.setImageResource(weather.skyImage.image)
+        skyImage.clipToOutline = true
     }
 }

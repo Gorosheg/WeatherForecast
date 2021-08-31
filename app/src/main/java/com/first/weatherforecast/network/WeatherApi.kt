@@ -15,5 +15,3 @@ interface WeatherApi {
     ): Call<Weather>
 
 }
-//59.939099, 30.315877
-//59.9389763 30.3166046

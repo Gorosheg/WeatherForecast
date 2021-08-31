@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Weatherforecast/app/src/main/res/drawable/rect_with_round_corners.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/app/src/main/res/layout/activity_cities.xml" value="0.10052083333333334" />
         <entry key="..\:/Weatherforecast/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
+        <entry key="..\:/Weatherforecast/app/src/main/res/layout/activity_weather.xml" value="0.25416666666666665" />
         <entry key="..\:/Weatherforecast/app/src/main/res/layout/list_of_cities.xml" value="0.10052083333333334" />
       </map>
     </option>
