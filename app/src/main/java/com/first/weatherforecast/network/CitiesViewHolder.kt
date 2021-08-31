@@ -12,18 +12,19 @@ class CitiesViewHolder(
     private val onCityClick: (City) -> Unit
 ) : RecyclerView.ViewHolder(cityView) {
 
-    private var cityText: TextView = cityView.findViewById(R.id.City)
-    private var cityRecycler: LinearLayout = cityView.findViewById(R.id.cityList)
+    private var cityText: TextView = cityView.findViewById(R.id.city)
+    private var rootLayout: LinearLayout = cityView.findViewById(R.id.rootLayout)
 
     private var city: City? = null
 
     init {
-        cityRecycler.setOnClickListener {
+        rootLayout.setOnClickListener {
             city?.let(onCityClick::invoke)
         }
     }
 
     fun bind(city: City) {
+        this.city = city
         cityText.text = city.name
     }
 }

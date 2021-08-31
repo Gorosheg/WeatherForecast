@@ -10,28 +10,31 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.first.weatherforecast.R
+import com.first.weatherforecast.model.City
 import com.first.weatherforecast.model.Weather
 import com.first.weatherforecast.network.NetworkManager
 import com.first.weatherforecast.ui.CitiesActivity.Companion.CITY_KEY
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 
 class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
-        loadWeather()
+
+        val city = intent.getSerializableExtra(CITY_KEY) as City
+        loadWeather(city)
 
         val back: Button = findViewById(R.id.backButton)
+
         back.setOnClickListener {
             onBackPressed()
         }
-
-        intent.getSerializableExtra(CITY_KEY)
     }
 
-    private fun loadWeather() {
+    private fun loadWeather(city: City) {
         val request = object : Callback<Weather> {
 
             override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
@@ -45,7 +48,7 @@ class WeatherActivity : AppCompatActivity() {
         }
 
         NetworkManager.api()
-            ?.getWeather()
+            ?.getWeather(latitude = city.latitude, longitude = city.longitude)
             ?.enqueue(request)
     }
 
