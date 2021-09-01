@@ -1,14 +1,14 @@
 package com.first.weatherforecast.ui
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.first.weatherforecast.R
 import com.first.weatherforecast.model.City
 import com.first.weatherforecast.model.Weather
@@ -17,21 +17,21 @@ import com.first.weatherforecast.ui.CitiesActivity.Companion.CITY_KEY
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.Serializable
 
 class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
 
-        val city = intent.getSerializableExtra(CITY_KEY) as City
-        loadWeather(city)
-
-        val back: Button = findViewById(R.id.backButton)
-
-        back.setOnClickListener {
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+
+        val city = intent.getSerializableExtra(CITY_KEY) as City
+        loadWeather(city)
     }
 
     private fun loadWeather(city: City) {

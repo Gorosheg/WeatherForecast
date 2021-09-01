@@ -16,4 +16,6 @@
     <string name="ash">Пепел</string>
     <string name="squall">Шквалистый ветер</string>
     <string name="tornado">Торнадо</string>
+    <string name="back">back</string>
+    <string name="spb">Санкт-Петербург</string>
 </resources>
