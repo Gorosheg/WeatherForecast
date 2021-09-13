@@ -96,7 +96,8 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginStart="16dp"
-            android:background="@color/darkGray"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rect_with_round_corners"
             app:layout_constraintEnd_toStartOf="@+id/humidity"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/town" />
@@ -105,7 +106,7 @@
             android:id="@+id/feelDegrees"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12C"
+            android:text=""
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/feelsLike"
             app:layout_constraintEnd_toEndOf="@+id/feelsLike"
@@ -127,7 +128,8 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginStart="16dp"
-            android:background="@color/darkGray"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rect_with_round_corners"
             app:layout_constraintEnd_toStartOf="@+id/pressure"
             app:layout_constraintStart_toEndOf="@+id/feelsLike"
             app:layout_constraintTop_toBottomOf="@+id/town" />
@@ -136,7 +138,7 @@
             android:id="@+id/humidityParam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="85%"
+            tools:text="50%"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/humidity"
             app:layout_constraintEnd_toEndOf="@+id/humidity"
@@ -153,13 +155,22 @@
             app:layout_constraintStart_toStartOf="@+id/humidity"
             app:layout_constraintTop_toTopOf="@+id/humidity" />
 
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintEnd_toEndOf="@+id/humidity"
+            app:layout_constraintStart_toStartOf="@+id/humidity"
+            app:layout_constraintTop_toBottomOf="@+id/humidityParam"
+            app:srcCompat="@drawable/ic_weather_humidity" />
+
         <View
             android:id="@+id/pressure"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:background="@color/darkGray"
+            android:background="@drawable/rect_with_round_corners"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/humidity"
             app:layout_constraintTop_toBottomOf="@+id/town" />
@@ -168,7 +179,7 @@
             android:id="@+id/pressureParam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="750"
+            android:text=""
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/pressure"
             app:layout_constraintEnd_toEndOf="@+id/pressure"

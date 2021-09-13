@@ -35,7 +35,7 @@ class Weather(
         get() = weather.humidity
 
     val pressure: Int
-        get() = weather.pressure.millimetrs
+        get() = weather.pressure.millimeters
 
 
     val skyCondition: SkyCondition
@@ -48,7 +48,7 @@ class Weather(
     private val Double.celsius: Int
         get() = (this - ABSOLUTE_ZERO).toInt()
 
-    private val Int.millimetrs: Int
+    private val Int.millimeters: Int
         get() = (this * MERCURY).toInt()
 }
 
