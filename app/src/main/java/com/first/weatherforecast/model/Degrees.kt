@@ -13,5 +13,11 @@ class Degrees(
     val tempMax: Double,
 
     @SerializedName("feels_like")
-    val feelsLike: Double
+    val feelsLike: Double,
+
+    @SerializedName("pressure")
+    val pressure: Int,
+
+    @SerializedName("humidity")
+    val humidity: Int
 )

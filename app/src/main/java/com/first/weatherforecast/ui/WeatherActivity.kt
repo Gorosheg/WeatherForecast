@@ -58,14 +58,19 @@ class WeatherActivity : AppCompatActivity() {
         val town: TextView = findViewById(R.id.town)
         val degrees: TextView = findViewById(R.id.degrees)
         val maxMin: TextView = findViewById(R.id.minMax)
-
         val skyCondition: TextView = findViewById(R.id.skyCondition)
         val skyImage: ImageView = findViewById(R.id.SkyImage)
+        val feelDegrees: TextView = findViewById(R.id.feelDegrees)
+        val humidityParam: TextView = findViewById(R.id.humidityParam)
+        val pressureParam: TextView = findViewById(R.id.pressureParam)
 
         town.text = weather.city
 
         degrees.text = weather.degree.toString() + "°C"
         maxMin.text = "${weather.tempMax}/${weather.tempMin}"
+        feelDegrees.text = weather.feelsLike.toString() + "°C"
+        humidityParam.text = weather.humidity.toString() + "%"
+        pressureParam.text = weather.pressure.toString()
 
         skyCondition.setText(weather.skyCondition.text)
         skyImage.setImageResource(weather.skyImage.image)
