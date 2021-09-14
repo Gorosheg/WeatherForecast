@@ -21,4 +21,6 @@
     <string name="feels_like">Ощущается как</string>
     <string name="humidity">Влажность</string>
     <string name="pressure">Давление</string>
+    <string name="latitude">Широта</string>
+    <string name="longitude">Долгота</string>
 </resources>
