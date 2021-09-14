@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
 import com.first.weatherforecast.model.City
 import com.first.weatherforecast.network.CitiesAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CitiesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,6 +16,7 @@ class CitiesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cities)
 
         val recyclerView: RecyclerView = findViewById(R.id.cityList)
+        val dialogButton: FloatingActionButton = findViewById(R.id.dialog_button)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         recyclerView.adapter = CitiesAdapter(
@@ -22,6 +24,15 @@ class CitiesActivity : AppCompatActivity() {
             onCityClick = ::navigateToWeatherScreen
         )
 
+        showDialog(dialogButton)
+
+    }
+
+    private fun showDialog(dialogButton: FloatingActionButton) {
+        dialogButton.setOnClickListener {
+            val dialog = CityDialog()
+            dialog.show(supportFragmentManager, "custom")           //???
+        }
     }
 
     private fun buildList(): List<City> {
