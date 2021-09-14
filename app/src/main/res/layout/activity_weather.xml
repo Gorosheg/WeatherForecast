@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
+    android:background="@color/white"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -48,7 +48,6 @@
             android:id="@+id/degrees"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:textColor="@color/white"
             android:textSize="80sp"
             android:visibility="visible"
@@ -61,7 +60,6 @@
             android:id="@+id/minMax"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:textColor="@color/white"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +71,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text=""
             android:textColor="@color/white"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/SkyImage"
@@ -106,7 +103,6 @@
             android:id="@+id/feelDegrees"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/feelsLike"
             app:layout_constraintEnd_toEndOf="@+id/feelsLike"
@@ -138,12 +134,12 @@
             android:id="@+id/humidityParam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="50%"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/humidity"
             app:layout_constraintEnd_toEndOf="@+id/humidity"
             app:layout_constraintStart_toStartOf="@+id/humidity"
-            app:layout_constraintTop_toTopOf="@+id/humidity" />
+            app:layout_constraintTop_toTopOf="@+id/humidity"
+            tools:text="50%" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -179,7 +175,6 @@
             android:id="@+id/pressureParam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/pressure"
             app:layout_constraintEnd_toEndOf="@+id/pressure"

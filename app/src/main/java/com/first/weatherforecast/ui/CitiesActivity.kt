@@ -16,7 +16,7 @@ class CitiesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cities)
 
         val recyclerView: RecyclerView = findViewById(R.id.cityList)
-        val dialogButton: FloatingActionButton = findViewById(R.id.dialog_button)
+        val addCity: FloatingActionButton = findViewById(R.id.dialog_button)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         recyclerView.adapter = CitiesAdapter(
@@ -24,19 +24,15 @@ class CitiesActivity : AppCompatActivity() {
             onCityClick = ::navigateToWeatherScreen
         )
 
-        showDialog(dialogButton)
-
+        addCity.setOnClickListener { showCityDialog() }
     }
 
-    private fun showDialog(dialogButton: FloatingActionButton) {
-        dialogButton.setOnClickListener {
-            val dialog = CityDialog()
-            dialog.show(supportFragmentManager, "custom")           //???
-        }
+    private fun showCityDialog() {
+        CityDialog().show(supportFragmentManager, CityDialog::class.qualifiedName)
     }
 
     private fun buildList(): List<City> {
-        return mutableListOf(
+        return listOf(
             City(59.939999, 30.315877, "Санкт-Петербург"),
             City(55.7522, 37.6156, "Москва"),
             City(60.1695, 24.9354, "Хельсинки")

@@ -9,12 +9,12 @@ import com.first.weatherforecast.R
 class CityDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         super.onCreateDialog(savedInstanceState)
-        val builder = AlertDialog.Builder(activity)
-        return builder
-            .setTitle("Введите координаты города")
-            .setView(R.layout.fragment_cities_dialog)
-            .setPositiveButton("Добавить", null)
-            .setNegativeButton("Отмена", null)
+
+        return AlertDialog.Builder(activity)
+            .setTitle(getString(R.string.coordinats))
+            .setView(R.layout.fragment_city_dialog)
+            .setPositiveButton(getString(R.string.add), null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .create()
     }
 }
