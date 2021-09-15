@@ -9,7 +9,7 @@ import com.first.weatherforecast.model.City
 import com.first.weatherforecast.ui.recycler.CitiesViewHolder
 
 class CitiesAdapter(
-    var items: List<City>,
+    val items: MutableList<City>,
     private val onCityClick: (City) -> Unit
 ) : RecyclerView.Adapter<CitiesViewHolder>() {
 

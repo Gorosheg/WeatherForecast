@@ -37,8 +37,8 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         cityDialog.show(supportFragmentManager, CityDialog::class.qualifiedName)
     }
 
-    private fun buildList(): List<City> {
-        return listOf(
+    private fun buildList(): MutableList<City> {
+        return mutableListOf(
             City(59.939999, 30.315877, "Санкт-Петербург"),
             City(55.7522, 37.6156, "Москва"),
             City(60.1695, 24.9354, "Хельсинки")
@@ -54,7 +54,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
     override fun onCityAdd(latitude: Double, longitude: Double) {
         val adapter = adapter ?: return
         val newCity = City(latitude, longitude, "")
-        adapter.items += listOf(newCity)
+        adapter.items += newCity
         //adapter.notifyDataSetChanged() // Обновляем всё адаптер
         adapter.notifyItemInserted(adapter.itemCount - 1) // Говорим, что добавили элемент в конец
     }
