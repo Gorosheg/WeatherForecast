@@ -1,4 +1,4 @@
-package com.first.weatherforecast.network
+package com.first.weatherforecast.ui.recycler
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
 import com.first.weatherforecast.model.City
+import com.first.weatherforecast.ui.recycler.CitiesViewHolder
 
 class CitiesAdapter(
-    private val cities: List<City>,
+    var items: List<City>,
     private val onCityClick: (City) -> Unit
 ) : RecyclerView.Adapter<CitiesViewHolder>() {
 
@@ -20,8 +21,8 @@ class CitiesAdapter(
     }
 
     override fun onBindViewHolder(holder: CitiesViewHolder, position: Int) {
-        holder.bind(cities[position])
+        holder.bind(items[position])
     }
 
-    override fun getItemCount(): Int = cities.size
+    override fun getItemCount(): Int = items.size
 }

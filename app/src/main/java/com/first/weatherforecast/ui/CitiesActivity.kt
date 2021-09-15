@@ -3,16 +3,16 @@ package com.first.weatherforecast.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
 import com.first.weatherforecast.model.City
-import com.first.weatherforecast.network.CitiesAdapter
-import com.first.weatherforecast.network.CityAddListener
+import com.first.weatherforecast.ui.recycler.CitiesAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CitiesActivity : AppCompatActivity(), CityAddListener {
+
+    private var adapter: CitiesAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,10 +22,12 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         val addCity: FloatingActionButton = findViewById(R.id.dialog_button)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        recyclerView.adapter = CitiesAdapter(
-            cities = buildList(),
+        adapter = CitiesAdapter(
+            items = buildList(),
             onCityClick = ::navigateToWeatherScreen
         )
+
+        recyclerView.adapter = adapter
 
         addCity.setOnClickListener { showCityDialog() }
     }
@@ -49,8 +51,12 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         startActivity(intent)
     }
 
-    override fun onCityAdd(latitude: Int, longitude: Int) {
-
+    override fun onCityAdd(latitude: Double, longitude: Double) {
+        val adapter = adapter ?: return
+        val newCity = City(latitude, longitude, "")
+        adapter.items += listOf(newCity)
+        //adapter.notifyDataSetChanged() // Обновляем всё адаптер
+        adapter.notifyItemInserted(adapter.itemCount - 1) // Говорим, что добавили элемент в конец
     }
 
     companion object {

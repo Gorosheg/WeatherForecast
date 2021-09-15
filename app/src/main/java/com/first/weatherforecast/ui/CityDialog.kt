@@ -2,15 +2,10 @@ package com.first.weatherforecast.ui
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import com.first.weatherforecast.R
-import com.first.weatherforecast.network.CityAddListener
-import kotlin.math.E
 
 class CityDialog : DialogFragment() {
 
@@ -28,13 +23,13 @@ class CityDialog : DialogFragment() {
     }
 
     private fun exitWithResult() {
-        val view = view ?: return
-        val latitude = view.findViewById<EditText>(R.id.latitude).text
-        val longitude = view.findViewById<EditText>(R.id.longitude).text
+        val dialog = dialog ?: return
+        val latitude = dialog.findViewById<EditText>(R.id.latitude).text
+        val longitude = dialog.findViewById<EditText>(R.id.longitude).text
 
         (activity as CityAddListener).onCityAdd(
-            latitude = latitude.toString().toInt(),
-            longitude = longitude.toString().toInt()
+            latitude = latitude.toString().toDouble(),
+            longitude = longitude.toString().toDouble()
         )
     }
 

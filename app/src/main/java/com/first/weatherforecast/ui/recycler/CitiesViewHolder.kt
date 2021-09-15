@@ -1,4 +1,4 @@
-package com.first.weatherforecast.network
+package com.first.weatherforecast.ui.recycler
 
 import android.view.View
 import android.widget.LinearLayout
