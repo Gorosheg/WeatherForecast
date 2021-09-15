@@ -3,14 +3,17 @@ package com.first.weatherforecast.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
 import com.first.weatherforecast.model.City
 import com.first.weatherforecast.network.CitiesAdapter
+import com.first.weatherforecast.network.CityAddListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class CitiesActivity : AppCompatActivity() {
+class CitiesActivity : AppCompatActivity(), CityAddListener {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cities)
@@ -28,7 +31,8 @@ class CitiesActivity : AppCompatActivity() {
     }
 
     private fun showCityDialog() {
-        CityDialog().show(supportFragmentManager, CityDialog::class.qualifiedName)
+        val cityDialog = CityDialog()
+        cityDialog.show(supportFragmentManager, CityDialog::class.qualifiedName)
     }
 
     private fun buildList(): List<City> {
@@ -43,6 +47,10 @@ class CitiesActivity : AppCompatActivity() {
         val intent = Intent(this, WeatherActivity::class.java)
         intent.putExtra(CITY_KEY, city)
         startActivity(intent)
+    }
+
+    override fun onCityAdd(latitude: Int, longitude: Int) {
+
     }
 
     companion object {
