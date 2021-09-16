@@ -40,7 +40,6 @@ class WeatherActivity : AppCompatActivity() {
         )
     }
 
-
     @SuppressLint("SetTextI18n")
     private fun handleWeatherResponse(weather: Weather) {
         val town: TextView = findViewById(R.id.town)

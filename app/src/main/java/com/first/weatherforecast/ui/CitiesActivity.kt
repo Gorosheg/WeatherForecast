@@ -3,10 +3,13 @@ package com.first.weatherforecast.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
 import com.first.weatherforecast.model.City
+import com.first.weatherforecast.model.Weather
+import com.first.weatherforecast.network.loadWeather
 import com.first.weatherforecast.ui.recycler.CitiesAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -52,9 +55,28 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
     }
 
     override fun onCityAdd(latitude: Double, longitude: Double) {
-        val adapter = adapter ?: return
         val newCity = City(latitude, longitude, "")
-        adapter.items += newCity
+        loadWeather(newCity)
+    }
+
+    private fun loadWeather(city: City) {
+        loadWeather(
+            city = city,
+            onSuccess = {
+                addParamsToNewCity(it, city)
+            },
+            onFailure = {
+                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+            }
+        )
+    }
+
+    private fun addParamsToNewCity(weather: Weather, city: City) {
+        city.name = weather.city
+
+        val adapter = adapter ?: return
+
+        adapter.items += city
         //adapter.notifyDataSetChanged() // Обновляем всё адаптер
         adapter.notifyItemInserted(adapter.itemCount - 1) // Говорим, что добавили элемент в конец
     }

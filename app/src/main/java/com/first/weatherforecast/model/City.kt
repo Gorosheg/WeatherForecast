@@ -5,5 +5,5 @@ import java.io.Serializable
 class City(
     val latitude: Double,
     val longitude: Double,
-    val name: String
+    var name: String
 ) : Serializable
