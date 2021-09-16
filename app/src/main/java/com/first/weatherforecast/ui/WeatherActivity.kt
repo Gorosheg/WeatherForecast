@@ -1,22 +1,17 @@
 package com.first.weatherforecast.ui
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.first.weatherforecast.R
 import com.first.weatherforecast.model.City
 import com.first.weatherforecast.model.Weather
-import com.first.weatherforecast.network.NetworkManager
+import com.first.weatherforecast.network.loadWeather
 import com.first.weatherforecast.ui.CitiesActivity.Companion.CITY_KEY
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,21 +30,14 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun loadWeather(city: City) {
-        val request = object : Callback<Weather> {
-
-            override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
-                val weather: Weather = response.body() ?: return
-                handleWeatherResponse(weather)
+        loadWeather(
+            city = city,
+            onSuccess = ::handleWeatherResponse, // Передача в аргумент ссылки на функцию, т.к. аргументы совпадают
+            //onSuccess = { handleWeatherResponse(it) }, // Вызов функции, без ссылки на фнкцию
+            onFailure = {
+                Toast.makeText(this@WeatherActivity, it.message, Toast.LENGTH_SHORT).show()
             }
-
-            override fun onFailure(call: Call<Weather>, t: Throwable) {
-                Toast.makeText(this@WeatherActivity, t.message, Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        NetworkManager.api()
-            ?.getWeather(latitude = city.latitude, longitude = city.longitude)
-            ?.enqueue(request)
+        )
     }
 
 
@@ -68,6 +56,7 @@ class WeatherActivity : AppCompatActivity() {
 
         degrees.text = weather.degree.toString() + "°C"
         maxMin.text = "${weather.tempMax}/${weather.tempMin}"
+
         feelDegrees.text = weather.feelsLike.toString() + "°C"
         humidityParam.text = weather.humidity.toString() + "%"
         pressureParam.text = weather.pressure.toString()
