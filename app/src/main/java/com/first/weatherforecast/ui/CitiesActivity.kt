@@ -42,9 +42,9 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
 
     private fun buildList(): MutableList<City> {
         return mutableListOf(
-            City(59.939999, 30.315877, "Санкт-Петербург"),
-            City(55.7522, 37.6156, "Москва"),
-            City(60.1695, 24.9354, "Хельсинки")
+            City(latitude = 59.939999, longitude = 30.315877, name = "Санкт-Петербург"),
+            City(latitude = 55.7522, longitude = 37.6156, name = "Москва"),
+            City(latitude = 60.1695, longitude = 24.9354, name = "Хельсинки")
         )
     }
 
@@ -55,7 +55,11 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
     }
 
     override fun onCityAdd(latitude: Double, longitude: Double) {
-        val newCity = City(latitude, longitude, "")
+        val newCity = City(
+            latitude = latitude,
+            longitude = longitude,
+            name = ""
+        )
         loadWeather(newCity)
     }
 
