@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
+import com.first.weatherforecast.database.CityListDataChanged
 import com.first.weatherforecast.model.City
 import com.first.weatherforecast.model.Weather
 import com.first.weatherforecast.network.loadWeather
@@ -14,19 +15,31 @@ import com.first.weatherforecast.ui.recycler.CitiesAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CitiesActivity : AppCompatActivity(), CityAddListener {
+    init {
+        println("qwerty activity init")
+
+    }
 
     private var adapter: CitiesAdapter? = null
+    private val db by lazy { CityListDataChanged() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        println("qwerty activity on create")
         setContentView(R.layout.activity_cities)
 
         val recyclerView: RecyclerView = findViewById(R.id.cityList)
         val addCity: FloatingActionButton = findViewById(R.id.dialog_button)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        val listOfCities = buildList()
+
+        listOfCities.forEach {
+            db.addCity(it)
+        }
+
         adapter = CitiesAdapter(
-            items = buildList(),
+            items = db.allCities(),
             onCityClick = ::navigateToWeatherScreen
         )
 
@@ -61,13 +74,16 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
             name = ""
         )
         loadWeather(newCity)
+
     }
 
     private fun loadWeather(city: City) {
         loadWeather(
             city = city,
             onSuccess = {
-                addParamsToNewCity(it, city)
+                city.name = it.city
+                addParamsToNewCity(city)
+                addCityToDb(city)
             },
             onFailure = {
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
@@ -75,14 +91,17 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         )
     }
 
-    private fun addParamsToNewCity(weather: Weather, city: City) {
-        city.name = weather.city
+    private fun addParamsToNewCity(city: City) {
 
         val adapter = adapter ?: return
 
         adapter.items += city
         //adapter.notifyDataSetChanged() // Обновляем всё адаптер
         adapter.notifyItemInserted(adapter.itemCount - 1) // Говорим, что добавили элемент в конец
+    }
+
+    private fun addCityToDb(city: City) {
+        db.addCity(city)
     }
 
     companion object {

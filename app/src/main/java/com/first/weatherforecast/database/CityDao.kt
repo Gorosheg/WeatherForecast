@@ -7,7 +7,7 @@ import com.first.weatherforecast.model.City
 interface CityDao {
 
     @Query("SELECT * FROM city")
-    fun getAll(): List<City>
+    fun getAll(): MutableList<City>
 
     @Query("SELECT * FROM city WHERE id =:id")
     fun getById(id: Long): City
