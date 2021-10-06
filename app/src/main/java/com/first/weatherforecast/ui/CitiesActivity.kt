@@ -7,9 +7,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
-import com.first.weatherforecast.database.CityListDataChanged
+import com.first.weatherforecast.database.CitiesDatabaseDatasource
 import com.first.weatherforecast.model.City
-import com.first.weatherforecast.model.Weather
 import com.first.weatherforecast.network.loadWeather
 import com.first.weatherforecast.ui.recycler.CitiesAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -21,7 +20,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
     }
 
     private var adapter: CitiesAdapter? = null
-    private val db by lazy { CityListDataChanged() }
+    private val db by lazy { CitiesDatabaseDatasource() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +40,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         }
 
         adapter = CitiesAdapter(
-            items = db.allCities(),
+            items = db.allCities().toMutableList(),
             onCityClick = ::navigateToWeatherScreen
         )
 

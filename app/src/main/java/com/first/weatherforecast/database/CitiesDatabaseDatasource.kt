@@ -2,7 +2,7 @@ package com.first.weatherforecast.database
 
 import com.first.weatherforecast.model.City
 
-class CityListDataChanged {
+class CitiesDatabaseDatasource {
 
     init {
         println("qwerty CityListDataChanged init")
@@ -14,7 +14,7 @@ class CityListDataChanged {
         cityDao.insert(city)
     }
 
-    fun allCities(): MutableList<City> {
+    fun allCities(): List<City> {
         return cityDao.getAll()
     }
 
