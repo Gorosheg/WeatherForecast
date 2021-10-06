@@ -34,8 +34,10 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
 
         val listOfCities = buildList()
 
-        listOfCities.forEach {
-            db.addCity(it)
+        if (db.allCities().size == 0) {
+            listOfCities.forEach {
+                db.addCity(it)
+            }
         }
 
         adapter = CitiesAdapter(
