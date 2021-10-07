@@ -6,9 +6,8 @@ import com.first.weatherforecast.database.model.CityEntity
 @Dao
 interface CityDao {
 
-    // TODO
-//    @Query("")
-//    fun isEmpty(): Boolean
+    @Query("SELECT COUNT(*) FROM CityEntity")
+    fun count(): Int
 
     @Query("SELECT * FROM CityEntity")
     fun getAll(): List<CityEntity>
@@ -22,7 +21,7 @@ interface CityDao {
     @Insert // Добавление элемента
     fun insert(city: CityEntity)
 
-    @Update // Обновление таблицы
+    @Update // Обновление данных элемента
     fun update(city: CityEntity)
 
     @Delete // Удаление элемента

@@ -11,7 +11,7 @@ class CitiesDatabaseDatasource {
     private val cityDao = db.cityDao
 
     init {
-        if (getAllCities().isEmpty()) {
+        if (isEmpty()) {
             cityDao.insert(buildInitialCities())
         }
     }
@@ -26,6 +26,11 @@ class CitiesDatabaseDatasource {
 
     fun addCity(city: City) {
         cityDao.insert(city.toEntity())
+    }
+
+
+    private fun isEmpty(): Boolean {
+        return cityDao.count() == 0
     }
 
     fun getAllCities(): List<City> {

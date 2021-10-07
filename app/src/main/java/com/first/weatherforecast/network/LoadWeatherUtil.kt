@@ -27,6 +27,7 @@ fun loadWeather(
         }
 
         override fun onFailure(call: Call<Weather>, t: Throwable) {
+            t.printStackTrace()
             onFailure.invoke(Throwable())
         }
     }
