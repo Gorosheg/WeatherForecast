@@ -8,16 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
 import com.first.weatherforecast.database.CitiesDatabaseDatasource
-import com.first.weatherforecast.model.City
+import com.first.weatherforecast.database.model.CityEntity
 import com.first.weatherforecast.network.loadWeather
+import com.first.weatherforecast.ui.model.City
 import com.first.weatherforecast.ui.recycler.CitiesAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CitiesActivity : AppCompatActivity(), CityAddListener {
-    init {
-        println("qwerty activity init")
-
-    }
 
     private var adapter: CitiesAdapter? = null
     private val db by lazy { CitiesDatabaseDatasource() }
@@ -31,16 +28,8 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         val addCity: FloatingActionButton = findViewById(R.id.dialog_button)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val listOfCities = buildList()
-
-        if (db.allCities().size == 0) {
-            listOfCities.forEach {
-                db.addCity(it)
-            }
-        }
-
         adapter = CitiesAdapter(
-            items = db.allCities().toMutableList(),
+            items = db.getAllCities().toMutableList(),
             onCityClick = ::navigateToWeatherScreen
         )
 
@@ -52,14 +41,6 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
     private fun showCityDialog() {
         val cityDialog = CityDialog()
         cityDialog.show(supportFragmentManager, CityDialog::class.qualifiedName)
-    }
-
-    private fun buildList(): MutableList<City> {
-        return mutableListOf(
-            City(latitude = 59.939999, longitude = 30.315877, name = "Санкт-Петербург"),
-            City(latitude = 55.7522, longitude = 37.6156, name = "Москва"),
-            City(latitude = 60.1695, longitude = 24.9354, name = "Хельсинки")
-        )
     }
 
     private fun navigateToWeatherScreen(city: City) {

@@ -1,7 +1,7 @@
 package com.first.weatherforecast.network
 
-import com.first.weatherforecast.model.City
 import com.first.weatherforecast.model.Weather
+import com.first.weatherforecast.ui.model.City
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

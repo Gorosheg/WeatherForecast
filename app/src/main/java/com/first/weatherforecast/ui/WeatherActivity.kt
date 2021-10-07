@@ -8,10 +8,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.first.weatherforecast.R
-import com.first.weatherforecast.model.City
 import com.first.weatherforecast.model.Weather
 import com.first.weatherforecast.network.loadWeather
 import com.first.weatherforecast.ui.CitiesActivity.Companion.CITY_KEY
+import com.first.weatherforecast.ui.model.City
 
 class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

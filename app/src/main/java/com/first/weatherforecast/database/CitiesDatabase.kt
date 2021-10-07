@@ -2,9 +2,9 @@ package com.first.weatherforecast.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.first.weatherforecast.model.City
+import com.first.weatherforecast.database.model.CityEntity
 
-@Database(entities = [City::class], version = 1)
+@Database(entities = [CityEntity::class], version = 1)
 abstract class CitiesDatabase : RoomDatabase() {
     abstract val cityDao: CityDao
 }

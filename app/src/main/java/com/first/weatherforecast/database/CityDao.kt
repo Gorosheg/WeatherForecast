@@ -1,23 +1,30 @@
 package com.first.weatherforecast.database
 
 import androidx.room.*
-import com.first.weatherforecast.model.City
+import com.first.weatherforecast.database.model.CityEntity
 
 @Dao
 interface CityDao {
 
-    @Query("SELECT * FROM city")
-    fun getAll(): List<City>
+    // TODO
+//    @Query("")
+//    fun isEmpty(): Boolean
 
-    @Query("SELECT * FROM city WHERE id =:id")
-    fun getById(id: Long): City
+    @Query("SELECT * FROM CityEntity")
+    fun getAll(): List<CityEntity>
+
+    @Query("SELECT * FROM CityEntity WHERE id =:id")
+    fun getById(id: Long): CityEntity
 
     @Insert // Добавление элемента
-    fun insert(city: City)
+    fun insert(cities: List<CityEntity>)
+
+    @Insert // Добавление элемента
+    fun insert(city: CityEntity)
 
     @Update // Обновление таблицы
-    fun update(city: City)
+    fun update(city: CityEntity)
 
     @Delete // Удаление элемента
-    fun delete(city: City)
+    fun delete(city: CityEntity)
 }
