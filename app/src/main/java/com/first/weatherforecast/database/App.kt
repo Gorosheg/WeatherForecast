@@ -5,12 +5,9 @@ import androidx.room.Room
 
 class App : Application() {
 
-    init {
-        println("qwerty App init")
-    }
+
     override fun onCreate() {
         super.onCreate()
-        println("qwerty App on create")
         dataBase = Room.databaseBuilder(this, CitiesDatabase::class.java, "database")
             .allowMainThreadQueries()
             .build()

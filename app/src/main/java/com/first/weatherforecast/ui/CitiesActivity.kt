@@ -1,35 +1,41 @@
 package com.first.weatherforecast.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
-import com.first.weatherforecast.database.CitiesDatabaseDatasource
-import com.first.weatherforecast.database.model.CityEntity
+import com.first.weatherforecast.model.MyViewModel
 import com.first.weatherforecast.network.loadWeather
 import com.first.weatherforecast.ui.model.City
 import com.first.weatherforecast.ui.recycler.CitiesAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
+
 class CitiesActivity : AppCompatActivity(), CityAddListener {
 
     private var adapter: CitiesAdapter? = null
-    private val db by lazy { CitiesDatabaseDatasource() }
+
+    // получим доступ к провайдеру, который хранит все ViewModel для этого Activity.
+    // Методом get запрашиваем у этого провайдера конкретную модель по имени класса
+    private val viewModel: MyViewModel by lazy { ViewModelProvider(this).get(MyViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        println("qwerty activity on create")
         setContentView(R.layout.activity_cities)
+
+        viewModel.data.observe(this, ::updateCitiesToList)
+        viewModel.loadData()
 
         val recyclerView: RecyclerView = findViewById(R.id.cityList)
         val addCity: FloatingActionButton = findViewById(R.id.dialog_button)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         adapter = CitiesAdapter(
-            items = db.getAllCities().toMutableList(),
+            items = mutableListOf(),
             onCityClick = ::navigateToWeatherScreen
         )
 
@@ -56,34 +62,19 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
             name = ""
         )
         loadWeather(newCity)
-
     }
 
     private fun loadWeather(city: City) {
-        loadWeather(
-            city = city,
-            onSuccess = {
-                city.name = it.city
-                addParamsToNewCity(city)
-                addCityToDb(city)
-            },
-            onFailure = {
-                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-            }
-        )
+        viewModel.loadWeather(city)
     }
 
-    private fun addParamsToNewCity(city: City) {
-
+    private fun updateCitiesToList(cities: List<City>) {
         val adapter = adapter ?: return
 
-        adapter.items += city
-        //adapter.notifyDataSetChanged() // Обновляем всё адаптер
-        adapter.notifyItemInserted(adapter.itemCount - 1) // Говорим, что добавили элемент в конец
-    }
-
-    private fun addCityToDb(city: City) {
-        db.addCity(city)
+        adapter.items.clear()
+        adapter.items += cities
+        adapter.notifyDataSetChanged()
+//        adapter.notifyItemRangeInserted()
     }
 
     companion object {
