@@ -1,15 +1,13 @@
 package com.first.weatherforecast.model
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.first.weatherforecast.database.CitiesDatabaseDatasource
 import com.first.weatherforecast.network.loadWeather
-import com.first.weatherforecast.ui.CitiesActivity
 import com.first.weatherforecast.ui.model.City
 
-class MyViewModel : ViewModel() {
+class CitiesViewModel : ViewModel() {
 
     private val db by lazy { CitiesDatabaseDatasource() }
 

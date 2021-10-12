@@ -2,14 +2,12 @@ package com.first.weatherforecast.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
-import com.first.weatherforecast.model.MyViewModel
-import com.first.weatherforecast.network.loadWeather
+import com.first.weatherforecast.model.CitiesViewModel
 import com.first.weatherforecast.ui.model.City
 import com.first.weatherforecast.ui.recycler.CitiesAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -21,7 +19,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
 
     // получим доступ к провайдеру, который хранит все ViewModel для этого Activity.
     // Методом get запрашиваем у этого провайдера конкретную модель по имени класса
-    private val viewModel: MyViewModel by lazy { ViewModelProvider(this).get(MyViewModel::class.java) }
+    private val viewModel: CitiesViewModel by lazy { ViewModelProvider(this).get(CitiesViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
