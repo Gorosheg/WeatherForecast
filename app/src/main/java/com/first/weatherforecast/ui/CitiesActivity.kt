@@ -68,11 +68,12 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
 
     private fun updateCitiesToList(cities: List<City>) {
         val adapter = adapter ?: return
-
+        val previousItemCount = adapter.itemCount
         adapter.items.clear()
         adapter.items += cities
         adapter.notifyDataSetChanged()
-//        adapter.notifyItemRangeInserted()
+//        adapter.notifyItemRangeRemoved(0, previousItemCount)
+        //      adapter.notifyItemRangeInserted(previousItemCount - 1, adapter.itemCount - previousItemCount)
     }
 
     companion object {
