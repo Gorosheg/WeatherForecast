@@ -1,4 +1,4 @@
-package com.first.weatherforecast.ui
+package com.first.weatherforecast.feature.cities
 
 import android.app.AlertDialog
 import android.app.Dialog

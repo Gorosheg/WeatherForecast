@@ -1,22 +1,24 @@
-package com.first.weatherforecast.model
+package com.first.weatherforecast.datasource.network.model
 
+import com.first.weatherforecast.model.SkyCondition
+import com.first.weatherforecast.model.SkyImage
 import com.google.gson.annotations.SerializedName
 
 private const val ABSOLUTE_ZERO = 273.15
 private const val MERCURY = 0.750063755419211
 
-class Weather(
+class WeatherResponse(
     @SerializedName("main")
-    private val weather: Degrees,
+    private val weather: DegreesResponse,
 
     @SerializedName("weather")
-    private val skies: List<SkyConditions>,
+    private val skies: List<SkyConditionsResponse>,
 
     @SerializedName("name")
     val city: String
 ) {
 
-    private val sky: SkyConditions
+    private val sky: SkyConditionsResponse
         get() = skies.first()
 
     val degree: Int

@@ -1,8 +1,8 @@
-package com.first.weatherforecast.database.model
+package com.first.weatherforecast.datasource.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.first.weatherforecast.ui.model.City
+import com.first.weatherforecast.model.City
 
 @Entity
 class CityEntity(

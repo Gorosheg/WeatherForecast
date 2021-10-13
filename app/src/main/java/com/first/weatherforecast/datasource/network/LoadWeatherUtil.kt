@@ -1,7 +1,7 @@
-package com.first.weatherforecast.network
+package com.first.weatherforecast.datasource.network
 
-import com.first.weatherforecast.model.Weather
-import com.first.weatherforecast.ui.model.City
+import com.first.weatherforecast.datasource.network.model.WeatherResponse
+import com.first.weatherforecast.model.City
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,17 +16,17 @@ import retrofit2.Response
  */
 fun loadWeather(
     city: City,
-    onSuccess: (Weather) -> Unit,
+    onSuccess: (WeatherResponse) -> Unit,
     onFailure: (Throwable) -> Unit
 ) {
-    val request = object : Callback<Weather> {
+    val request = object : Callback<WeatherResponse> {
 
-        override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
-            val weather: Weather = response.body() ?: return
+        override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
+            val weather: WeatherResponse = response.body() ?: return
             onSuccess.invoke(weather)
         }
 
-        override fun onFailure(call: Call<Weather>, t: Throwable) {
+        override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
             t.printStackTrace()
             onFailure.invoke(Throwable())
         }

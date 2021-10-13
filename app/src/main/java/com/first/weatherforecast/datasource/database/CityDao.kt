@@ -1,7 +1,7 @@
-package com.first.weatherforecast.database
+package com.first.weatherforecast.datasource.database
 
 import androidx.room.*
-import com.first.weatherforecast.database.model.CityEntity
+import com.first.weatherforecast.datasource.database.model.CityEntity
 
 @Dao
 interface CityDao {

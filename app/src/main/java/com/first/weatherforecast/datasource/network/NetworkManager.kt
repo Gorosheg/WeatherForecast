@@ -1,4 +1,4 @@
-package com.first.weatherforecast.network
+package com.first.weatherforecast.datasource.network
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

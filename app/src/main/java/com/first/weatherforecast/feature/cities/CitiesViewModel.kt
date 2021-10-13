@@ -1,11 +1,12 @@
-package com.first.weatherforecast.model
+package com.first.weatherforecast.feature.cities
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.first.weatherforecast.database.CitiesDatabaseDatasource
-import com.first.weatherforecast.network.loadWeather
-import com.first.weatherforecast.ui.model.City
+import com.first.weatherforecast.datasource.database.CitiesDatabaseDatasource
+import com.first.weatherforecast.util.SingleLifeEvent
+import com.first.weatherforecast.datasource.network.loadWeather
+import com.first.weatherforecast.model.City
 
 class CitiesViewModel : ViewModel() {
 

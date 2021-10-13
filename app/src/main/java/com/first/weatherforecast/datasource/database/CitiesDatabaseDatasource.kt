@@ -1,9 +1,9 @@
-package com.first.weatherforecast.database
+package com.first.weatherforecast.datasource.database
 
-import com.first.weatherforecast.database.model.CityEntity
-import com.first.weatherforecast.database.model.toEntity
-import com.first.weatherforecast.database.model.toSimpleCities
-import com.first.weatherforecast.ui.model.City
+import com.first.weatherforecast.datasource.database.model.CityEntity
+import com.first.weatherforecast.datasource.database.model.toEntity
+import com.first.weatherforecast.datasource.database.model.toSimpleCities
+import com.first.weatherforecast.model.City
 
 class CitiesDatabaseDatasource {
 

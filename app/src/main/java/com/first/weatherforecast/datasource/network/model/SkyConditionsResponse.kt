@@ -1,8 +1,8 @@
-package com.first.weatherforecast.model
+package com.first.weatherforecast.datasource.network.model
 
 import com.google.gson.annotations.SerializedName
 
-class SkyConditions(
+class SkyConditionsResponse(
     /**
      * Состояние неба.
      * Варианты:

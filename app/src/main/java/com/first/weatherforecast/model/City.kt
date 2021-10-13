@@ -1,4 +1,4 @@
-package com.first.weatherforecast.ui.model
+package com.first.weatherforecast.model
 
 import java.io.Serializable
 

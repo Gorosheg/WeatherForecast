@@ -1,4 +1,4 @@
-package com.first.weatherforecast.database
+package com.first.weatherforecast.datasource.database
 
 import android.app.Application
 import androidx.room.Room

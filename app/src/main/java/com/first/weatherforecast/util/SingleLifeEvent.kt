@@ -1,4 +1,4 @@
-package com.first.weatherforecast.model
+package com.first.weatherforecast.util
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MediatorLiveData

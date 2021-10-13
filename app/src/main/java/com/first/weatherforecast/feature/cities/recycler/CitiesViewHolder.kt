@@ -1,11 +1,11 @@
-package com.first.weatherforecast.ui.recycler
+package com.first.weatherforecast.feature.cities.recycler
 
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
-import com.first.weatherforecast.ui.model.City
+import com.first.weatherforecast.model.City
 
 class CitiesViewHolder(
     cityView: View,
