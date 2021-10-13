@@ -2,6 +2,7 @@ package com.first.weatherforecast.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +28,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
 
         viewModel.data.observe(this, ::updateCitiesToList)
         viewModel.loadData()
-
+        viewModel.toast.observe(this, ::makeToast)
         val recyclerView: RecyclerView = findViewById(R.id.cityList)
         val addCity: FloatingActionButton = findViewById(R.id.dialog_button)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -72,8 +73,12 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         adapter.items.clear()
         adapter.items += cities
         adapter.notifyDataSetChanged()
-//        adapter.notifyItemRangeRemoved(0, previousItemCount)
+        //      adapter.notifyItemRangeRemoved(0, previousItemCount)
         //      adapter.notifyItemRangeInserted(previousItemCount - 1, adapter.itemCount - previousItemCount)
+    }
+
+    private fun makeToast(throwable: Throwable) {
+        Toast.makeText(this, "Can't load the City", Toast.LENGTH_SHORT).show()
     }
 
     companion object {

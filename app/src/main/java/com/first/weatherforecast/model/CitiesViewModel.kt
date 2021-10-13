@@ -12,7 +12,9 @@ class CitiesViewModel : ViewModel() {
     private val db by lazy { CitiesDatabaseDatasource() }
 
     private var _data = MutableLiveData<List<City>>()
+    private var _toast: MutableLiveData<Throwable> = SingleLifeEvent<Throwable>()
     val data: LiveData<List<City>> = _data
+    val toast: LiveData<Throwable> = _toast
 
     fun loadData() {
         _data.value = db.getAllCities()
@@ -27,7 +29,7 @@ class CitiesViewModel : ViewModel() {
                 loadData()
             },
             onFailure = {
-                //Toast.makeText(CitiesActivity, it.message, Toast.LENGTH_SHORT).show()
+                _toast.value = it
             }
         )
 
