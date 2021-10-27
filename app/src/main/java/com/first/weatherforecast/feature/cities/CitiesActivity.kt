@@ -62,9 +62,10 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
             loadWeather(newCity)
         }
 
-        if (latitude == null || longitude == null) {
+        if (latitude != null && longitude != null) {
             val newCity = City(
-                name = name
+                latitude = latitude,
+                longitude = longitude
             )
             loadWeather(newCity)
         }
