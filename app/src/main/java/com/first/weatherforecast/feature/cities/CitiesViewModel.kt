@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.first.weatherforecast.datasource.database.CitiesDatabaseDatasource
 import com.first.weatherforecast.util.SingleLifeEvent
 import com.first.weatherforecast.datasource.network.loadWeather
+import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.model.City
 
 class CitiesViewModel : ViewModel() {
@@ -25,20 +26,36 @@ class CitiesViewModel : ViewModel() {
         loadWeather(
             city = city,
             onSuccess = {
-                city.name = it.city
-                addCity(city)
+                val newCity = copyCity(city, it)
+
+                addCity(newCity)
                 loadData()
             },
             onFailure = {
                 _toast.value = it
             }
         )
+    }
 
+    private fun copyCity(
+        city: City,
+        it: WeatherResponse
+    ): City {
+        if (city.name == null) {
+            val newCity = city.copy(
+                name = it.city
+            )
+            return newCity
+        } else {
+            val newCity = city.copy(
+                latitude = it.latitude,
+                longitude = it.longitude
+            )
+            return newCity
+        }
     }
 
     private fun addCity(city: City) {
         db.addCity(city)
     }
-
-
 }

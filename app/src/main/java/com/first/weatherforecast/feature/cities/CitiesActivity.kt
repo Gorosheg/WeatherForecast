@@ -54,13 +54,20 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         startActivity(intent)
     }
 
-    override fun onCityAdd(latitude: Double, longitude: Double) {
-        val newCity = City(
-            latitude = latitude,
-            longitude = longitude,
-            name = ""
-        )
-        loadWeather(newCity)
+    override fun onCityAdd(latitude: Double?, longitude: Double?, name: String?) {
+        if (name != null) {
+            val newCity = City(
+                name = name
+            )
+            loadWeather(newCity)
+        }
+
+        if (latitude == null || longitude == null) {
+            val newCity = City(
+                name = name
+            )
+            loadWeather(newCity)
+        }
     }
 
     private fun loadWeather(city: City) {

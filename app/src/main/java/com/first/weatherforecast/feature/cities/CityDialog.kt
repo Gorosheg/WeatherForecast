@@ -13,7 +13,7 @@ class CityDialog : DialogFragment() {
         super.onCreateDialog(savedInstanceState)
 
         return AlertDialog.Builder(activity)
-            .setTitle(getString(R.string.coordinats))
+            .setTitle(getString(R.string.CityDialogTitle))
             .setView(R.layout.fragment_city_dialog)
             .setPositiveButton(getString(R.string.add)) { _, _ ->
                 exitWithResult()
@@ -26,11 +26,19 @@ class CityDialog : DialogFragment() {
         val dialog = dialog ?: return
         val latitude = dialog.findViewById<EditText>(R.id.latitude).text
         val longitude = dialog.findViewById<EditText>(R.id.longitude).text
+        val cityName = dialog.findViewById<EditText>(R.id.name).text
 
-        (activity as CityAddListener).onCityAdd(
-            latitude = latitude.toString().toDouble(),
-            longitude = longitude.toString().toDouble()
-        )
+        if (cityName != null) {
+            (activity as CityAddListener).onCityAdd(
+                name = cityName.toString()
+            )
+        }
+        if (cityName == null && latitude != null && longitude != null) {
+            (activity as CityAddListener).onCityAdd(
+                latitude = latitude.toString().toDouble(),
+                longitude = longitude.toString().toDouble()
+            )
+        }
     }
 
 }

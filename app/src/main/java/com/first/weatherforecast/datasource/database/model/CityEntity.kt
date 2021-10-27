@@ -18,9 +18,9 @@ fun List<City>.toEntities(): List<CityEntity> = map { city ->
 }
 
 fun City.toEntity() = CityEntity(
-    latitude = latitude,
-    longitude = longitude,
-    name = name
+    latitude = latitude ?: 0.0,
+    longitude = longitude ?: 0.0,
+    name = name ?: ""
 )
 
 // С ссылкой на функцию - map(CityEntity::toSimpleCity)

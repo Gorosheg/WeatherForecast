@@ -27,7 +27,8 @@
 
     <string name="latitude">Широта</string>
     <string name="longitude">Долгота</string>
-    <string name="coordinats">Введите координаты города</string>
+    <string name="CityDialogTitle">Введите название или координаты города</string>
     <string name="add">Добавить</string>
     <string name="cancel">Отмена</string>
+    <string name="city_name">City name</string>
 </resources>
