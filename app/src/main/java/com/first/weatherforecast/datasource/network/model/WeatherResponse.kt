@@ -15,8 +15,17 @@ class WeatherResponse(
     private val skies: List<SkyConditionsResponse>,
 
     @SerializedName("name")
-    val city: String
+    val city: String,
+
+    @SerializedName("coord")
+    val coordinates: CoordinatesResponse
 ) {
+
+    val latitude: Double
+        get() = coordinates.latitude
+
+    val longitude: Double
+        get() = coordinates.longitude
 
     private val sky: SkyConditionsResponse
         get() = skies.first()
@@ -53,4 +62,3 @@ class WeatherResponse(
     private val Int.millimeters: Int
         get() = (this * MERCURY).toInt()
 }
-
