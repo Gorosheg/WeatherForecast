@@ -3,7 +3,6 @@ package com.first.weatherforecast.feature.cities
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.text.Editable
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import com.first.weatherforecast.R
