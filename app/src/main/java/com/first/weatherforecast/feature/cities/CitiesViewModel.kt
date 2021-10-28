@@ -36,6 +36,11 @@ class CitiesViewModel : ViewModel() {
         )
     }
 
+    fun removeCity(city: City) {
+        db.deleteCity(city)
+        loadData()
+    }
+
     private fun copyCity(
         city: City,
         it: WeatherResponse

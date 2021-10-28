@@ -35,7 +35,8 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
 
         adapter = CitiesAdapter(
             items = mutableListOf(),
-            onCityClick = ::navigateToWeatherScreen
+            onCityClick = ::navigateToWeatherScreen,
+            removeCity = ::onTrashClick
         )
 
         recyclerView.adapter = adapter
@@ -54,16 +55,24 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         startActivity(intent)
     }
 
+    private fun onTrashClick(city: City) {
+        viewModel.removeCity(city)
+
+        /*val adapter = adapter ?: return
+        val newItems = adapter.items - city
+        updateCitiesToList(newItems)*/
+    }
+
     override fun onCityAdd(latitude: Double?, longitude: Double?, name: String?) {
         if (name != "") {
             val newCity = City(
-                latitude = latitude,
-                longitude = longitude
+                name = name
             )
             loadWeather(newCity)
         } else if (latitude != null && longitude != null) {
             val newCity = City(
-                name = name
+                latitude = latitude,
+                longitude = longitude
             )
             loadWeather(newCity)
         }

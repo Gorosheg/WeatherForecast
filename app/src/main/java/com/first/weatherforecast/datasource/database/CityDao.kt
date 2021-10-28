@@ -15,7 +15,7 @@ interface CityDao {
     @Query("SELECT * FROM CityEntity WHERE id =:id")
     fun getById(id: Long): CityEntity
 
-    @Insert // Добавление элемента
+    @Insert // Добавление элементов
     fun insert(cities: List<CityEntity>)
 
     @Insert // Добавление элемента
