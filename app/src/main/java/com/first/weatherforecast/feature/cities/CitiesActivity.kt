@@ -55,17 +55,15 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
     }
 
     override fun onCityAdd(latitude: Double?, longitude: Double?, name: String?) {
-        if (name != null) {
-            val newCity = City(
-                name = name
-            )
-            loadWeather(newCity)
-        }
-
-        if (latitude != null && longitude != null) {
+        if (name != "") {
             val newCity = City(
                 latitude = latitude,
                 longitude = longitude
+            )
+            loadWeather(newCity)
+        } else if (latitude != null && longitude != null) {
+            val newCity = City(
+                name = name
             )
             loadWeather(newCity)
         }

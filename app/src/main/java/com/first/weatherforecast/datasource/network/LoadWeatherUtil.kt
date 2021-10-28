@@ -31,13 +31,13 @@ fun loadWeather(
             onFailure.invoke(Throwable())
         }
     }
-    if (city.latitude != null && city.longitude != null){
+    if (city.latitude != null && city.longitude != null) {
         NetworkManager.api()
             ?.getWeatherByCoordinates(latitude = city.latitude, longitude = city.longitude)
             ?.enqueue(request)
-    } else {
+    } else if (city.name != null) {
         NetworkManager.api()
-            ?.getWeatherByName(cityName = city.name!!)
+            ?.getWeatherByName(cityName = city.name)
             ?.enqueue(request)
     }
 

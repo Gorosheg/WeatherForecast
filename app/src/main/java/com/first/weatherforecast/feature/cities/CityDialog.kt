@@ -3,6 +3,7 @@ package com.first.weatherforecast.feature.cities
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import com.first.weatherforecast.R
@@ -24,19 +25,18 @@ class CityDialog : DialogFragment() {
 
     private fun exitWithResult() {
         val dialog = dialog ?: return
-        val latitude = dialog.findViewById<EditText>(R.id.latitude).text
-        val longitude = dialog.findViewById<EditText>(R.id.longitude).text
-        val cityName = dialog.findViewById<EditText>(R.id.name).text
+        val latitude = dialog.findViewById<EditText>(R.id.latitude).text.toString()
+        val longitude = dialog.findViewById<EditText>(R.id.longitude).text.toString()
+        val cityName: String = dialog.findViewById<EditText>(R.id.name).text.toString()
 
-        if (cityName != null) {
+        if (cityName != "") {
             (activity as CityAddListener).onCityAdd(
-                name = cityName.toString()
+                name = cityName
             )
-        }
-        if (cityName == null && latitude != null && longitude != null) {
+        } else if (latitude != "" && longitude != "") {
             (activity as CityAddListener).onCityAdd(
-                latitude = latitude.toString().toDouble(),
-                longitude = longitude.toString().toDouble()
+                latitude = latitude.toDouble(),
+                longitude = longitude.toDouble()
             )
         }
     }

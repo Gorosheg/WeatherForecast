@@ -27,7 +27,6 @@ class CitiesViewModel : ViewModel() {
             city = city,
             onSuccess = {
                 val newCity = copyCity(city, it)
-
                 addCity(newCity)
                 loadData()
             },
