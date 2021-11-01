@@ -26,4 +26,7 @@ interface CityDao {
 
     @Delete // Удаление элемента
     fun delete(city: CityEntity)
+
+    @Query("DELETE FROM CityEntity WHERE name = :name")
+    fun delete(name: String)
 }

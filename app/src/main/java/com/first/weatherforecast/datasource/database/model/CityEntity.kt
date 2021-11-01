@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.first.weatherforecast.model.City
 
 @Entity
-class CityEntity(
+data class CityEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val latitude: Double,

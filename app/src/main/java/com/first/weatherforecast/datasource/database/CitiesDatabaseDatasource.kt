@@ -38,6 +38,9 @@ class CitiesDatabaseDatasource {
     }
 
     fun deleteCity(city: City) {
-        cityDao.delete(city.toEntity())
+        println("frgthyjukiol" + city.toEntity())
+        if (city.name != null) {
+            cityDao.delete(city.name)
+        }
     }
 }

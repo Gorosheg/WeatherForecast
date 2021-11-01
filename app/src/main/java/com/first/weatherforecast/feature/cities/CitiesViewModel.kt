@@ -37,6 +37,7 @@ class CitiesViewModel : ViewModel() {
     }
 
     fun removeCity(city: City) {
+        println("frgthyjukiol"+db.getAllCities())
         db.deleteCity(city)
         loadData()
     }
