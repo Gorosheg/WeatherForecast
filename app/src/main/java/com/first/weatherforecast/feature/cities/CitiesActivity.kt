@@ -64,7 +64,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
     }
 
     override fun onCityAdd(latitude: Double?, longitude: Double?, name: String?) {
-        if (name != "") {
+        if (name != null) {
             val newCity = City(
                 name = name
             )
