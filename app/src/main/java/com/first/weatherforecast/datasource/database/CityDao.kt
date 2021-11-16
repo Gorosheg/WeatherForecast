@@ -2,6 +2,9 @@ package com.first.weatherforecast.datasource.database
 
 import androidx.room.*
 import com.first.weatherforecast.datasource.database.model.CityEntity
+import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.Single
 
 @Dao
 interface CityDao {
@@ -10,10 +13,10 @@ interface CityDao {
     fun count(): Int
 
     @Query("SELECT * FROM CityEntity")
-    fun getAll(): List<CityEntity>
+    fun getAll(): Observable<List<CityEntity>>
 
     @Query("SELECT * FROM CityEntity WHERE id =:id")
-    fun getById(id: Long): CityEntity
+    fun getById(id: Long): Observable<CityEntity>
 
     @Insert // Добавление элементов
     fun insert(cities: List<CityEntity>)

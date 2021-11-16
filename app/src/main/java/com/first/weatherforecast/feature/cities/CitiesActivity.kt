@@ -12,6 +12,9 @@ import com.first.weatherforecast.feature.weather.WeatherActivity
 import com.first.weatherforecast.model.City
 import com.first.weatherforecast.feature.cities.recycler.CitiesAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 
 class CitiesActivity : AppCompatActivity(), CityAddListener {
@@ -22,13 +25,22 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
     // Методом get запрашиваем у этого провайдера конкретную модель по имени класса
     private val viewModel: CitiesViewModel by lazy { ViewModelProvider(this).get(CitiesViewModel::class.java) }
 
+    private var disposable: Disposable? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cities)
 
-        viewModel.data.observe(this, ::updateCitiesToList)
-        viewModel.loadData()
-        viewModel.toast.observe(this, ::makeToast)
+        disposable = viewModel.loadData()
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext(::updateCitiesToList)
+            .doOnError(::makeToast)
+            .subscribe()
+
+        /* viewModel.data.observe(this, ::updateCitiesToList)
+         viewModel.loadData()*/
+        viewModel.error.observe(this, ::makeToast)
         val recyclerView: RecyclerView = findViewById(R.id.cityList)
         val addCity: FloatingActionButton = findViewById(R.id.dialog_button)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -42,6 +54,12 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         recyclerView.adapter = adapter
 
         addCity.setOnClickListener { showCityDialog() }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable?.dispose()
+        disposable = null
     }
 
     private fun showCityDialog() {
@@ -84,7 +102,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
 
     private fun updateCitiesToList(cities: List<City>) {
         val adapter = adapter ?: return
-        val previousItemCount = adapter.itemCount
+        //    val previousItemCount = adapter.itemCount
         adapter.items.clear()
         adapter.items += cities
         adapter.notifyDataSetChanged()

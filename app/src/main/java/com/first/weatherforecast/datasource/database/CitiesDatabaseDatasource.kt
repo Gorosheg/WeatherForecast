@@ -4,6 +4,8 @@ import com.first.weatherforecast.datasource.database.model.CityEntity
 import com.first.weatherforecast.datasource.database.model.toEntity
 import com.first.weatherforecast.datasource.database.model.toSimpleCities
 import com.first.weatherforecast.model.City
+import io.reactivex.Observable
+import io.reactivex.Single
 
 class CitiesDatabaseDatasource {
 
@@ -33,12 +35,12 @@ class CitiesDatabaseDatasource {
         return cityDao.count() == 0
     }
 
-    fun getAllCities(): List<City> {
-        return cityDao.getAll().toSimpleCities()
+    fun getAllCities(): Observable<List<City>> {
+        return cityDao.getAll()
+            .map(List<CityEntity>::toSimpleCities)
     }
 
     fun deleteCity(city: City) {
-        println("frgthyjukiol" + city.toEntity())
         if (city.name != null) {
             cityDao.delete(city.name)
         }

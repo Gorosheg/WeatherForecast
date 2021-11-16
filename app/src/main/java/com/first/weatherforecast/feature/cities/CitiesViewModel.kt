@@ -8,18 +8,17 @@ import com.first.weatherforecast.util.SingleLifeEvent
 import com.first.weatherforecast.datasource.network.loadWeather
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.model.City
+import io.reactivex.Observable
 
 class CitiesViewModel : ViewModel() {
 
     private val db by lazy { CitiesDatabaseDatasource() }
 
-    private var _data = MutableLiveData<List<City>>()
-    private var _toast: MutableLiveData<Throwable> = SingleLifeEvent<Throwable>()
-    val data: LiveData<List<City>> = _data
-    val toast: LiveData<Throwable> = _toast
+    private var _error: MutableLiveData<Throwable> = SingleLifeEvent<Throwable>()
+    val error: LiveData<Throwable> = _error
 
-    fun loadData() {
-        _data.value = db.getAllCities()
+    fun loadData(): Observable<List<City>> {
+        return db.getAllCities()
     }
 
     fun loadWeather(city: City) {
@@ -28,35 +27,30 @@ class CitiesViewModel : ViewModel() {
             onSuccess = {
                 val newCity = copyCity(city, it)
                 addCity(newCity)
-                loadData()
             },
             onFailure = {
-                _toast.value = it
+                _error.value = it
             }
         )
     }
 
     fun removeCity(city: City) {
-        println("frgthyjukiol"+db.getAllCities())
         db.deleteCity(city)
-        loadData()
     }
 
     private fun copyCity(
         city: City,
-        it: WeatherResponse
+        response: WeatherResponse
     ): City {
-        if (city.name == null) {
-            val newCity = city.copy(
-                name = it.city
+        return if (city.name == null) {
+            city.copy(
+                name = response.city
             )
-            return newCity
         } else {
-            val newCity = city.copy(
-                latitude = it.latitude,
-                longitude = it.longitude
+            city.copy(
+                latitude = response.latitude,
+                longitude = response.longitude
             )
-            return newCity
         }
     }
 
