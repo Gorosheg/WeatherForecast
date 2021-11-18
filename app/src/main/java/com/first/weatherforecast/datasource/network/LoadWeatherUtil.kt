@@ -2,43 +2,17 @@ package com.first.weatherforecast.datasource.network
 
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.model.City
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.Single
 
-/**
- * @param onSuccess - В случае успешного получения данных передает Weather тому,
- * кто вызвал функцию для дальнейших действий.
- * @param onFailure - В случае неудачи передает Throwable тому, кто вызвал функцию
- *
- * Статическая функция, которая не делает ничего лишнего, не вызывает никаких сайд эффектов
- * У функции есть только входые и выходные данные
- */
-fun loadWeather(
-    city: City,
-    onSuccess: (WeatherResponse) -> Unit,
-    onFailure: (Throwable) -> Unit
-) {
-    val request = object : Callback<WeatherResponse> {
+fun loadingWeather(city: City): Single<WeatherResponse> {
 
-        override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
-            val weather: WeatherResponse = response.body() ?: return
-            onSuccess.invoke(weather)
-        }
-
-        override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
-            t.printStackTrace()
-            onFailure.invoke(Throwable())
-        }
-    }
-    if (city.latitude != null && city.longitude != null) {
+    return if (city.latitude != null && city.longitude != null) {
         NetworkManager.api()
-            ?.getWeatherByCoordinates(latitude = city.latitude, longitude = city.longitude)
-            ?.enqueue(request)
-    } else if (city.name != null) {
+            .getWeatherByCoordinates(latitude = city.latitude, longitude = city.longitude)
+    } else {
+        val name = city.name ?: throw IllegalStateException("Can't find a name")
         NetworkManager.api()
-            ?.getWeatherByName(cityName = city.name)
-            ?.enqueue(request)
+            .getWeatherByName(cityName = name)
     }
 
 }

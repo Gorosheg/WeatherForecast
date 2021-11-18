@@ -8,10 +8,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.first.weatherforecast.R
+import com.first.weatherforecast.datasource.network.loadingWeather
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
-import com.first.weatherforecast.datasource.network.loadWeather
 import com.first.weatherforecast.feature.cities.CitiesActivity.Companion.CITY_KEY
 import com.first.weatherforecast.model.City
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,14 +32,14 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun loadWeather(city: City) {
-        loadWeather(
-            city = city,
-            onSuccess = ::handleWeatherResponse, // Передача в аргумент ссылки на функцию, т.к. аргументы совпадают
-            //onSuccess = { handleWeatherResponse(it) }, // Вызов функции, без ссылки на фнкцию
-            onFailure = {
+        loadingWeather(city = city)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSuccess(::handleWeatherResponse)
+            .doOnError {
                 Toast.makeText(this@WeatherActivity, it.message, Toast.LENGTH_SHORT).show()
             }
-        )
+            .subscribe()
     }
 
     @SuppressLint("SetTextI18n")

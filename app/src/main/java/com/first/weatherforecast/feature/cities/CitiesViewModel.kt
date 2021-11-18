@@ -1,41 +1,37 @@
 package com.first.weatherforecast.feature.cities
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.first.weatherforecast.datasource.database.CitiesDatabaseDatasource
-import com.first.weatherforecast.util.SingleLifeEvent
-import com.first.weatherforecast.datasource.network.loadWeather
+import com.first.weatherforecast.datasource.network.loadingWeather
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.model.City
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.Subject
 
 class CitiesViewModel : ViewModel() {
 
     private val db by lazy { CitiesDatabaseDatasource() }
 
-    private var _error: MutableLiveData<Throwable> = SingleLifeEvent<Throwable>()
-    val error: LiveData<Throwable> = _error
+    private val _error: Subject<Throwable> = PublishSubject.create()
+    val error: Observable<Throwable> = _error
 
     fun loadData(): Observable<List<City>> {
         return db.getAllCities()
     }
 
     fun loadWeather(city: City) {
-        loadWeather(
-            city = city,
-            onSuccess = {
+        loadingWeather(city = city)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSuccess {
                 val newCity = copyCity(city, it)
                 addCity(newCity)
-            },
-            onFailure = {
-                _error.value = it
             }
-        )
-    }
-
-    fun removeCity(city: City) {
-        db.deleteCity(city)
+            .doOnError(_error::onNext)
+            .subscribe()
     }
 
     private fun copyCity(
@@ -56,5 +52,9 @@ class CitiesViewModel : ViewModel() {
 
     private fun addCity(city: City) {
         db.addCity(city)
+    }
+
+    fun removeCity(city: City) {
+        db.deleteCity(city)
     }
 }
