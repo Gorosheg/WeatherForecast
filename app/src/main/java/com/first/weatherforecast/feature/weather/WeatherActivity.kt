@@ -12,6 +12,7 @@ import com.first.weatherforecast.datasource.network.loadingWeather
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.feature.cities.CitiesActivity.Companion.CITY_KEY
 import com.first.weatherforecast.model.City
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
