@@ -39,7 +39,6 @@ class WeatherActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess(::handleWeatherResponse)
             .doOnError(::makeToast)
-
             .subscribe()
     }
 

@@ -6,15 +6,12 @@ import com.first.weatherforecast.feature.weather.data.WeatherRepositoryImpl
 import com.first.weatherforecast.feature.weather.domain.WeatherInteractor
 import com.first.weatherforecast.feature.weather.domain.WeatherInteractorImpl
 
-class WeatherDI () {
+class WeatherDi(private val networkDataSource: NetworkDataSource) {
 
     val interactor: WeatherInteractor
         get() = WeatherInteractorImpl(repository)
 
     private val repository: WeatherRepository
         get() = WeatherRepositoryImpl(networkDataSource)
-
-    private val networkDataSource: NetworkDataSource
-        get() = NetworkDataSource()
 
 }
