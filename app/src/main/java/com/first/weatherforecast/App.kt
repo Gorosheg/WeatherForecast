@@ -2,9 +2,9 @@ package com.first.weatherforecast
 
 import android.app.Application
 import androidx.room.Room
-import com.first.weatherforecast.city.dI.CitiesDi
 import com.first.weatherforecast.datasource.database.CitiesDatabase
-import com.first.weatherforecast.weather.dI.WeatherDI
+import com.first.weatherforecast.feature.city.dI.CitiesDi
+import com.first.weatherforecast.feature.weather.dI.WeatherDI
 
 class App : Application() {
 

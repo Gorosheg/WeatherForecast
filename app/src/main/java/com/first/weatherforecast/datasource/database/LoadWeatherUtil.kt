@@ -1,9 +1,10 @@
 package com.first.weatherforecast.datasource.database
 
+import com.first.weatherforecast.common.model.City
 import com.first.weatherforecast.datasource.network.NetworkManager
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
-import com.first.weatherforecast.model.City
 import io.reactivex.Single
+
 class NetworkDataSource{
 
     fun loadingWeather(city: City): Single<WeatherResponse> {

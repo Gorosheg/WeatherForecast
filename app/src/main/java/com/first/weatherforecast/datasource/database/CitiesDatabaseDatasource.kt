@@ -1,9 +1,9 @@
 package com.first.weatherforecast.datasource.database
 
+import com.first.weatherforecast.common.model.City
 import com.first.weatherforecast.datasource.database.model.CityEntity
 import com.first.weatherforecast.datasource.database.model.toEntity
 import com.first.weatherforecast.datasource.database.model.toSimpleCities
-import com.first.weatherforecast.model.City
 import io.reactivex.Observable
 
 class CitiesDatabaseDatasource(private val cityDao: CityDao) {

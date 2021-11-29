@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherForecast">
         <activity
-            android:name="com.first.weatherforecast.city.presentation.CitiesActivity"
+            android:name="com.first.weatherforecast.feature.city.presentation.CitiesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.first.weatherforecast.weather.presentation.WeatherActivity"
+            android:name="com.first.weatherforecast.feature.weather.presentation.WeatherActivity"
             android:exported="true">
 
         </activity>

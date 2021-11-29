@@ -2,7 +2,7 @@ package com.first.weatherforecast.datasource.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.first.weatherforecast.model.City
+import com.first.weatherforecast.common.model.City
 
 @Entity
 data class CityEntity(

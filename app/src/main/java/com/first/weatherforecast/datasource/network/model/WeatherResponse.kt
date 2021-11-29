@@ -1,7 +1,7 @@
 package com.first.weatherforecast.datasource.network.model
 
-import com.first.weatherforecast.model.SkyCondition
-import com.first.weatherforecast.model.SkyImage
+import com.first.weatherforecast.common.model.SkyCondition
+import com.first.weatherforecast.common.model.SkyImage
 import com.google.gson.annotations.SerializedName
 
 private const val ABSOLUTE_ZERO = 273.15
