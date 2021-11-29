@@ -1,6 +1,6 @@
-package com.first.weatherforecast.citiesDomain
+package com.first.weatherforecast.city.domain
 
-import com.first.weatherforecast.citiesData.CitiesRepository
+import com.first.weatherforecast.city.data.CitiesRepository
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.model.City
 import io.reactivex.Observable

@@ -1,4 +1,4 @@
-package com.first.weatherforecast.citiesPresentation.cities.recycler
+package com.first.weatherforecast.city.presentation.recycler
 
 import android.view.LayoutInflater
 import android.view.View

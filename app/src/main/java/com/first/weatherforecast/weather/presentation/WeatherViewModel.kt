@@ -1,10 +1,10 @@
-package com.first.weatherforecast.weatherPresentation
+package com.first.weatherforecast.weather.presentation
 
 import androidx.lifecycle.ViewModel
 import com.first.weatherforecast.App
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.model.City
-import com.first.weatherforecast.weatherDomain.WeatherInteractor
+import com.first.weatherforecast.weather.domain.WeatherInteractor
 import io.reactivex.Single
 
 class WeatherViewModel : ViewModel() {

@@ -6,7 +6,7 @@ import com.first.weatherforecast.datasource.database.model.toSimpleCities
 import com.first.weatherforecast.model.City
 import io.reactivex.Observable
 
-class CitiesDatabaseDatasource(  private val cityDao: CityDao ) {
+class CitiesDatabaseDatasource(private val cityDao: CityDao) {
 
     // Может убрать уже? Оставить Москву? Научиться определять местоположение пользователя?
     init {

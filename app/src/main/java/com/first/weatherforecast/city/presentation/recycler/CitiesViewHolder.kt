@@ -1,4 +1,4 @@
-package com.first.weatherforecast.citiesPresentation.cities.recycler
+package com.first.weatherforecast.city.presentation.recycler
 
 import android.view.View
 import android.widget.Button

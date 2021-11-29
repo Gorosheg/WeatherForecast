@@ -1,4 +1,4 @@
-package com.first.weatherforecast.citiesPresentation.cities
+package com.first.weatherforecast.city.presentation
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
-import com.first.weatherforecast.citiesPresentation.cities.recycler.CitiesAdapter
+import com.first.weatherforecast.city.presentation.recycler.CitiesAdapter
 import com.first.weatherforecast.model.City
-import com.first.weatherforecast.weatherPresentation.WeatherActivity
+import com.first.weatherforecast.weather.presentation.WeatherActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

@@ -1,14 +1,14 @@
-package com.first.weatherforecast.weatherData
+package com.first.weatherforecast.weather.data
 
 import com.first.weatherforecast.datasource.database.NetworkDataSource
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.model.City
 import io.reactivex.Single
 
-class WeatherRepositoryImpl() : WeatherRepository {
+class WeatherRepositoryImpl(private val networkDataSource: NetworkDataSource) : WeatherRepository {
 
     override fun loadWeather(city: City): Single<WeatherResponse> {
-        return NetworkDataSource().loadingWeather(city)
+        return networkDataSource.loadingWeather(city)
     }
 
 }

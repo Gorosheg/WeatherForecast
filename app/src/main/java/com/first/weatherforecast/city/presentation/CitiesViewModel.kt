@@ -1,8 +1,8 @@
-package com.first.weatherforecast.citiesPresentation.cities
+package com.first.weatherforecast.city.presentation
 
 import androidx.lifecycle.ViewModel
 import com.first.weatherforecast.App
-import com.first.weatherforecast.citiesDomain.CitiesInteractor
+import com.first.weatherforecast.city.domain.CitiesInteractor
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.model.City
 import io.reactivex.Observable

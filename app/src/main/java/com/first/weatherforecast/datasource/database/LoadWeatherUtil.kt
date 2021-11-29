@@ -7,7 +7,6 @@ import io.reactivex.Single
 class NetworkDataSource{
 
     fun loadingWeather(city: City): Single<WeatherResponse> {
-
         return if (city.latitude != null && city.longitude != null) {
             NetworkManager.api()
                 .getWeatherByCoordinates(latitude = city.latitude, longitude = city.longitude)
@@ -16,6 +15,5 @@ class NetworkDataSource{
             NetworkManager.api()
                 .getWeatherByName(cityName = name)
         }
-
     }
 }

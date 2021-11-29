@@ -1,4 +1,4 @@
-package com.first.weatherforecast.weatherPresentation
+package com.first.weatherforecast.weather.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.first.weatherforecast.R
-import com.first.weatherforecast.citiesPresentation.cities.CitiesActivity.Companion.CITY_KEY
+import com.first.weatherforecast.city.presentation.CitiesActivity.Companion.CITY_KEY
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.model.City
 import io.reactivex.android.schedulers.AndroidSchedulers

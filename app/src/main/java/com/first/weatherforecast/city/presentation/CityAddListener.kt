@@ -1,4 +1,4 @@
-package com.first.weatherforecast.citiesPresentation.cities
+package com.first.weatherforecast.city.presentation
 
 interface CityAddListener {
 
