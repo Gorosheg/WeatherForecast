@@ -2,8 +2,9 @@ package com.first.weatherforecast
 
 import android.app.Application
 import androidx.room.Room
+import com.first.weatherforecast.citiesDI.CitiesDi
 import com.first.weatherforecast.datasource.database.CitiesDatabase
-import com.first.weatherforecast.di.CitiesDi
+import com.first.weatherforecast.weatherDI.WeatherDI
 
 class App : Application() {
 
@@ -17,6 +18,7 @@ class App : Application() {
     companion object {
         lateinit var database: CitiesDatabase
         val citiesDi by lazy { CitiesDi(database) }
+        val weatherDi by lazy { WeatherDI() }
     }
 
 }

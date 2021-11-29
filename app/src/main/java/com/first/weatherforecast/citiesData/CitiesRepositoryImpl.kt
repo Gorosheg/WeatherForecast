@@ -1,4 +1,4 @@
-package com.first.weatherforecast.data
+package com.first.weatherforecast.citiesData
 
 import com.first.weatherforecast.datasource.database.CitiesDatabaseDatasource
 import com.first.weatherforecast.datasource.database.NetworkDataSource

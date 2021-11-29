@@ -1,4 +1,4 @@
-package com.first.weatherforecast.presentation.weather
+package com.first.weatherforecast.weatherPresentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,15 +7,17 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.first.weatherforecast.App
+import androidx.lifecycle.ViewModelProvider
 import com.first.weatherforecast.R
+import com.first.weatherforecast.citiesPresentation.cities.CitiesActivity.Companion.CITY_KEY
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
-import com.first.weatherforecast.presentation.cities.CitiesActivity.Companion.CITY_KEY
 import com.first.weatherforecast.model.City
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class WeatherActivity : AppCompatActivity() {
+
+    private val viewModel: WeatherViewModel by lazy { ViewModelProvider(this).get(WeatherViewModel::class.java) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
@@ -32,14 +34,17 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun loadWeather(city: City) {
-        App.citiesDi.interactor.loadWeather(city = city)
+        viewModel.loadWeather(city = city)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess(::handleWeatherResponse)
-            .doOnError {
-                Toast.makeText(this@WeatherActivity, it.message, Toast.LENGTH_SHORT).show()
-            }
+            .doOnError(::makeToast)
+
             .subscribe()
+    }
+
+    private fun makeToast(it: Throwable) {
+        Toast.makeText(this@WeatherActivity, it.message, Toast.LENGTH_SHORT).show()
     }
 
     @SuppressLint("SetTextI18n")

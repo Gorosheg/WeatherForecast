@@ -1,18 +1,9 @@
-package com.first.weatherforecast.data
+package com.first.weatherforecast.weatherData
 
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.model.City
-import io.reactivex.Observable
 import io.reactivex.Single
 
-interface CitiesRepository {
-
-    val cities: Observable<List<City>>
-
-    fun addCity(city: City)
-
+interface WeatherRepository {
     fun loadWeather(city: City): Single<WeatherResponse>
-
-    fun removeCity(city: City)
-
 }
