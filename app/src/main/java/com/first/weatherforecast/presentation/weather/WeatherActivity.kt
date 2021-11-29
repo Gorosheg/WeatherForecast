@@ -1,4 +1,4 @@
-package com.first.weatherforecast.feature.weather
+package com.first.weatherforecast.presentation.weather
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,12 +7,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.first.weatherforecast.App
 import com.first.weatherforecast.R
-import com.first.weatherforecast.datasource.network.loadingWeather
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
-import com.first.weatherforecast.feature.cities.CitiesActivity.Companion.CITY_KEY
+import com.first.weatherforecast.presentation.cities.CitiesActivity.Companion.CITY_KEY
 import com.first.weatherforecast.model.City
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -33,7 +32,7 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun loadWeather(city: City) {
-        loadingWeather(city = city)
+        App.citiesDi.interactor.loadWeather(city = city)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess(::handleWeatherResponse)

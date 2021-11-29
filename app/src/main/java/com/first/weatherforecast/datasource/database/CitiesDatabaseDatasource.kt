@@ -5,17 +5,18 @@ import com.first.weatherforecast.datasource.database.model.toEntity
 import com.first.weatherforecast.datasource.database.model.toSimpleCities
 import com.first.weatherforecast.model.City
 import io.reactivex.Observable
-import io.reactivex.Single
 
-class CitiesDatabaseDatasource {
+class CitiesDatabaseDatasource(  private val cityDao: CityDao ) {
 
-    private val db = App.dataBase
-    private val cityDao = db.cityDao
-
+    // Может убрать уже? Оставить Москву? Научиться определять местоположение пользователя?
     init {
         if (isEmpty()) {
             cityDao.insert(buildInitialCities())
         }
+    }
+
+    private fun isEmpty(): Boolean {
+        return cityDao.count() == 0
     }
 
     private fun buildInitialCities(): List<CityEntity> {
@@ -30,13 +31,8 @@ class CitiesDatabaseDatasource {
         cityDao.insert(city.toEntity())
     }
 
-
-    private fun isEmpty(): Boolean {
-        return cityDao.count() == 0
-    }
-
     fun getAllCities(): Observable<List<City>> {
-        return cityDao.getAll()
+        return cityDao.cities()
             .map(List<CityEntity>::toSimpleCities)
     }
 

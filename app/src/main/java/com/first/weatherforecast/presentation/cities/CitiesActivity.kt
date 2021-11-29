@@ -1,4 +1,4 @@
-package com.first.weatherforecast.feature.cities
+package com.first.weatherforecast.presentation.cities
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
-import com.first.weatherforecast.feature.cities.recycler.CitiesAdapter
-import com.first.weatherforecast.feature.weather.WeatherActivity
+import com.first.weatherforecast.presentation.cities.recycler.CitiesAdapter
+import com.first.weatherforecast.presentation.weather.WeatherActivity
 import com.first.weatherforecast.model.City
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -32,7 +32,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cities)
 
-        disposable += viewModel.loadData()
+        disposable += viewModel.cities
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext(::updateCitiesToList)

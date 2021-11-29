@@ -1,9 +1,9 @@
-package com.first.weatherforecast.feature.cities
+package com.first.weatherforecast.presentation.cities
 
 import androidx.lifecycle.ViewModel
-import com.first.weatherforecast.datasource.database.CitiesDatabaseDatasource
-import com.first.weatherforecast.datasource.network.loadingWeather
+import com.first.weatherforecast.App
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
+import com.first.weatherforecast.domain.CitiesInteractor
 import com.first.weatherforecast.model.City
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,17 +13,16 @@ import io.reactivex.subjects.Subject
 
 class CitiesViewModel : ViewModel() {
 
-    private val db by lazy { CitiesDatabaseDatasource() }
+    private val interactor: CitiesInteractor by lazy { App.citiesDi.interactor }
 
     private val _error: Subject<Throwable> = PublishSubject.create()
     val error: Observable<Throwable> = _error
 
-    fun loadData(): Observable<List<City>> {
-        return db.getAllCities()
-    }
+    val cities: Observable<List<City>>
+        get() = interactor.cities
 
     fun loadWeather(city: City) {
-        loadingWeather(city = city)
+        interactor.loadWeather(city = city)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess {
@@ -51,10 +50,10 @@ class CitiesViewModel : ViewModel() {
     }
 
     private fun addCity(city: City) {
-        db.addCity(city)
+        interactor.addCity(city)
     }
 
     fun removeCity(city: City) {
-        db.deleteCity(city)
+        interactor.removeCity(city)
     }
 }

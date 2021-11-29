@@ -13,7 +13,7 @@ interface CityDao {
     fun count(): Int
 
     @Query("SELECT * FROM CityEntity")
-    fun getAll(): Observable<List<CityEntity>>
+    fun cities(): Observable<List<CityEntity>>
 
     @Query("SELECT * FROM CityEntity WHERE id =:id")
     fun getById(id: Long): Observable<CityEntity>
