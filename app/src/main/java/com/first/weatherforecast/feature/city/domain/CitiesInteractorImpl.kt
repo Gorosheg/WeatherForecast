@@ -22,4 +22,8 @@ class CitiesInteractorImpl(private val repository: CitiesRepository) : CitiesInt
     override fun removeCity(city: City) {
         repository.removeCity(city)
     }
+
+    override fun isFirstLaunch(): Boolean? {
+        return repository.isFirstLaunch()
+    }
 }

@@ -56,4 +56,8 @@ class CitiesViewModel : ViewModel() {
     fun removeCity(city: City) {
         interactor.removeCity(city)
     }
+
+    fun isFirstLaunch(): Boolean? {
+        return interactor.isFirstLaunch()
+    }
 }

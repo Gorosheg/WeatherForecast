@@ -42,6 +42,10 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         disposable += viewModel.error
             .subscribe(::makeToast)
 
+        if (viewModel.isFirstLaunch() == true) {
+            firstLaunchToast()
+        }
+
         val recyclerView: RecyclerView = findViewById(R.id.cityList)
         val addCity: FloatingActionButton = findViewById(R.id.dialog_button)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -112,6 +116,10 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
 
     private fun makeToast(throwable: Throwable) {
         Toast.makeText(this, "$throwable", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun firstLaunchToast() {
+        Toast.makeText(this, "It is first time you open the application", Toast.LENGTH_SHORT).show()
     }
 
     companion object {

@@ -15,5 +15,7 @@ interface CitiesInteractor {
 
     fun removeCity(city: City)
 
+    fun isFirstLaunch(): Boolean?
+
 
 }

@@ -15,4 +15,6 @@ interface CitiesRepository {
 
     fun removeCity(city: City)
 
+    fun isFirstLaunch(): Boolean?
+
 }
