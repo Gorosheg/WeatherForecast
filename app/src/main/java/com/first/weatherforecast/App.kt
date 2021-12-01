@@ -3,7 +3,7 @@ package com.first.weatherforecast
 import android.annotation.SuppressLint
 import android.app.Application
 import com.first.weatherforecast.datasource.sharedPreference.MutablePreferenceDatasource
-import com.first.weatherforecast.datasource.sharedPreference.SharedPrefValues
+import com.first.weatherforecast.datasource.sharedPreference.FirstLaaunchEnum
 import com.first.weatherforecast.datasource.sharedPreference.SharedPreferenceDi
 import com.first.weatherforecast.datasource.database.DatabaseDi
 import com.first.weatherforecast.datasource.network.NetworkDi
@@ -22,13 +22,10 @@ class App : Application() {
     }
 
     private fun initIsFirstLaunchPref(preferences: MutablePreferenceDatasource) {
-        when (preferences.isFirstLaunchEnum) {
-            SharedPrefValues.DEFAULT -> {
-                preferences.isFirstLaunchEnum = SharedPrefValues.TRUE
-            }
-            SharedPrefValues.TRUE -> {
-                preferences.isFirstLaunchEnum = SharedPrefValues.FALSE
-            }
+        if (preferences.firstLaaunchEnum == FirstLaaunchEnum.DEFAULT) {
+            preferences.firstLaaunchEnum = FirstLaaunchEnum.TRUE
+        } else if (preferences.firstLaaunchEnum == FirstLaaunchEnum.TRUE) {
+            preferences.firstLaaunchEnum = FirstLaaunchEnum.FALSE
         }
     }
 
@@ -40,11 +37,12 @@ class App : Application() {
 
         val citiesDi by lazy {
             CitiesDi(
-                databaseDi.datasource,
-                networkDi.networkDataSource,
-                sharedPrefDi.preferenceDatasource
+                datasource = databaseDi.datasource,
+                networkDataSource = networkDi.networkDataSource,
+                isFirstLaunch = sharedPrefDi.preferenceDatasource
             )
         }
+
         val weatherDi by lazy { WeatherDi(networkDi.networkDataSource) }
 
     }

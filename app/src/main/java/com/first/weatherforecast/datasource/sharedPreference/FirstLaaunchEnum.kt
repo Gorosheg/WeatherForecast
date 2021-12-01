@@ -1,6 +1,6 @@
 package com.first.weatherforecast.datasource.sharedPreference
 
-enum class SharedPrefValues {
+enum class FirstLaaunchEnum {
     DEFAULT,
     TRUE,
     FALSE;
@@ -15,7 +15,7 @@ enum class SharedPrefValues {
 
     companion object {
 
-        fun stringToEnum(string: String?): SharedPrefValues {
+        fun stringToEnum(string: String?): FirstLaaunchEnum {
             return when (string) {
                 null -> DEFAULT
                 "True" -> TRUE
