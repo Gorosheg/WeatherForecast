@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.first.weatherforecast.R
 import com.first.weatherforecast.common.model.City
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
@@ -65,9 +66,13 @@ class WeatherActivity : AppCompatActivity() {
         feelDegrees.text = weather.feelsLike.toString() + "°C"
         humidityParam.text = weather.humidity.toString() + "%"
         pressureParam.text = weather.pressure.toString()
-
         skyCondition.setText(weather.skyCondition.text)
-        skyImage.setImageResource(weather.skyImage.image)
+
+        Glide // Добавление изображения из интернета
+            .with(this) // context
+            .load(weather.skyImage.image) // Ссылка на изображение
+            .into(skyImage) // View
+
         skyImage.clipToOutline = true
     }
 }
