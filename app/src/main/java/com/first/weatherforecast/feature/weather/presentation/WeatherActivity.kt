@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
+import com.first.weatherforecast.App
 import com.first.weatherforecast.R
 import com.first.weatherforecast.common.model.City
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
@@ -17,8 +19,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class WeatherActivity : AppCompatActivity() {
+    private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var city: City
 
-    private val viewModel: WeatherViewModel by lazy { ViewModelProvider(this).get(WeatherViewModel::class.java) }
+    private val viewModel: WeatherViewModel by lazy {
+        ViewModelProvider(this, App.weatherDi.getViewModelFactory(city))
+            .get(WeatherViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
@@ -30,15 +38,25 @@ class WeatherActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        val city = intent.getSerializableExtra(CITY_KEY) as City
-        loadWeather(city)
+        city = intent.getSerializableExtra(CITY_KEY) as City
+        loadWeather()
+
+        swipeRefresh = findViewById(R.id.swipeRefreshLayout)
+        swipeRefresh.setOnRefreshListener {
+            loadWeather()
+
+        }
+
     }
 
-    private fun loadWeather(city: City) {
-        viewModel.loadWeather(city = city)
+    private fun loadWeather() {
+        viewModel.loadWeather()
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSuccess(::handleWeatherResponse)
+            .doOnSuccess {
+                handleWeatherResponse(it)
+                swipeRefresh.isRefreshing = false
+            }
             .doOnError(::makeToast)
             .subscribe()
     }

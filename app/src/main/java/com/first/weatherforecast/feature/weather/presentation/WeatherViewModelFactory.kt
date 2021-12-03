@@ -1,18 +1,16 @@
 package com.first.weatherforecast.feature.weather.presentation
 
 import androidx.lifecycle.ViewModel
-import com.first.weatherforecast.App
+import androidx.lifecycle.ViewModelProvider
 import com.first.weatherforecast.common.model.City
-import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.feature.weather.domain.WeatherInteractor
-import io.reactivex.Single
 
-class WeatherViewModel(
+class WeatherViewModelFactory(
     private val interactor: WeatherInteractor,
     private val city: City
-) : ViewModel() {
+) : ViewModelProvider.Factory {
 
-    fun loadWeather(): Single<WeatherResponse> {
-        return interactor.loadWeather(city)
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return WeatherViewModel(interactor, city) as T
     }
 }
