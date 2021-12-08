@@ -1,9 +1,17 @@
 package com.first.weatherforecast.feature.city.presentation
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback
+import androidx.core.app.ActivityCompat.requestPermissions
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,15 +26,21 @@ import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
 
 
-class CitiesActivity : AppCompatActivity(), CityAddListener {
+class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermissionsResultCallback {
 
     private var adapter: CitiesAdapter? = null
 
     // получим доступ к провайдеру, который хранит все ViewModel для этого Activity.
     // Методом get запрашиваем у этого провайдера конкретную модель по имени класса
     private val viewModel: CitiesViewModel by lazy { ViewModelProvider(this).get(CitiesViewModel::class.java) }
-
     private var disposable = CompositeDisposable()
+    private val locationManager: LocationManager by lazy { getSystemService(Context.LOCATION_SERVICE) as LocationManager }
+
+    private val mLocationListener: LocationListener = LocationListener {
+        it.latitude // TODO: показвать только этот город в списке
+        it.longitude
+        println("wqerty $it")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +71,44 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
         )
 
         recyclerView.adapter = adapter
-
         addCity.setOnClickListener { showCityDialog() }
+
+        enableMyLocation()
+
+    }
+
+    private fun enableMyLocation() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            // показываем город по координатам
+            locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                1000 * 10, 10f, mLocationListener // Не заходит((
+            )
+        } else {
+            requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            return
+        }
+        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            enableMyLocation()
+        } else {
+            // делаем что-то по дефолту
+        }
     }
 
     override fun onDestroy() {
@@ -124,6 +174,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener {
 
     companion object {
 
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
         const val CITY_KEY = "CITY_KEY"
 
     }
