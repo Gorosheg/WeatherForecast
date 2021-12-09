@@ -2,11 +2,11 @@ package com.first.weatherforecast
 
 import android.annotation.SuppressLint
 import android.app.Application
-import com.first.weatherforecast.datasource.sharedPreference.MutablePreferenceDatasource
-import com.first.weatherforecast.datasource.sharedPreference.FirstLaaunchEnum
-import com.first.weatherforecast.datasource.sharedPreference.SharedPreferenceDi
 import com.first.weatherforecast.datasource.database.DatabaseDi
 import com.first.weatherforecast.datasource.network.NetworkDi
+import com.first.weatherforecast.datasource.sharedPreference.FirstLaaunchEnum
+import com.first.weatherforecast.datasource.sharedPreference.MutablePreferenceDatasource
+import com.first.weatherforecast.datasource.sharedPreference.SharedPreferenceDi
 import com.first.weatherforecast.feature.city.dI.CitiesDi
 import com.first.weatherforecast.feature.weather.dI.WeatherDi
 

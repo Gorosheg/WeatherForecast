@@ -1,12 +1,13 @@
 package com.first.weatherforecast.feature.city.dI
 
-import com.first.weatherforecast.datasource.sharedPreference.PreferenceDatasource
 import com.first.weatherforecast.datasource.database.CitiesDatabaseDatasource
 import com.first.weatherforecast.datasource.database.NetworkDataSource
+import com.first.weatherforecast.datasource.sharedPreference.PreferenceDatasource
 import com.first.weatherforecast.feature.city.data.CitiesRepository
 import com.first.weatherforecast.feature.city.data.CitiesRepositoryImpl
 import com.first.weatherforecast.feature.city.domain.CitiesInteractor
 import com.first.weatherforecast.feature.city.domain.CitiesInteractorImpl
+import com.first.weatherforecast.feature.city.presentation.CitiesViewModelFactory
 
 class CitiesDi(
     private val datasource: CitiesDatabaseDatasource,
@@ -19,5 +20,9 @@ class CitiesDi(
 
     private val repository: CitiesRepository
         get() = CitiesRepositoryImpl(datasource, networkDataSource, isFirstLaunch)
+
+    fun getViewModelFactory(): CitiesViewModelFactory {
+        return CitiesViewModelFactory(interactor)
+    }
 
 }

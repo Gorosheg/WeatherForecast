@@ -1,7 +1,6 @@
 package com.first.weatherforecast.feature.city.presentation
 
 import androidx.lifecycle.ViewModel
-import com.first.weatherforecast.App
 import com.first.weatherforecast.common.model.City
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.feature.city.domain.CitiesInteractor
@@ -11,9 +10,9 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 
-class CitiesViewModel : ViewModel() {
+class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
 
-    private val interactor: CitiesInteractor by lazy { App.citiesDi.interactor }
+    // private val interactor: CitiesInteractor by lazy { App.citiesDi(City).interactor }
 
     private val _error: Subject<Throwable> = PublishSubject.create()
     val error: Observable<Throwable> = _error

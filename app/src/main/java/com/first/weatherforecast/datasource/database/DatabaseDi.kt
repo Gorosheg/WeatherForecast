@@ -12,6 +12,9 @@ class DatabaseDi(context: Context) {
 
     private val cityDao: CityDao = database.cityDao
 
-    val datasource: CitiesDatabaseDatasource = CitiesDatabaseDatasource(cityDao)
+    val datasource = CitiesDatabaseDatasource(cityDao/*, firstCity*/)
 
+    /* fun qwe(firstCity: City): CitiesDatabaseDatasource {
+         return CitiesDatabaseDatasource(cityDao, firstCity)
+     }*/
 }
