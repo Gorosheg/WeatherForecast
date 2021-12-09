@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.first.weatherforecast.App
 import com.first.weatherforecast.R
 import com.first.weatherforecast.common.model.City
@@ -31,6 +32,7 @@ import io.reactivex.schedulers.Schedulers
 class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermissionsResultCallback {
 
     private var adapter: CitiesAdapter? = null
+    private lateinit var swipeRefresh: SwipeRefreshLayout
 
     // получим доступ к провайдеру, который хранит все ViewModel для этого Activity.
     // Методом get запрашиваем у этого провайдера конкретную модель по имени класса
@@ -49,6 +51,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cities)
+        swipeRefresh = findViewById(R.id.citiesRefresh)
 
         disposable += viewModel.cities
             .subscribeOn(Schedulers.newThread())
@@ -87,17 +90,16 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
     }
 
     private fun enableMyLocation() {
+        swipeRefresh.isRefreshing = true
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED
         ) {
             // показываем город по координатам
-            println("wqefghrty enableMyLocation")
             locationManager.requestLocationUpdates(
                 LocationManager.NETWORK_PROVIDER,
                 10, 100f, mLocationListener
             )
 
-            println("wqefghrty locationManager ends")
         } else {
             requestPermissions(
                 this,
@@ -112,23 +114,21 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        println("wqefghrty onRequestPermissionsResult")
         if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults)
             return
         }
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            println("wqefghrty onRequestPermissionsResult location ok")
             enableMyLocation()
         } else {
             // делаем что-то по дефолту
-            println("wqefghrty onRequestPermissionsResult no location")
+            swipeRefresh.isRefreshing = false
         }
     }
 
     private fun handleLocation(it: Location) {
         viewModel.loadWeather(City(latitude = it.latitude, it.longitude))
-        println("wqefghrty $it")
+        swipeRefresh.isRefreshing = false
         locationManager.removeUpdates(mLocationListener)
     }
 
