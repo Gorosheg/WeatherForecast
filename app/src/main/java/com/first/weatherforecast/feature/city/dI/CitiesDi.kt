@@ -15,14 +15,14 @@ class CitiesDi(
     private val isFirstLaunch: PreferenceDatasource
 ) {
 
-    val interactor: CitiesInteractor
+    private val interactor: CitiesInteractor
         get() = CitiesInteractorImpl(repository)
 
     private val repository: CitiesRepository
         get() = CitiesRepositoryImpl(datasource, networkDataSource, isFirstLaunch)
 
-    fun getViewModelFactory(): CitiesViewModelFactory {
-        return CitiesViewModelFactory(interactor)
+    fun getViewModelFactory(): CitiesViewModelFactory { // Вызываем из Activity
+        return CitiesViewModelFactory(interactor) // Создает ViewModelFactory
     }
 
 }

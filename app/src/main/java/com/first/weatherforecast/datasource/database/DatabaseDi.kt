@@ -2,6 +2,7 @@ package com.first.weatherforecast.datasource.database
 
 import android.content.Context
 import androidx.room.Room
+import com.first.weatherforecast.common.model.City
 
 class DatabaseDi(context: Context) {
 
@@ -12,9 +13,6 @@ class DatabaseDi(context: Context) {
 
     private val cityDao: CityDao = database.cityDao
 
-    val datasource = CitiesDatabaseDatasource(cityDao/*, firstCity*/)
+    val datasource = CitiesDatabaseDatasource(cityDao)
 
-    /* fun qwe(firstCity: City): CitiesDatabaseDatasource {
-         return CitiesDatabaseDatasource(cityDao, firstCity)
-     }*/
 }

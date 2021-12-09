@@ -48,7 +48,7 @@ class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
         }
     }
 
-    private fun addCity(city: City) {
+    fun addCity(city: City) {
         interactor.addCity(city)
     }
 

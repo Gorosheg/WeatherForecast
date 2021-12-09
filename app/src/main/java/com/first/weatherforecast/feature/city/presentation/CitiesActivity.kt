@@ -94,7 +94,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
             println("wqefghrty enableMyLocation")
             locationManager.requestLocationUpdates(
                 LocationManager.NETWORK_PROVIDER,
-                1000 * 10, 100f, mLocationListener
+                10, 100f, mLocationListener
             )
 
             println("wqefghrty locationManager ends")
@@ -127,8 +127,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
     }
 
     private fun handleLocation(it: Location) {
-        it.latitude // TODO: показвать только этот город в списке
-        it.longitude
+        viewModel.loadWeather(City(latitude = it.latitude, it.longitude))
         println("wqefghrty $it")
         locationManager.removeUpdates(mLocationListener)
     }

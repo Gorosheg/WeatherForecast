@@ -6,13 +6,7 @@ import com.first.weatherforecast.datasource.database.model.toEntity
 import com.first.weatherforecast.datasource.database.model.toSimpleCities
 import io.reactivex.Observable
 
-class CitiesDatabaseDatasource(private val cityDao: CityDao/*, firstCity: City*/) {
-
-   /* init {
-        if (isEmpty()) {
-            cityDao.insert(firstCity.toEntity())
-        }
-    }*/
+class CitiesDatabaseDatasource(private val cityDao: CityDao) {
 
     private fun isEmpty(): Boolean {
         return cityDao.count() == 0
