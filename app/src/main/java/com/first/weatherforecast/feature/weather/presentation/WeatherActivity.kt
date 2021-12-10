@@ -50,7 +50,7 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun loadWeather() {
-        viewModel.loadWeather()
+        viewModel.loadWeather() // TODO: Проверить логами вызывается ли метод, чистить disposable в onDestroyed
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess {

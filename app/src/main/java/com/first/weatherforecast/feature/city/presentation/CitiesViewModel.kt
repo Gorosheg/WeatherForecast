@@ -7,20 +7,27 @@ import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.feature.city.domain.CitiesInteractor
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 
 class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
-
+    private var disposable = CompositeDisposable()
     private val _error: Subject<Throwable> = PublishSubject.create()
     val error: Observable<Throwable> = _error
 
     val cities: Observable<List<City>>
         get() = interactor.cities
 
+    override fun onCleared() {
+        super.onCleared()
+        disposable.dispose()
+    }
+
     fun loadWeather(city: City) {
-        interactor.loadWeather(city = city)
+        disposable += interactor.loadWeather(city = city)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess {

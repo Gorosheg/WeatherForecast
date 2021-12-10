@@ -29,7 +29,7 @@ import io.reactivex.schedulers.Schedulers
 class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermissionsResultCallback {
 
     private var adapter: CitiesAdapter? = null
-    private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var swipeRefresh: SwipeRefreshLayout // TODO: сделать некликабельным
 
     // получим доступ к провайдеру, который хранит все ViewModel для этого Activity.
     // Методом get запрашиваем у этого провайдера конкретную модель по имени класса
@@ -45,10 +45,6 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
 
     private val userLocation: UserLocation by lazy {
         UserLocation(locationManager, ::loaderChange, ::loadWeatherByLocation)
-    }
-
-    private fun loaderChange(it: Boolean) {
-        swipeRefresh.isRefreshing = it
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -157,6 +153,10 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
 
     private fun loadWeather(city: City) {
         viewModel.loadWeather(city)
+    }
+
+    private fun loaderChange(it: Boolean) {
+        swipeRefresh.isRefreshing = it
     }
 
     private fun makeToast(throwable: Throwable) {
