@@ -12,16 +12,15 @@ class CitiesDatabaseDatasource(private val cityDao: CityDao) {
         return cityDao.count() == 0
     }
 
-/*    private fun buildInitialCities(): List<CityEntity> {
-        return listOf(
-            CityEntity(latitude = 59.939999, longitude = 30.315877, name = "Санкт-Петербург"),
-            CityEntity(latitude = 55.7522, longitude = 37.6156, name = "Москва"),
-            CityEntity(latitude = 60.1695, longitude = 24.9354, name = "Хельсинки")
-        )
-    }*/
-
     fun addCity(city: City) {
         cityDao.insert(city.toEntity())
+    }
+
+    fun isCityExist(city: City): Boolean {
+        return if (city.name == null) false
+        else {
+            cityDao.getByName(city.name) != null
+        }
     }
 
     fun getAllCities(): Observable<List<City>> {

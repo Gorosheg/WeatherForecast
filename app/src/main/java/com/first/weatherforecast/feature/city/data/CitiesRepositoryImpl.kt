@@ -1,10 +1,10 @@
 package com.first.weatherforecast.feature.city.data
 
 import com.first.weatherforecast.common.model.City
-import com.first.weatherforecast.datasource.sharedPreference.PreferenceDatasource
 import com.first.weatherforecast.datasource.database.CitiesDatabaseDatasource
 import com.first.weatherforecast.datasource.database.NetworkDataSource
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
+import com.first.weatherforecast.datasource.sharedPreference.PreferenceDatasource
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -21,6 +21,10 @@ class CitiesRepositoryImpl(
         this.database.addCity(city)
     }
 
+    override fun isCityExist(city: City): Boolean {
+        return this.database.isCityExist(city)
+    }
+
     override fun loadWeather(city: City): Single<WeatherResponse> {
         return networkDataSource.loadingWeather(city)
     }
@@ -30,7 +34,7 @@ class CitiesRepositoryImpl(
     }
 
     override fun isFirstLaunch(): Boolean? {
-        return  PreferenceDatasource.isFirstLaunch
+        return PreferenceDatasource.isFirstLaunch
 
     }
 }

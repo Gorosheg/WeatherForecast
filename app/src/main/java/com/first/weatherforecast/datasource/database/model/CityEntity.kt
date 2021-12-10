@@ -6,11 +6,11 @@ import com.first.weatherforecast.common.model.City
 
 @Entity
 data class CityEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+
     val latitude: Double,
     val longitude: Double,
-    var name: String
+    @PrimaryKey
+    val name: String
 )
 
 fun List<City>.toEntities(): List<CityEntity> = map { city ->

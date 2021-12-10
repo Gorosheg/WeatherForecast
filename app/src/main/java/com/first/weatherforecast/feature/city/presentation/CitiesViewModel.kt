@@ -26,7 +26,9 @@ class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess {
                 val newCity = copyCity(city, it)
-                addCity(newCity)
+                if (!isCityExist(newCity)) {
+                    addCity(newCity)
+                }
             }
             .doOnError(_error::onNext)
             .subscribe()
@@ -48,8 +50,12 @@ class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
         }
     }
 
-    fun addCity(city: City) {
+    private fun addCity(city: City) {
         interactor.addCity(city)
+    }
+
+    private fun isCityExist(city: City): Boolean {
+        return interactor.isCityExist(city)
     }
 
     fun removeCity(city: City) {

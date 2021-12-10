@@ -97,7 +97,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
             // показываем город по координатам
             locationManager.requestLocationUpdates(
                 LocationManager.NETWORK_PROVIDER,
-                10, 100f, mLocationListener
+                10, 1000f, mLocationListener
             )
 
         } else {
@@ -121,15 +121,15 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             enableMyLocation()
         } else {
-            // делаем что-то по дефолту
+            // делаем что-то по дефолту // TODO
             swipeRefresh.isRefreshing = false
         }
     }
 
     private fun handleLocation(it: Location) {
-        viewModel.loadWeather(City(latitude = it.latitude, it.longitude))
-        swipeRefresh.isRefreshing = false
+        loadWeather(City(it.latitude, it.longitude))
         locationManager.removeUpdates(mLocationListener)
+        swipeRefresh.isRefreshing = false
     }
 
     private fun showCityDialog() {

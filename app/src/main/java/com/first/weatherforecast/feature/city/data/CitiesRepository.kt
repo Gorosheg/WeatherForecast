@@ -11,6 +11,8 @@ interface CitiesRepository {
 
     fun addCity(city: City)
 
+    fun isCityExist(city: City):Boolean
+
     fun loadWeather(city: City): Single<WeatherResponse>
 
     fun removeCity(city: City)

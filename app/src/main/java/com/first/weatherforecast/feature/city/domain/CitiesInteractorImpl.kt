@@ -15,6 +15,10 @@ class CitiesInteractorImpl(private val repository: CitiesRepository) : CitiesInt
         repository.addCity(city)
     }
 
+    override fun isCityExist(city: City): Boolean {
+        return repository.isCityExist(city)
+    }
+
     override fun loadWeather(city: City): Single<WeatherResponse> {
         return repository.loadWeather(city)
     }
