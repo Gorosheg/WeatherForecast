@@ -3,10 +3,10 @@ package com.first.weatherforecast.datasource.database.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.first.weatherforecast.common.model.City
+import com.first.weatherforecast.common.model.Coordinates
 
 @Entity
 data class CityEntity(
-
     val latitude: Double,
     val longitude: Double,
     @PrimaryKey
@@ -18,8 +18,8 @@ fun List<City>.toEntities(): List<CityEntity> = map { city ->
 }
 
 fun City.toEntity() = CityEntity(
-    latitude = latitude ?: 0.0,
-    longitude = longitude ?: 0.0,
+    latitude = coordinates?.latitude ?: 0.0,
+    longitude = coordinates?.longitude ?: 0.0,
     name = name ?: ""
 )
 
@@ -29,7 +29,6 @@ fun List<CityEntity>.toSimpleCities(): List<City> = map { city ->
 }
 
 fun CityEntity.toSimpleCity() = City(
-    latitude = latitude,
-    longitude = longitude,
+    coordinates = Coordinates(latitude, longitude),
     name = name
 )

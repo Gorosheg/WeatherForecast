@@ -8,8 +8,8 @@ import io.reactivex.Single
 class NetworkDataSource(private val api: WeatherApi) {
 
     fun loadingWeather(city: City): Single<WeatherResponse> {
-        return if (city.latitude != null && city.longitude != null) {
-            api.getWeatherByCoordinates(latitude = city.latitude, longitude = city.longitude)
+        return if (city.coordinates != null) {
+            api.getWeatherByCoordinates(latitude = city.coordinates.latitude, longitude = city.coordinates.longitude)
         } else {
             val name = city.name ?: throw IllegalStateException("Can't find a name")
             api.getWeatherByName(cityName = name)

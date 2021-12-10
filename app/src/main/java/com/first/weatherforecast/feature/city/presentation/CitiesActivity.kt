@@ -16,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.first.weatherforecast.App
 import com.first.weatherforecast.R
 import com.first.weatherforecast.common.model.City
+import com.first.weatherforecast.common.model.Coordinates
 import com.first.weatherforecast.feature.city.presentation.recycler.CitiesAdapter
 import com.first.weatherforecast.feature.weather.presentation.WeatherActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -141,15 +142,16 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
             loadWeather(newCity)
         } else if (latitude != null && longitude != null) {
             val newCity = City(
-                latitude = latitude,
-                longitude = longitude
+                coordinates = Coordinates(latitude, longitude)
             )
             loadWeather(newCity)
         }
     }
 
     private fun loadWeatherByLocation(location: Location) {
-        loadWeather(City(location.latitude, location.longitude))
+        loadWeather(
+            City(coordinates = Coordinates(location.latitude, location.longitude))
+        )
         loaderChange(false)
     }
 
