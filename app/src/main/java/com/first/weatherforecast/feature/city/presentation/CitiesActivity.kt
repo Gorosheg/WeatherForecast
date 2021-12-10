@@ -1,18 +1,14 @@
 package com.first.weatherforecast.feature.city.presentation
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback
-import androidx.core.app.ActivityCompat.requestPermissions
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -46,7 +42,13 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
 
-    private val mLocationListener: LocationListener = LocationListener(::handleLocation)
+    private val userLocation: UserLocation by lazy {
+        UserLocation(locationManager, ::loaderChange, ::loadWeatherByLocation)
+    }
+
+    private fun loaderChange(it: Boolean) {
+        swipeRefresh.isRefreshing = it
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +82,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         recyclerView.adapter = adapter
         addCity.setOnClickListener { showCityDialog() }
 
-        enableMyLocation()
+        userLocation.enableMyLocation(this)
 
     }
 
@@ -89,24 +91,14 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         disposable.dispose()
     }
 
-    private fun enableMyLocation() {
-        swipeRefresh.isRefreshing = true
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            // показываем город по координатам
-            locationManager.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER,
-                10, 1000f, mLocationListener
-            )
-
-        } else {
-            requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE
-            )
-        }
+    private fun updateCitiesToList(cities: List<City>) {
+        val adapter = adapter ?: return
+        //    val previousItemCount = adapter.itemCount
+        adapter.items.clear()
+        adapter.items += cities
+        adapter.notifyDataSetChanged()
+        //      adapter.notifyItemRangeRemoved(0, previousItemCount)
+        //      adapter.notifyItemRangeInserted(previousItemCount - 1, adapter.itemCount - previousItemCount)
     }
 
     override fun onRequestPermissionsResult(
@@ -119,17 +111,11 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
             return
         }
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            enableMyLocation()
+            userLocation.enableMyLocation(this)
         } else {
-            // делаем что-то по дефолту // TODO
+            showCityDialog()
             swipeRefresh.isRefreshing = false
         }
-    }
-
-    private fun handleLocation(it: Location) {
-        loadWeather(City(it.latitude, it.longitude))
-        locationManager.removeUpdates(mLocationListener)
-        swipeRefresh.isRefreshing = false
     }
 
     private fun showCityDialog() {
@@ -145,10 +131,6 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
 
     private fun onTrashClick(city: City) {
         viewModel.removeCity(city)
-
-        /*val adapter = adapter ?: return
-        val newItems = adapter.items - city
-        updateCitiesToList(newItems)*/
     }
 
     override fun onCityAdd(latitude: Double?, longitude: Double?, name: String?) {
@@ -166,18 +148,13 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         }
     }
 
-    private fun loadWeather(city: City) {
-        viewModel.loadWeather(city)
+    private fun loadWeatherByLocation(location: Location) {
+        loadWeather(City(location.latitude, location.longitude))
+        loaderChange(false)
     }
 
-    private fun updateCitiesToList(cities: List<City>) {
-        val adapter = adapter ?: return
-        //    val previousItemCount = adapter.itemCount
-        adapter.items.clear()
-        adapter.items += cities
-        adapter.notifyDataSetChanged()
-        //      adapter.notifyItemRangeRemoved(0, previousItemCount)
-        //      adapter.notifyItemRangeInserted(previousItemCount - 1, adapter.itemCount - previousItemCount)
+    private fun loadWeather(city: City) {
+        viewModel.loadWeather(city)
     }
 
     private fun makeToast(throwable: Throwable) {
@@ -185,12 +162,12 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
     }
 
     private fun firstLaunchToast() {
-        Toast.makeText(this, "It is first time you open the application", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "It is first time you open the application", Toast.LENGTH_LONG).show()
     }
 
     companion object {
 
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+        const val LOCATION_PERMISSION_REQUEST_CODE = 1
         const val CITY_KEY = "CITY_KEY"
 
     }
