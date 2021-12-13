@@ -110,7 +110,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
             userLocation.enableMyLocation(this)
         } else {
             showCityDialog()
-            swipeRefresh.isRefreshing = false
+            loaderChange(false)
         }
     }
 
@@ -160,8 +160,16 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
 
     private fun makeToast(throwable: UiCityExceptions) {
         when (throwable) {
-            UiCityExceptions.NotFound -> Toast.makeText(this, "City is not found", Toast.LENGTH_LONG).show()
-            UiCityExceptions.Unknown -> Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
+            UiCityExceptions.NotFound -> Toast.makeText(
+                this,
+                "City is not found",
+                Toast.LENGTH_LONG
+            ).show()
+            UiCityExceptions.Unknown -> Toast.makeText(
+                this,
+                "Something went wrong",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 

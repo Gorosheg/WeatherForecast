@@ -31,4 +31,5 @@
     <string name="add">Добавить</string>
     <string name="cancel">Отмена</string>
     <string name="city_name">City name</string>
+    <string name="wrongCoordinates">wrong coordinates</string>
 </resources>

@@ -15,6 +15,7 @@ class NetworkDataSource(private val api: WeatherApi) {
             )
         } else {
             val name = city.name ?: throw IllegalStateException("Can't find a name")
-            api.getWeatherByName(cityName = name)         }
+            api.getWeatherByName(cityName = name)
+        }
     }
 }
