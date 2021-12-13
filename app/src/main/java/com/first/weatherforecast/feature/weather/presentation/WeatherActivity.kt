@@ -16,12 +16,14 @@ import com.first.weatherforecast.common.model.City
 import com.first.weatherforecast.datasource.network.model.WeatherResponse
 import com.first.weatherforecast.feature.city.presentation.CitiesActivity.Companion.CITY_KEY
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
 
 class WeatherActivity : AppCompatActivity() {
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var city: City
-
+    private var disposable = CompositeDisposable()
     private val viewModel: WeatherViewModel by lazy {
         ViewModelProvider(this, App.weatherDi.getViewModelFactory(city))
             .get(WeatherViewModel::class.java)
@@ -49,8 +51,13 @@ class WeatherActivity : AppCompatActivity() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.dispose()
+    }
+
     private fun loadWeather() {
-        viewModel.loadWeather() // TODO: Проверить логами вызывается ли метод, чистить disposable в onDestroyed
+        disposable += viewModel.loadWeather()
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess {

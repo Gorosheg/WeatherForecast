@@ -29,7 +29,7 @@ import io.reactivex.schedulers.Schedulers
 class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermissionsResultCallback {
 
     private var adapter: CitiesAdapter? = null
-    private lateinit var swipeRefresh: SwipeRefreshLayout // TODO: сделать некликабельным
+    private lateinit var swipeRefresh: SwipeRefreshLayout
 
     // получим доступ к провайдеру, который хранит все ViewModel для этого Activity.
     // Методом get запрашиваем у этого провайдера конкретную модель по имени класса
@@ -51,12 +51,11 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cities)
         swipeRefresh = findViewById(R.id.citiesRefresh)
-
+        swipeRefresh.isEnabled = false
         disposable += viewModel.cities
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext(::updateCitiesToList)
-            .doOnError(::makeToast)
             .subscribe()
 
         disposable += viewModel.error
@@ -159,8 +158,11 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         swipeRefresh.isRefreshing = it
     }
 
-    private fun makeToast(throwable: Throwable) {
-        Toast.makeText(this, "$throwable", Toast.LENGTH_SHORT).show()
+    private fun makeToast(throwable: UiCityExceptions) {
+        when (throwable) {
+            UiCityExceptions.NotFound -> Toast.makeText(this, "City is not found", Toast.LENGTH_LONG).show()
+            UiCityExceptions.Unknown -> Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun firstLaunchToast() {

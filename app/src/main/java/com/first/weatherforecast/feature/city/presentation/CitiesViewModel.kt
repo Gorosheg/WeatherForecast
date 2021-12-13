@@ -12,11 +12,12 @@ import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
+import retrofit2.HttpException
 
 class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
     private var disposable = CompositeDisposable()
-    private val _error: Subject<Throwable> = PublishSubject.create()
-    val error: Observable<Throwable> = _error
+    private val _error: Subject<UiCityExceptions> = PublishSubject.create()
+    val error: Observable<UiCityExceptions> = _error
 
     val cities: Observable<List<City>>
         get() = interactor.cities
@@ -36,7 +37,15 @@ class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
                     addCity(newCity)
                 }
             }
-            .doOnError(_error::onNext)
+            .doOnError {
+                when (it) {
+                    is HttpException -> UiCityExceptions.NotFound
+                    else -> UiCityExceptions.Unknown
+                }
+                _error.onNext(UiCityExceptions.NotFound)
+            }
+            .ignoreElement()
+            .onErrorComplete()
             .subscribe()
     }
 
