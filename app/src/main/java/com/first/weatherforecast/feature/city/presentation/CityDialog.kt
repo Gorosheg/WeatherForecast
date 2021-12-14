@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
-import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import com.first.weatherforecast.R
+import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 
 class CityDialog : DialogFragment() {
@@ -29,68 +29,53 @@ class CityDialog : DialogFragment() {
         val dialog = dialog ?: return
         val addButton = dialog.findViewById<Button>(R.id.addButton)
         val clearButton = dialog.findViewById<Button>(R.id.clearButton)
+        val latitudeLayout = dialog.findViewById<TextInputLayout>(R.id.latitudeInput)
+        val latitude = dialog.findViewById<EditText>(R.id.latitude)
+        val longitudeLayout = dialog.findViewById<TextInputLayout>(R.id.longitudeInput)
+        val longitude = dialog.findViewById<EditText>(R.id.longitude)
+
+        latitude.addTextChangedListener {
+            latitudeLayout.error = "incorrect latitude"
+            latitudeLayout.isErrorEnabled = latitudeValidation(it.toString())
+        }
+
+        longitude.addTextChangedListener {
+            longitudeLayout.error = "incorrect longitude"
+            longitudeLayout.isErrorEnabled = longitudeValidation(it.toString())
+        }
+
         addButton.setOnClickListener {
-            setResult()
+            if (!latitudeLayout.isErrorEnabled && !longitudeLayout.isErrorEnabled) {
+                setResult(latitude.text.toString(), longitude.text.toString())
+            }
         }
         clearButton.setOnClickListener {
             dialog.dismiss()
         }
-
     }
 
-    /*override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        super.onCreateDialog(savedInstanceState)
+    private fun latitudeValidation(it: String): Boolean {
+        return it.isNotBlank() && (it.toDouble() > 90)
+    }
 
-        return AlertDialog.Builder(activity)
-            .setTitle(getString(R.string.CityDialogTitle))
-            .setView(R.layout.fragment_city_dialog)
-            .setPositiveButton(getString(R.string.add)) { _, _ ->
-                setResult()
-            }
-            .setOnCancelListener {
+    private fun longitudeValidation(it: String): Boolean {
+        return it.isNotBlank() && (it.toDouble() > 180)
+    }
 
-            }
-            .setNegativeButton(getString(R.string.cancel), null)
-            .create()
-    }*/
-
-    private fun setResult() {
+    private fun setResult(latitude: String, longitude: String) {
         val dialog = dialog ?: return
-        val latitude = dialog.findViewById<EditText>(R.id.latitude).text.toString()
-        val longitude = dialog.findViewById<EditText>(R.id.longitude).text.toString()
         val cityName: String = dialog.findViewById<EditText>(R.id.name).text.toString()
-        val errorMessage = dialog.findViewById<TextView>(R.id.errorMessage)
 
         if (cityName != "") {
             (activity as CityAddListener).onCityAdd(
                 name = cityName
             )
         } else if (latitude != "" && longitude != "") {
-            if (validation(latitude, longitude, errorMessage)) {
-                (activity as CityAddListener).onCityAdd(
-                    latitude = latitude.toDouble(),
-                    longitude = longitude.toDouble()
-                )
-                dialog.dismiss()
-            }
+            (activity as CityAddListener).onCityAdd(
+                latitude = latitude.toDouble(),
+                longitude = longitude.toDouble()
+            )
         }
+        dialog.dismiss()
     }
-
-    private fun validation(
-        latitude: String,
-        longitude: String,
-        errorMessage: TextView
-    ): Boolean {
-        if (latitude.toDouble() < 0 ||
-            latitude.toDouble() > 90 ||
-            longitude.toDouble() < 0 ||
-            longitude.toDouble() > 180
-        ) {
-            errorMessage.text = getString(R.string.wrongCoordinates)
-            errorMessage.isVisible = true
-            return false
-        }
-        return true
-    }
-
 }
