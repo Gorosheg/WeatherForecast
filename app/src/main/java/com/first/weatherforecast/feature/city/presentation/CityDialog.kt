@@ -31,13 +31,28 @@ class CityDialog : DialogFragment() {
         val clearButton = dialog.findViewById<Button>(R.id.clearButton)
         addButton.setOnClickListener {
             setResult()
-            dialog.dismiss()
         }
         clearButton.setOnClickListener {
             dialog.dismiss()
         }
 
     }
+
+    /*override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        super.onCreateDialog(savedInstanceState)
+
+        return AlertDialog.Builder(activity)
+            .setTitle(getString(R.string.CityDialogTitle))
+            .setView(R.layout.fragment_city_dialog)
+            .setPositiveButton(getString(R.string.add)) { _, _ ->
+                setResult()
+            }
+            .setOnCancelListener {
+
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .create()
+    }*/
 
     private fun setResult() {
         val dialog = dialog ?: return
@@ -56,6 +71,7 @@ class CityDialog : DialogFragment() {
                     latitude = latitude.toDouble(),
                     longitude = longitude.toDouble()
                 )
+                dialog.dismiss()
             }
         }
     }
