@@ -88,11 +88,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/spb"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/SkyImage" />
+                app:layout_constraintTop_toBottomOf="@+id/SkyImage"
+                tools:text="Санкт-Петербург" />
 
             <View
                 android:id="@+id/feelsLike"

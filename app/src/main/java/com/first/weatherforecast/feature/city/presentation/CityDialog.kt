@@ -35,12 +35,12 @@ class CityDialog : DialogFragment() {
         val longitude = dialog.findViewById<EditText>(R.id.longitude)
 
         latitude.addTextChangedListener {
-            latitudeLayout.error = "incorrect latitude"
+            latitudeLayout.error = getString(R.string.incorrect_latitude)
             latitudeLayout.isErrorEnabled = latitudeValidation(it.toString())
         }
 
         longitude.addTextChangedListener {
-            longitudeLayout.error = "incorrect longitude"
+            longitudeLayout.error = getString(R.string.incorrect_longitude)
             longitudeLayout.isErrorEnabled = longitudeValidation(it.toString())
         }
 
