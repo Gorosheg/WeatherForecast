@@ -34,10 +34,8 @@ android {
 dependencies {
 
     implementation project(':common')
-    implementation project(':app')
     implementation project(':network')
     implementation project(':database')
-    implementation project(':weatherScreen')
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'

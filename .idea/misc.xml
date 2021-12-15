@@ -17,9 +17,17 @@
         <entry key="..\:/Weatherforecast/app/src/main/res/layout/fragment_cities_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Weatherforecast/app/src/main/res/layout/fragment_city_dialog.xml" value="0.4" />
         <entry key="..\:/Weatherforecast/app/src/main/res/layout/list_of_cities.xml" value="0.4" />
-        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/activity_cities.xml" value="0.25416666666666665" />
+        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/drawable/ic_plus_add.xml" value="0.1" />
+        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/activity_cities.xml" value="0.1" />
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/fragment_city_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/list_of_cities.xml" value="0.25416666666666665" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1574074074074074" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_pressure.xml" value="0.1" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_temperature.xml" value="0.1" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_weather_humidity.xml" value="0.1" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/rect_with_round_corners.xml" value="0.1" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/layout/activity_weather.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

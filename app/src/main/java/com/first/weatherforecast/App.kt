@@ -6,6 +6,7 @@ import com.first.citiesscreen.dI.CitiesDi
 import com.first.database.DatabaseDi
 import com.first.network.NetworkDi
 import com.first.sharedpreference.FirstLaunchEnum
+import com.first.sharedpreference.SharedPreferenceDi
 import com.first.weatherscreen.dI.WeatherDi
 
 @SuppressLint("StaticFieldLeak")
@@ -14,7 +15,13 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         databaseDi = DatabaseDi(this)
-        sharedPrefDi = com.first.sharedpreference.SharedPreferenceDi(this)
+        sharedPrefDi = SharedPreferenceDi(this)
+        WeatherDi.weatherDi = WeatherDi(networkDi.networkDataSource)
+        CitiesDi.instance = CitiesDi(
+            datasource = databaseDi.datasource,
+            networkDataSource = networkDi.networkDataSource,
+            preferenceDatasource = sharedPrefDi.preferenceDatasource
+        )
 
         initIsFirstLaunchPref(sharedPrefDi.mutablePreferenceDatasource)
     }
@@ -29,19 +36,9 @@ class App : Application() {
 
     companion object {
 
-        private lateinit var sharedPrefDi: com.first.sharedpreference.SharedPreferenceDi
+        private lateinit var sharedPrefDi: SharedPreferenceDi
         private lateinit var databaseDi: DatabaseDi
         private val networkDi by lazy { NetworkDi() }
-
-        val citiesDi by lazy {
-            CitiesDi(
-                datasource = databaseDi.datasource,
-                networkDataSource = networkDi.networkDataSource,
-                isFirstLaunch = sharedPrefDi.preferenceDatasource
-            )
-        }
-
-        val weatherDi by lazy { WeatherDi(networkDi.networkDataSource) }
 
     }
 

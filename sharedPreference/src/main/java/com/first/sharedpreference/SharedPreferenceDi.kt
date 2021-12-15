@@ -10,7 +10,7 @@ class SharedPreferenceDi(context: Context) {
         Context.MODE_PRIVATE  // Модификатор доступа
     )
 
-    private val preference = PreferenceDatasourceImpl(sharedPref)
+    private val preference: PreferenceDatasourceImpl = PreferenceDatasourceImpl(sharedPref)
 
     val mutablePreferenceDatasource: MutablePreferenceDatasource = preference
     val preferenceDatasource: PreferenceDatasource = preference

@@ -1,8 +1,9 @@
 package com.first.database
 
-import com.first.database.model.CityEntity
-import com.first.database.model.toSimpleCities
 import com.first.common.model.City
+import com.first.database.model.CityEntity
+import com.first.database.model.toEntity
+import com.first.database.model.toSimpleCities
 import io.reactivex.Observable
 
 class CitiesDatabaseDatasource(private val cityDao: CityDao) {

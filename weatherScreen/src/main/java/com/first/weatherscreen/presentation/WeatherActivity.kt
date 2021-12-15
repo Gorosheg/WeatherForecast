@@ -12,8 +12,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.first.common.model.City
 import com.first.network.model.WeatherResponse
-import com.first.weatherforecast.App
-import com.first.weatherforecast.R
+import com.first.weatherscreen.R
+import com.first.weatherscreen.dI.WeatherDi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
@@ -24,7 +24,7 @@ class WeatherActivity : AppCompatActivity() {
     private lateinit var city: City
     private var disposable = CompositeDisposable()
     private val viewModel: WeatherViewModel by lazy {
-        ViewModelProvider(this, App.weatherDi.getViewModelFactory(city))
+        ViewModelProvider(this, WeatherDi.weatherDi.getViewModelFactory(city))
             .get(WeatherViewModel::class.java)
     }
 

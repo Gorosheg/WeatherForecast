@@ -1,7 +1,7 @@
 package com.first.weatherscreen.dI
 
 import com.first.common.model.City
-import com.first.database.NetworkDataSource
+import com.first.network.NetworkDataSource
 import com.first.weatherscreen.data.WeatherRepository
 import com.first.weatherscreen.data.WeatherRepositoryImpl
 import com.first.weatherscreen.domain.WeatherInteractor
@@ -18,6 +18,12 @@ class WeatherDi(private val networkDataSource: NetworkDataSource) {
 
     fun getViewModelFactory(city: City): WeatherViewModelFactory {
         return WeatherViewModelFactory(interactor, city)
+    }
+
+    companion object {
+
+        lateinit var weatherDi: WeatherDi
+
     }
 
 }

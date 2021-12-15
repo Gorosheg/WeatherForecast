@@ -1,7 +1,6 @@
 package com.first.citiesscreen.presentation
 
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
@@ -15,11 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.first.citiesscreen.R.id
 import com.first.citiesscreen.R.layout
+import com.first.citiesscreen.dI.CitiesDi
 import com.first.citiesscreen.presentation.recycler.CitiesAdapter
 import com.first.common.model.City
 import com.first.common.model.Coordinates
-import com.first.weatherforecast.App
-import com.first.weatherscreen.presentation.WeatherActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -35,7 +33,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
     // получим доступ к провайдеру, который хранит все ViewModel для этого Activity.
     // Методом get запрашиваем у этого провайдера конкретную модель по имени класса
     private val viewModel: CitiesViewModel by lazy {
-        ViewModelProvider(this, App.citiesDi.getViewModelFactory())
+        ViewModelProvider(this, CitiesDi.instance.getViewModelFactory())
             .get(CitiesViewModel::class.java)
     }
     private var disposable = CompositeDisposable()
@@ -121,9 +119,9 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
     }
 
     private fun navigateToWeatherScreen(city: City) {
-        val intent = Intent(this, WeatherActivity::class.java)
+        /*val intent = Intent(this, WeatherActivity::class.java)
         intent.putExtra(CITY_KEY, city)
-        startActivity(intent)
+        startActivity(intent)*/
     }
 
     private fun onTrashClick(city: City) {

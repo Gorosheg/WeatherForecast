@@ -1,6 +1,5 @@
 package com.first.network
 
-import com.first.database.NetworkDataSource
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
