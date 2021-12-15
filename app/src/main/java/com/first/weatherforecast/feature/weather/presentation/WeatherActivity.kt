@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.first.weatherforecast.App
 import com.first.weatherforecast.R
 import com.first.weatherforecast.common.model.City
-import com.first.weatherforecast.datasource.network.model.WeatherResponse
+import com.first.network.model.WeatherResponse
 import com.first.weatherforecast.feature.city.presentation.CitiesActivity.Companion.CITY_KEY
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

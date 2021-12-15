@@ -1,6 +1,6 @@
-package com.first.weatherforecast.datasource.network
+package com.first.network
 
-import com.first.weatherforecast.datasource.network.model.WeatherResponse
+import com.first.network.model.WeatherResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

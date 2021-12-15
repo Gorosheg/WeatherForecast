@@ -1,7 +1,7 @@
-package com.first.weatherforecast.datasource.database
+package com.first.database
 
 import androidx.room.*
-import com.first.weatherforecast.datasource.database.model.CityEntity
+import com.first.database.model.CityEntity
 import io.reactivex.Observable
 
 @Dao

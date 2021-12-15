@@ -1,7 +1,7 @@
 package com.first.weatherforecast.feature.weather.data
 
 import com.first.weatherforecast.common.model.City
-import com.first.weatherforecast.datasource.network.model.WeatherResponse
+import com.first.network.model.WeatherResponse
 import io.reactivex.Single
 
 interface WeatherRepository {

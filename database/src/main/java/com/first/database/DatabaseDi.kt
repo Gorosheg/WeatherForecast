@@ -1,8 +1,7 @@
-package com.first.weatherforecast.datasource.database
+package com.first.database
 
 import android.content.Context
 import androidx.room.Room
-import com.first.weatherforecast.common.model.City
 
 class DatabaseDi(context: Context) {
 

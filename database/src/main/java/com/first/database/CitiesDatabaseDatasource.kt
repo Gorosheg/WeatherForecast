@@ -1,9 +1,9 @@
-package com.first.weatherforecast.datasource.database
+package com.first.database
 
+import com.first.database.model.CityEntity
+import com.first.database.model.toEntity
+import com.first.database.model.toSimpleCities
 import com.first.weatherforecast.common.model.City
-import com.first.weatherforecast.datasource.database.model.CityEntity
-import com.first.weatherforecast.datasource.database.model.toEntity
-import com.first.weatherforecast.datasource.database.model.toSimpleCities
 import io.reactivex.Observable
 
 class CitiesDatabaseDatasource(private val cityDao: CityDao) {
@@ -17,10 +17,10 @@ class CitiesDatabaseDatasource(private val cityDao: CityDao) {
     }
 
     fun isCityExist(city: City): Boolean {
-        return if (city.name == null) false
-        else {
-            cityDao.getByName(city.name) != null
-        }
+        val cityName = city.name
+        return if (cityName == null) false
+        else cityDao.getByName(cityName) != null
+
     }
 
     fun getAllCities(): Observable<List<City>> {
@@ -29,8 +29,9 @@ class CitiesDatabaseDatasource(private val cityDao: CityDao) {
     }
 
     fun deleteCity(city: City) {
-        if (city.name != null) {
-            cityDao.delete(city.name)
+        val cityName = city.name
+        if (cityName != null) {
+            cityDao.delete(cityName)
         }
     }
 }

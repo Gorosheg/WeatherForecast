@@ -3,7 +3,7 @@ package com.first.weatherforecast.feature.city.presentation
 import androidx.lifecycle.ViewModel
 import com.first.weatherforecast.common.model.City
 import com.first.weatherforecast.common.model.Coordinates
-import com.first.weatherforecast.datasource.network.model.WeatherResponse
+import com.first.network.model.WeatherResponse
 import com.first.weatherforecast.feature.city.domain.CitiesInteractor
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

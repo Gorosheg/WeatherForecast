@@ -1,4 +1,4 @@
-package com.first.weatherforecast.datasource.network.model
+package com.first.network.model
 
 import com.first.weatherforecast.common.model.SkyCondition
 import com.first.weatherforecast.common.model.SkyImage

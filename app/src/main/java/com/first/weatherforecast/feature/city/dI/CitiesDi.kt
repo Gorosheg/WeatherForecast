@@ -1,7 +1,7 @@
 package com.first.weatherforecast.feature.city.dI
 
-import com.first.weatherforecast.datasource.database.CitiesDatabaseDatasource
-import com.first.weatherforecast.datasource.database.NetworkDataSource
+import com.first.database.CitiesDatabaseDatasource
+import com.first.database.NetworkDataSource
 import com.first.weatherforecast.datasource.sharedPreference.PreferenceDatasource
 import com.first.weatherforecast.feature.city.data.CitiesRepository
 import com.first.weatherforecast.feature.city.data.CitiesRepositoryImpl

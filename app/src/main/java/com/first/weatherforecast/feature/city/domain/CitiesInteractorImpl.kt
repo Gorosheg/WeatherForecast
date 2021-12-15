@@ -1,7 +1,7 @@
 package com.first.weatherforecast.feature.city.domain
 
 import com.first.weatherforecast.common.model.City
-import com.first.weatherforecast.datasource.network.model.WeatherResponse
+import com.first.network.model.WeatherResponse
 import com.first.weatherforecast.feature.city.data.CitiesRepository
 import io.reactivex.Observable
 import io.reactivex.Single

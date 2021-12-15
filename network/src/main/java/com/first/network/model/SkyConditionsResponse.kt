@@ -1,4 +1,4 @@
-package com.first.weatherforecast.datasource.network.model
+package com.first.network.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,4 +1,4 @@
-package com.first.weatherforecast.datasource.database.model
+package com.first.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
