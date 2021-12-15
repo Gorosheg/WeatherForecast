@@ -2,7 +2,7 @@ package com.first.citiesscreen.domain
 
 import com.first.citiesscreen.data.CitiesRepository
 import com.first.network.model.WeatherResponse
-import com.first.weatherforecast.common.model.City
+import com.first.common.model.City
 import io.reactivex.Observable
 import io.reactivex.Single
 

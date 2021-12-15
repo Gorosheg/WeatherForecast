@@ -38,6 +38,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation project(':network')
     implementation project(':app')
+    implementation project(':common')
 
     // room
     implementation("androidx.room:room-runtime:2.3.0")

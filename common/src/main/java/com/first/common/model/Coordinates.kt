@@ -1,4 +1,4 @@
-package com.first.weatherforecast.common.model
+package com.first.common.model
 
 import java.io.Serializable
 

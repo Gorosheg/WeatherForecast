@@ -1,7 +1,7 @@
-package com.first.weatherforecast.common.model
+package com.first.common.model
 
 import androidx.annotation.StringRes
-import com.first.weatherforecast.R
+import com.first.common.R
 
 enum class SkyCondition(@StringRes val text: Int) {
 

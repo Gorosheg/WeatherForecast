@@ -1,6 +1,6 @@
 package com.first.weatherforecast.feature.weather.dI
 
-import com.first.weatherforecast.common.model.City
+import com.first.common.model.City
 import com.first.database.NetworkDataSource
 import com.first.weatherforecast.feature.weather.data.WeatherRepository
 import com.first.weatherforecast.feature.weather.data.WeatherRepositoryImpl

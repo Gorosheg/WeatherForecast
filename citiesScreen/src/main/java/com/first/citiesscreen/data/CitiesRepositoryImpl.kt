@@ -3,7 +3,7 @@ package com.first.citiesscreen.data
 import com.first.database.CitiesDatabaseDatasource
 import com.first.database.NetworkDataSource
 import com.first.network.model.WeatherResponse
-import com.first.weatherforecast.common.model.City
+import com.first.common.model.City
 import com.first.weatherforecast.datasource.sharedPreference.PreferenceDatasource
 import io.reactivex.Observable
 import io.reactivex.Single

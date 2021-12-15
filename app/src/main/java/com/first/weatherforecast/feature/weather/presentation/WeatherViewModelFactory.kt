@@ -2,7 +2,7 @@ package com.first.weatherforecast.feature.weather.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.first.weatherforecast.common.model.City
+import com.first.common.model.City
 import com.first.weatherforecast.feature.weather.domain.WeatherInteractor
 
 class WeatherViewModelFactory(

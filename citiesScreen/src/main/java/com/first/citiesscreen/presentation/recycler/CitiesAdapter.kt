@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
-import com.first.weatherforecast.common.model.City
+import com.first.common.model.City
 
 class CitiesAdapter(
     val items: MutableList<City>,

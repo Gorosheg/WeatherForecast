@@ -3,8 +3,8 @@ package com.first.citiesscreen.presentation
 import androidx.lifecycle.ViewModel
 import com.first.citiesscreen.domain.CitiesInteractor
 import com.first.network.model.WeatherResponse
-import com.first.weatherforecast.common.model.City
-import com.first.weatherforecast.common.model.Coordinates
+import com.first.common.model.City
+import com.first.common.model.Coordinates
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

@@ -12,7 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.first.weatherforecast.App
 import com.first.weatherforecast.R
-import com.first.weatherforecast.common.model.City
+import com.first.common.model.City
 import com.first.network.model.WeatherResponse
 import com.first.citiesscreen.presentation.CitiesActivity.Companion.CITY_KEY
 import io.reactivex.android.schedulers.AndroidSchedulers

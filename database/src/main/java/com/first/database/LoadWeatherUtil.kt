@@ -2,7 +2,7 @@ package com.first.database
 
 import com.first.network.WeatherApi
 import com.first.network.model.WeatherResponse
-import com.first.weatherforecast.common.model.City
+import com.first.common.model.City
 import io.reactivex.Single
 
 class NetworkDataSource(private val api: WeatherApi) {

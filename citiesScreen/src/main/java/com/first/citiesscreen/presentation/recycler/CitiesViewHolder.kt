@@ -6,7 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.first.weatherforecast.R
-import com.first.weatherforecast.common.model.City
+import com.first.common.model.City
 
 class CitiesViewHolder(
     cityView: View,
