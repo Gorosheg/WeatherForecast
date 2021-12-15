@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherForecast">
         <activity
-            android:name="com.first.weatherforecast.feature.city.presentation.CitiesActivity"
+            android:name="com.first.citiesscreen.presentation.CitiesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

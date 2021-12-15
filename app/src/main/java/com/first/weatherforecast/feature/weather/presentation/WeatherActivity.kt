@@ -14,7 +14,7 @@ import com.first.weatherforecast.App
 import com.first.weatherforecast.R
 import com.first.weatherforecast.common.model.City
 import com.first.network.model.WeatherResponse
-import com.first.weatherforecast.feature.city.presentation.CitiesActivity.Companion.CITY_KEY
+import com.first.citiesscreen.presentation.CitiesActivity.Companion.CITY_KEY
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign

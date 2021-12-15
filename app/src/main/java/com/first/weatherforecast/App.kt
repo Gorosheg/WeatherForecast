@@ -7,7 +7,7 @@ import com.first.network.NetworkDi
 import com.first.weatherforecast.datasource.sharedPreference.FirstLaaunchEnum
 import com.first.weatherforecast.datasource.sharedPreference.MutablePreferenceDatasource
 import com.first.weatherforecast.datasource.sharedPreference.SharedPreferenceDi
-import com.first.weatherforecast.feature.city.dI.CitiesDi
+import com.first.citiesscreen.dI.CitiesDi
 import com.first.weatherforecast.feature.weather.dI.WeatherDi
 
 @SuppressLint("StaticFieldLeak")

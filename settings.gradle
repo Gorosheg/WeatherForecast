@@ -10,3 +10,5 @@ rootProject.name = "Weather forecast"
 include ':app'
 include ':database'
 include ':network'
+include ':citiesScreen'
+include ':weatherScreen'

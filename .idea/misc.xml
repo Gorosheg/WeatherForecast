@@ -17,6 +17,9 @@
         <entry key="..\:/Weatherforecast/app/src/main/res/layout/fragment_cities_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Weatherforecast/app/src/main/res/layout/fragment_city_dialog.xml" value="0.4" />
         <entry key="..\:/Weatherforecast/app/src/main/res/layout/list_of_cities.xml" value="0.4" />
+        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/activity_cities.xml" value="0.25416666666666665" />
+        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/fragment_city_dialog.xml" value="0.25416666666666665" />
+        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/list_of_cities.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
