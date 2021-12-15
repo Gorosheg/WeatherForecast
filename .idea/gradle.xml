@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/database" />
             <option value="$PROJECT_DIR$/network" />
+            <option value="$PROJECT_DIR$/sharedPreference" />
             <option value="$PROJECT_DIR$/weatherScreen" />
           </set>
         </option>

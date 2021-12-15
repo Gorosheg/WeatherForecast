@@ -19,7 +19,7 @@ import com.first.citiesscreen.presentation.recycler.CitiesAdapter
 import com.first.common.model.City
 import com.first.common.model.Coordinates
 import com.first.weatherforecast.App
-import com.first.weatherforecast.feature.weather.presentation.WeatherActivity
+import com.first.weatherscreen.presentation.WeatherActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
