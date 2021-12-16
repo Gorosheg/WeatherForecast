@@ -29,11 +29,12 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
 
     private var adapter: CitiesAdapter? = null
     private lateinit var swipeRefresh: SwipeRefreshLayout
+    private val di by lazy { CitiesDi.instance }
 
     // получим доступ к провайдеру, который хранит все ViewModel для этого Activity.
     // Методом get запрашиваем у этого провайдера конкретную модель по имени класса
     private val viewModel: CitiesViewModel by lazy {
-        ViewModelProvider(this, CitiesDi.instance.getViewModelFactory())
+        ViewModelProvider(this, di.getViewModelFactory())
             .get(CitiesViewModel::class.java)
     }
     private var disposable = CompositeDisposable()
@@ -119,9 +120,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
     }
 
     private fun navigateToWeatherScreen(city: City) {
-        /*val intent = Intent(this, WeatherActivity::class.java)
-        intent.putExtra(CITY_KEY, city)
-        startActivity(intent)*/
+        di.navigator.navigateToWeatherScreen(this, city)
     }
 
     private fun onTrashClick(city: City) {
@@ -179,7 +178,6 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
     companion object {
 
         const val LOCATION_PERMISSION_REQUEST_CODE = 1
-        const val CITY_KEY = "CITY_KEY"
 
     }
 

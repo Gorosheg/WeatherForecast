@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
+import com.first.common.CITY_KEY
 import com.first.common.model.City
 import com.first.network.model.WeatherResponse
 import com.first.weatherscreen.R
@@ -24,7 +25,7 @@ class WeatherActivity : AppCompatActivity() {
     private lateinit var city: City
     private var disposable = CompositeDisposable()
     private val viewModel: WeatherViewModel by lazy {
-        ViewModelProvider(this, WeatherDi.weatherDi.getViewModelFactory(city))
+        ViewModelProvider(this, WeatherDi.instance.getViewModelFactory(city))
             .get(WeatherViewModel::class.java)
     }
 
@@ -39,7 +40,7 @@ class WeatherActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-  //      city = intent.getSerializableExtra(CITY_KEY) as City TODO: Переход между активити
+        city = intent.getSerializableExtra(CITY_KEY) as City
         loadWeather()
 
         swipeRefresh = findViewById(R.id.swipeRefreshLayout)

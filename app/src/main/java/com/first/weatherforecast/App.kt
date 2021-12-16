@@ -16,11 +16,16 @@ class App : Application() {
         super.onCreate()
         databaseDi = DatabaseDi(this)
         sharedPrefDi = SharedPreferenceDi(this)
-        WeatherDi.weatherDi = WeatherDi(networkDi.networkDataSource)
+
+        WeatherDi.instance = WeatherDi(networkDi.networkDataSource)
+
+        val navigator = NavigatorImpl()
+
         CitiesDi.instance = CitiesDi(
             datasource = databaseDi.datasource,
             networkDataSource = networkDi.networkDataSource,
-            preferenceDatasource = sharedPrefDi.preferenceDatasource
+            preferenceDatasource = sharedPrefDi.preferenceDatasource,
+            navigator = navigator
         )
 
         initIsFirstLaunchPref(sharedPrefDi.mutablePreferenceDatasource)

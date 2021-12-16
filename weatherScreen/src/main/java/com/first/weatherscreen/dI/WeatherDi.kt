@@ -22,7 +22,7 @@ class WeatherDi(private val networkDataSource: NetworkDataSource) {
 
     companion object {
 
-        lateinit var weatherDi: WeatherDi
+        lateinit var instance: WeatherDi
 
     }
 
