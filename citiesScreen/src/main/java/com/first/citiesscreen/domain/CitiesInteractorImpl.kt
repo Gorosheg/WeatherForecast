@@ -1,8 +1,8 @@
 package com.first.citiesscreen.domain
 
 import com.first.citiesscreen.data.CitiesRepository
-import com.first.network.model.WeatherResponse
 import com.first.common.model.City
+import com.first.network.model.WeatherResponse
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -10,6 +10,10 @@ class CitiesInteractorImpl(private val repository: CitiesRepository) : CitiesInt
 
     override val cities: Observable<List<City>>
         get() = repository.cities
+
+    override fun isEmpty(): Boolean {
+        return repository.isEmpty()
+    }
 
     override fun addCity(city: City) {
         repository.addCity(city)

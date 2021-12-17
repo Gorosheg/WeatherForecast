@@ -2,9 +2,9 @@ package com.first.citiesscreen.presentation
 
 import androidx.lifecycle.ViewModel
 import com.first.citiesscreen.domain.CitiesInteractor
-import com.first.network.model.WeatherResponse
 import com.first.common.model.City
 import com.first.common.model.Coordinates
+import com.first.network.model.WeatherResponse
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -17,6 +17,9 @@ class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
     private var disposable = CompositeDisposable()
     private val _error = PublishSubject.create<UiCityExceptions>()
     val error: Observable<UiCityExceptions> = _error
+
+    private var _dbIsEmpty = PublishSubject.create<Boolean>()
+    val dbIsEmpty: Observable<Boolean> = _dbIsEmpty
 
     val cities: Observable<List<City>>
         get() = interactor.cities
@@ -65,6 +68,7 @@ class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
 
     private fun addCity(city: City) {
         interactor.addCity(city)
+        isDbEmpty()
     }
 
     private fun isCityExist(city: City): Boolean {
@@ -73,9 +77,14 @@ class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
 
     fun removeCity(city: City) {
         interactor.removeCity(city)
+        isDbEmpty()
     }
 
     fun isFirstLaunch(): Boolean? {
         return interactor.isFirstLaunch()
+    }
+
+    fun isDbEmpty() {
+        _dbIsEmpty.onNext(interactor.isEmpty())
     }
 }

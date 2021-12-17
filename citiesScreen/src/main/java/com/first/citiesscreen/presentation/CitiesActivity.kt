@@ -5,9 +5,12 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,7 +54,11 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_cities)
         swipeRefresh = findViewById(id.citiesRefresh)
+        val recyclerView: RecyclerView = findViewById(id.cityList)
+        val addCityActionButton: FloatingActionButton = findViewById(id.add_action_button)
+        val addCityButton: Button = findViewById(id.dialog_button)
         swipeRefresh.isEnabled = false
+
         disposable += viewModel.cities
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -61,12 +68,16 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         disposable += viewModel.error
             .subscribe(::makeToast)
 
+        disposable += viewModel.dbIsEmpty
+            .doOnNext {
+                isDbEmpty(it, addCityActionButton, addCityButton)
+            }
+            .subscribe()
+
         if (viewModel.isFirstLaunch() == true) {
             firstLaunchToast()
         }
 
-        val recyclerView: RecyclerView = findViewById(id.cityList)
-        val addCity: FloatingActionButton = findViewById(id.dialog_button)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         adapter = CitiesAdapter(
@@ -76,15 +87,29 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         )
 
         recyclerView.adapter = adapter
-        addCity.setOnClickListener { showCityDialog() }
-
         userLocation.enableMyLocation(this)
+        addCityActionButton.setOnClickListener { showCityDialog() }
+        addCityButton.setOnClickListener { showCityDialog() }
 
     }
 
     override fun onDestroy() {
         super.onDestroy()
         disposable.dispose()
+    }
+
+    private fun isDbEmpty(
+        empty: Boolean,
+        addCityActionButton: FloatingActionButton,
+        addCityButton: Button
+    ) {
+        if (empty) {
+            addCityActionButton.isGone = true
+            addCityButton.isVisible = true
+        } else {
+            addCityActionButton.isVisible = true
+            addCityButton.isGone = true
+        }
     }
 
     private fun updateCitiesToList(cities: List<City>) {
@@ -109,9 +134,9 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             userLocation.enableMyLocation(this)
         } else {
-            showCityDialog()
             loaderChange(false)
         }
+        viewModel.isDbEmpty()
     }
 
     private fun showCityDialog() {
@@ -132,23 +157,23 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
             val newCity = City(
                 name = name
             )
-            loadWeather(newCity)
+            loadWeatherByCity(newCity)
         } else if (latitude != null && longitude != null) {
             val newCity = City(
                 coordinates = Coordinates(latitude, longitude)
             )
-            loadWeather(newCity)
+            loadWeatherByCity(newCity)
         }
     }
 
     private fun loadWeatherByLocation(location: Location) {
-        loadWeather(
+        loadWeatherByCity(
             City(coordinates = Coordinates(location.latitude, location.longitude))
         )
         loaderChange(false)
     }
 
-    private fun loadWeather(city: City) {
+    private fun loadWeatherByCity(city: City) {
         viewModel.loadWeather(city)
     }
 

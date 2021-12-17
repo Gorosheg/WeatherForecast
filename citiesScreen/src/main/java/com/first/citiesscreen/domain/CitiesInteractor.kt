@@ -1,13 +1,15 @@
 package com.first.citiesscreen.domain
 
-import com.first.network.model.WeatherResponse
 import com.first.common.model.City
+import com.first.network.model.WeatherResponse
 import io.reactivex.Observable
 import io.reactivex.Single
 
 interface CitiesInteractor {
 
     val cities: Observable<List<City>>
+
+    fun isEmpty():Boolean
 
     fun addCity(city: City)
 

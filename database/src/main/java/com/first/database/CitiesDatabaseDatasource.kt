@@ -8,7 +8,7 @@ import io.reactivex.Observable
 
 class CitiesDatabaseDatasource(private val cityDao: CityDao) {
 
-    private fun isEmpty(): Boolean {
+    fun isEmpty(): Boolean {
         return cityDao.count() == 0
     }
 

@@ -17,6 +17,10 @@ class CitiesRepositoryImpl(
     override val cities: Observable<List<City>>
         get() = this.database.getAllCities()
 
+    override fun isEmpty(): Boolean {
+        return this.database.isEmpty()
+    }
+
     override fun addCity(city: City) {
         this.database.addCity(city)
     }
