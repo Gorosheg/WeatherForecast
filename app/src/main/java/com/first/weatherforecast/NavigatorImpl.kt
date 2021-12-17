@@ -5,7 +5,7 @@ import android.content.Intent
 import com.first.common.CITY_KEY
 import com.first.common.Navigator
 import com.first.common.model.City
-import com.first.weatherscreen.presentation.WeatherActivity
+import com.first.weatherScreen.presentation.WeatherActivity
 
 class NavigatorImpl : Navigator {
 

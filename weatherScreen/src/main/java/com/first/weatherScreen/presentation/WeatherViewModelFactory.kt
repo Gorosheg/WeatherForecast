@@ -1,9 +1,9 @@
-package com.first.weatherscreen.presentation
+package com.first.weatherScreen.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.first.common.model.City
-import com.first.weatherscreen.domain.WeatherInteractor
+import com.first.weatherScreen.domain.WeatherInteractor
 
 class WeatherViewModelFactory(
     private val interactor: WeatherInteractor,

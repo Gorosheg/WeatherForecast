@@ -1,12 +1,12 @@
-package com.first.weatherscreen.dI
+package com.first.weatherScreen.dI
 
 import com.first.common.model.City
 import com.first.network.NetworkDataSource
-import com.first.weatherscreen.data.WeatherRepository
-import com.first.weatherscreen.data.WeatherRepositoryImpl
-import com.first.weatherscreen.domain.WeatherInteractor
-import com.first.weatherscreen.domain.WeatherInteractorImpl
-import com.first.weatherscreen.presentation.WeatherViewModelFactory
+import com.first.weatherScreen.data.WeatherRepository
+import com.first.weatherScreen.data.WeatherRepositoryImpl
+import com.first.weatherScreen.domain.WeatherInteractor
+import com.first.weatherScreen.domain.WeatherInteractorImpl
+import com.first.weatherScreen.presentation.WeatherViewModelFactory
 
 class WeatherDi(private val networkDataSource: NetworkDataSource) {
 

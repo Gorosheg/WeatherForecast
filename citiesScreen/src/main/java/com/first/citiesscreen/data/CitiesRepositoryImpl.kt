@@ -8,7 +8,7 @@ import com.first.sharedpreference.PreferenceDatasource
 import io.reactivex.Observable
 import io.reactivex.Single
 
-class CitiesRepositoryImpl(
+internal class CitiesRepositoryImpl(
     private val database: CitiesDatabaseDatasource,
     private val networkDataSource: NetworkDataSource,
     private val PreferenceDatasource: PreferenceDatasource

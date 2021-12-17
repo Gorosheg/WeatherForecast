@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.first.weatherscreen.presentation.WeatherActivity"
+            android:name="com.first.weatherScreen.presentation.WeatherActivity"
             android:exported="true">
 
         </activity>

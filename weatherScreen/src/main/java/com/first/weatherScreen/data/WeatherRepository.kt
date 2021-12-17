@@ -1,9 +1,9 @@
-package com.first.weatherscreen.domain
+package com.first.weatherScreen.data
 
 import com.first.common.model.City
 import com.first.network.model.WeatherResponse
 import io.reactivex.Single
 
-interface WeatherInteractor {
+interface WeatherRepository {
     fun loadWeather(city: City): Single<WeatherResponse>
 }

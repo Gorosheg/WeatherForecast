@@ -1,4 +1,4 @@
-package com.first.weatherscreen
+package com.first.weatherScreen
 
 import org.junit.Test
 

@@ -6,7 +6,7 @@ import com.first.network.model.WeatherResponse
 import io.reactivex.Observable
 import io.reactivex.Single
 
-class CitiesInteractorImpl(private val repository: CitiesRepository) : CitiesInteractor {
+internal class CitiesInteractorImpl(private val repository: CitiesRepository) : CitiesInteractor {
 
     override val cities: Observable<List<City>>
         get() = repository.cities

@@ -1,4 +1,4 @@
-package com.first.weatherscreen.presentation
+package com.first.weatherScreen.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -13,8 +13,8 @@ import com.bumptech.glide.Glide
 import com.first.common.CITY_KEY
 import com.first.common.model.City
 import com.first.network.model.WeatherResponse
-import com.first.weatherscreen.R
-import com.first.weatherscreen.dI.WeatherDi
+import com.first.weatherScreen.R
+import com.first.weatherScreen.dI.WeatherDi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign

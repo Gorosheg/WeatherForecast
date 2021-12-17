@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:background="@color/black"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            tools:context="com.first.weatherscreen.presentation.WeatherActivity">
+            tools:context="com.first.weatherScreen.presentation.WeatherActivity">
 
             <ImageView
                 android:id="@+id/SkyImage"

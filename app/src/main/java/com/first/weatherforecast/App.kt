@@ -7,7 +7,7 @@ import com.first.database.DatabaseDi
 import com.first.network.NetworkDi
 import com.first.sharedpreference.FirstLaunchEnum
 import com.first.sharedpreference.SharedPreferenceDi
-import com.first.weatherscreen.dI.WeatherDi
+import com.first.weatherScreen.dI.WeatherDi
 
 @SuppressLint("StaticFieldLeak")
 class App : Application() {

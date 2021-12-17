@@ -10,7 +10,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.first.citiesscreen.presentation.CitiesActivity.Companion.LOCATION_PERMISSION_REQUEST_CODE
 
-class UserLocation(
+internal class UserLocation(
     private val locationManager: LocationManager,
     private val onStart: (Boolean) -> Unit,
     private val onResult: (Location) -> Unit

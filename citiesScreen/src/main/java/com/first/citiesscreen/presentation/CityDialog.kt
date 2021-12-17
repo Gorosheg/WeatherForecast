@@ -15,7 +15,7 @@ import com.first.citiesscreen.R.string
 import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 
-class CityDialog : DialogFragment() {
+internal class CityDialog : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

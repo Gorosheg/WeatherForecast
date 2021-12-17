@@ -13,13 +13,13 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import retrofit2.HttpException
 
-class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
+internal class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
     private var disposable = CompositeDisposable()
     private val _error = PublishSubject.create<UiCityExceptions>()
     val error: Observable<UiCityExceptions> = _error
 
-    private var _dbIsEmpty = PublishSubject.create<Boolean>()
-    val dbIsEmpty: Observable<Boolean> = _dbIsEmpty
+    private var _IsEmpty = PublishSubject.create<Boolean>()
+    val isEmpty: Observable<Boolean> = _IsEmpty
 
     val cities: Observable<List<City>>
         get() = interactor.cities
@@ -68,7 +68,7 @@ class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
 
     private fun addCity(city: City) {
         interactor.addCity(city)
-        isDbEmpty()
+        isEmpty()
     }
 
     private fun isCityExist(city: City): Boolean {
@@ -77,14 +77,14 @@ class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
 
     fun removeCity(city: City) {
         interactor.removeCity(city)
-        isDbEmpty()
+        isEmpty()
     }
 
     fun isFirstLaunch(): Boolean? {
         return interactor.isFirstLaunch()
     }
 
-    fun isDbEmpty() {
-        _dbIsEmpty.onNext(interactor.isEmpty())
+    fun isEmpty() {
+        _IsEmpty.onNext(interactor.isEmpty())
     }
 }

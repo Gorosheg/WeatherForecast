@@ -6,6 +6,8 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback
@@ -30,8 +32,13 @@ import io.reactivex.schedulers.Schedulers
 
 class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermissionsResultCallback {
 
-    private var adapter: CitiesAdapter? = null
-    private lateinit var swipeRefresh: SwipeRefreshLayout
+
+    private val swipeRefresh: SwipeRefreshLayout by lazy { findViewById(id.citiesRefresh) }
+    private val recyclerView: RecyclerView by lazy { findViewById(id.cityList) }
+    private val addCityActionButton: FloatingActionButton by lazy { findViewById(id.add_action_button) }
+    private val addCityButton: Button by lazy { findViewById(id.dialog_button) }
+    private val noCitiesImage: ImageView by lazy { findViewById(id.no_cities_image) }
+    private val noCitiesText: TextView by lazy { findViewById(id.no_cities_text) }
     private val di by lazy { CitiesDi.instance }
 
     // получим доступ к провайдеру, который хранит все ViewModel для этого Activity.
@@ -40,7 +47,6 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         ViewModelProvider(this, di.getViewModelFactory())
             .get(CitiesViewModel::class.java)
     }
-    private var disposable = CompositeDisposable()
 
     private val locationManager: LocationManager by lazy {
         getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -50,29 +56,27 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         UserLocation(locationManager, ::loaderChange, ::loadWeatherByLocation)
     }
 
+    private var adapter: CitiesAdapter? = null
+    private var disposable = CompositeDisposable()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_cities)
-        swipeRefresh = findViewById(id.citiesRefresh)
-        val recyclerView: RecyclerView = findViewById(id.cityList)
-        val addCityActionButton: FloatingActionButton = findViewById(id.add_action_button)
-        val addCityButton: Button = findViewById(id.dialog_button)
         swipeRefresh.isEnabled = false
 
         disposable += viewModel.cities
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnNext(::updateCitiesToList)
-            .subscribe()
+            .subscribe{
+                updateCitiesToList(it)
+                viewModel.isEmpty()
+            }
 
         disposable += viewModel.error
             .subscribe(::makeToast)
 
-        disposable += viewModel.dbIsEmpty
-            .doOnNext {
-                isDbEmpty(it, addCityActionButton, addCityButton)
-            }
-            .subscribe()
+        disposable += viewModel.isEmpty
+            .subscribe(::noCities)
 
         if (viewModel.isFirstLaunch() == true) {
             firstLaunchToast()
@@ -98,17 +102,17 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         disposable.dispose()
     }
 
-    private fun isDbEmpty(
-        empty: Boolean,
-        addCityActionButton: FloatingActionButton,
-        addCityButton: Button
-    ) {
+    private fun noCities(empty: Boolean) {
         if (empty) {
             addCityActionButton.isGone = true
             addCityButton.isVisible = true
+            noCitiesImage.isVisible = true
+            noCitiesText.isVisible = true
         } else {
             addCityActionButton.isVisible = true
             addCityButton.isGone = true
+            noCitiesImage.isGone = true
+            noCitiesText.isGone = true
         }
     }
 
@@ -136,7 +140,6 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         } else {
             loaderChange(false)
         }
-        viewModel.isDbEmpty()
     }
 
     private fun showCityDialog() {

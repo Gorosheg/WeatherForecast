@@ -2,7 +2,7 @@ package com.first.sharedpreference
 
 import android.content.SharedPreferences
 
-class PreferenceDatasourceImpl(private val sharedPref: SharedPreferences) :
+internal class PreferenceDatasourceImpl(private val sharedPref: SharedPreferences) :
     MutablePreferenceDatasource,
     PreferenceDatasource {
 
