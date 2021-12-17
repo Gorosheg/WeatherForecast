@@ -6,29 +6,43 @@ import com.first.database.model.toEntity
 import com.first.database.model.toSimpleCities
 import io.reactivex.Observable
 
-class CitiesDatabaseDatasource(private val cityDao: CityDao) {
+interface CitiesDatabaseDatasource {
 
-    fun isEmpty(): Boolean {
+    fun isEmpty(): Boolean
+
+    fun addCity(city: City)
+
+    fun isCityExist(city: City): Boolean
+
+    fun getAllCities(): Observable<List<City>>
+
+    fun deleteCity(city: City)
+}
+
+internal class CitiesDatabaseDatasourceImpl(
+    private val cityDao: CityDao
+) : CitiesDatabaseDatasource {
+
+    override fun isEmpty(): Boolean {
         return cityDao.count() == 0
     }
 
-    fun addCity(city: City) {
+    override fun addCity(city: City) {
         cityDao.insert(city.toEntity())
     }
 
-    fun isCityExist(city: City): Boolean {
+    override fun isCityExist(city: City): Boolean {
         val cityName = city.name
         return if (cityName == null) false
         else cityDao.getByName(cityName) != null
-
     }
 
-    fun getAllCities(): Observable<List<City>> {
+    override fun getAllCities(): Observable<List<City>> {
         return cityDao.cities()
             .map(List<CityEntity>::toSimpleCities)
     }
 
-    fun deleteCity(city: City) {
+    override fun deleteCity(city: City) {
         val cityName = city.name
         if (cityName != null) {
             cityDao.delete(cityName)

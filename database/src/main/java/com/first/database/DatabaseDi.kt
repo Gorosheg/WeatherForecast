@@ -12,6 +12,6 @@ class DatabaseDi(context: Context) {
 
     private val cityDao: CityDao = database.cityDao
 
-    val datasource = CitiesDatabaseDatasource(cityDao)
+    val datasource: CitiesDatabaseDatasource = CitiesDatabaseDatasourceImpl(cityDao)
 
 }

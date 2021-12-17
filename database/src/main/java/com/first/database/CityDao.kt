@@ -5,7 +5,7 @@ import com.first.database.model.CityEntity
 import io.reactivex.Observable
 
 @Dao
-interface CityDao {
+internal interface CityDao {
 
     @Query("SELECT COUNT(*) FROM CityEntity")
     fun count(): Int

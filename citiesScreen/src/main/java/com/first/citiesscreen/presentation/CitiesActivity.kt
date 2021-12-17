@@ -67,7 +67,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         disposable += viewModel.cities
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{
+            .subscribe {
                 updateCitiesToList(it)
                 viewModel.isEmpty()
             }
