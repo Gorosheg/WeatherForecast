@@ -1,16 +1,16 @@
 package com.first.citiesscreen.data
 
 import com.first.common.model.City
+import com.first.common.model.Weather
 import com.first.database.CitiesDatabaseDatasource
-import com.first.network.NetworkDataSource
-import com.first.network.model.WeatherResponse
+import com.first.network.WeatherDatasource
 import com.first.sharedpreference.PreferenceDatasource
 import io.reactivex.Observable
 import io.reactivex.Single
 
 internal class CitiesRepositoryImpl(
     private val database: CitiesDatabaseDatasource,
-    private val networkDataSource: NetworkDataSource,
+    private val networkDataSource: WeatherDatasource,
     private val PreferenceDatasource: PreferenceDatasource
 ) : CitiesRepository {
 
@@ -29,7 +29,7 @@ internal class CitiesRepositoryImpl(
         return this.database.isCityExist(city)
     }
 
-    override fun loadWeather(city: City): Single<WeatherResponse> {
+    override fun loadWeather(city: City): Single<Weather> {
         return networkDataSource.loadingWeather(city)
     }
 

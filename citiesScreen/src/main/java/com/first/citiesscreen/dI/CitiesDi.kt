@@ -7,12 +7,12 @@ import com.first.citiesscreen.domain.CitiesInteractorImpl
 import com.first.citiesscreen.presentation.CitiesViewModelFactory
 import com.first.common.Navigator
 import com.first.database.CitiesDatabaseDatasource
-import com.first.network.NetworkDataSource
+import com.first.network.WeatherDatasource
 import com.first.sharedpreference.PreferenceDatasource
 
 class CitiesDi(
     private val datasource: CitiesDatabaseDatasource,
-    private val networkDataSource: NetworkDataSource,
+    private val networkDataSource: WeatherDatasource,
     private val preferenceDatasource: PreferenceDatasource,
     val navigator: Navigator
 ) {

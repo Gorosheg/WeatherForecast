@@ -32,7 +32,7 @@ internal class CitiesDatabaseDatasourceImpl(
     }
 
     override fun isCityExist(city: City): Boolean {
-        val cityName = city.name
+        val cityName = city.name 
         return if (cityName == null) false
         else cityDao.getByName(cityName) != null
     }

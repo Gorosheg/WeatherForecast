@@ -1,7 +1,7 @@
 package com.first.citiesscreen.domain
 
 import com.first.common.model.City
-import com.first.network.model.WeatherResponse
+import com.first.common.model.Weather
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -15,7 +15,7 @@ interface CitiesInteractor {
 
     fun isCityExist(city: City): Boolean
 
-    fun loadWeather(city: City): Single<WeatherResponse>
+    fun loadWeather(city: City): Single<Weather>
 
     fun removeCity(city: City)
 

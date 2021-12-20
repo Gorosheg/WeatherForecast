@@ -2,7 +2,7 @@ package com.first.network.model
 
 import com.google.gson.annotations.SerializedName
 
-class CoordinatesResponse (
+internal class CoordinatesResponse (
     @SerializedName("lat")
     val latitude: Double,
 

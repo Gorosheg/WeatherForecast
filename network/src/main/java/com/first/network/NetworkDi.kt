@@ -21,6 +21,6 @@ class NetworkDi {
         .build()
         .create(WeatherApi::class.java)
 
-    val networkDataSource = NetworkDataSource(api)
+    val networkDataSource: WeatherDatasource = NetworkDataSource(api)
 
 }

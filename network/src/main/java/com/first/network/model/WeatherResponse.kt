@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 private const val ABSOLUTE_ZERO = 273.15
 private const val MERCURY = 0.750063755419211
 
-class WeatherResponse(
+internal class WeatherResponse(
     @SerializedName("main")
     private val weather: DegreesResponse,
 
@@ -15,7 +15,7 @@ class WeatherResponse(
     private val skies: List<SkyConditionsResponse>,
 
     @SerializedName("name")
-    val city: String,
+    val cityName: String,
 
     @SerializedName("coord")
     val coordinates: CoordinatesResponse
@@ -47,7 +47,6 @@ class WeatherResponse(
 
     val pressure: Int
         get() = weather.pressure.millimeters
-
 
     val skyCondition: SkyCondition
         get() = SkyCondition.buildSkyCondition(sky.skyCondition)

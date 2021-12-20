@@ -12,7 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.first.common.CITY_KEY
 import com.first.common.model.City
-import com.first.network.model.WeatherResponse
+import com.first.common.model.Weather
 import com.first.weatherScreen.R
 import com.first.weatherScreen.dI.WeatherDi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -73,7 +73,7 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun handleWeatherResponse(weather: WeatherResponse) {
+    private fun handleWeatherResponse(weather: Weather) {
         val town: TextView = findViewById(R.id.town)
         val degrees: TextView = findViewById(R.id.degrees)
         val maxMin: TextView = findViewById(R.id.minMax)
@@ -83,7 +83,7 @@ class WeatherActivity : AppCompatActivity() {
         val humidityParam: TextView = findViewById(R.id.humidityParam)
         val pressureParam: TextView = findViewById(R.id.pressureParam)
 
-        town.text = weather.city
+        town.text = weather.cityName
 
         degrees.text = weather.degree.toString() + "°C"
         maxMin.text = "${weather.tempMax}/${weather.tempMin}"

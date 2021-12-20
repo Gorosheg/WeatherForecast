@@ -2,7 +2,7 @@ package com.first.citiesscreen.domain
 
 import com.first.citiesscreen.data.CitiesRepository
 import com.first.common.model.City
-import com.first.network.model.WeatherResponse
+import com.first.common.model.Weather
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -23,7 +23,7 @@ internal class CitiesInteractorImpl(private val repository: CitiesRepository) : 
         return repository.isCityExist(city)
     }
 
-    override fun loadWeather(city: City): Single<WeatherResponse> {
+    override fun loadWeather(city: City): Single<Weather> {
         return repository.loadWeather(city)
     }
 

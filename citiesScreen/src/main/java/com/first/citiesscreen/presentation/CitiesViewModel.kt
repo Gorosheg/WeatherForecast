@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.first.citiesscreen.domain.CitiesInteractor
 import com.first.common.model.City
 import com.first.common.model.Coordinates
-import com.first.network.model.WeatherResponse
+import com.first.common.model.Weather
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -53,11 +53,11 @@ internal class CitiesViewModel(private val interactor: CitiesInteractor) : ViewM
 
     private fun copyCity(
         city: City,
-        response: WeatherResponse
+        response: Weather
     ): City {
         return if (city.name == null) {
             city.copy(
-                name = response.city
+                name = response.cityName
             )
         } else {
             city.copy(
