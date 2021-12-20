@@ -11,5 +11,5 @@ data class Weather(
     val humidity: Int,
     val pressure: Int,
     val skyCondition: SkyCondition,
-    val skyImage: SkyImage,
+    val skyImage: SkyImage
 )
