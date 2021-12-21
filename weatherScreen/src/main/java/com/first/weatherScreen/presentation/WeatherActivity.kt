@@ -46,7 +46,6 @@ class WeatherActivity : AppCompatActivity() {
         swipeRefresh = findViewById(R.id.swipeRefreshLayout)
         swipeRefresh.setOnRefreshListener {
             loadWeather()
-
         }
 
     }

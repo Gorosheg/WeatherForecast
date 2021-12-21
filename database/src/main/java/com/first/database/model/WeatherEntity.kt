@@ -1,16 +1,12 @@
 package com.first.database.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.first.common.model.SkyCondition
 import com.first.common.model.SkyImage
 import com.first.common.model.Weather
 
-
-@Entity
 internal data class WeatherEntity(
-    val latitude: Double,
-    val longitude: Double,
+    val cityLatitude: Double,
+    val cityLongitude: Double,
     val degree: Int,
     val tempMax: Int,
     val tempMin: Int,
@@ -19,13 +15,12 @@ internal data class WeatherEntity(
     val pressure: Int,
     val skyCondition: SkyCondition,
     val skyImage: SkyImage,
-    @PrimaryKey
     val cityName: String
 )
 
 internal fun Weather.toEntity() = WeatherEntity(
-    latitude = latitude,
-    longitude = longitude,
+    cityLatitude = latitude,
+    cityLongitude = longitude,
     degree = degree,
     tempMax = tempMax,
     tempMin = tempMin,
@@ -43,8 +38,8 @@ internal fun List<WeatherEntity>.toSimpleWeather(): List<Weather> = map { weathe
 }
 
 internal fun WeatherEntity.toSimpleWeather() = Weather(
-    latitude = latitude,
-    longitude = longitude,
+    latitude = cityLatitude,
+    longitude = cityLongitude,
     degree = degree,
     tempMax = tempMax,
     tempMin = tempMin,

@@ -1,6 +1,7 @@
 package com.first.database
 
 import com.first.common.model.City
+import com.first.common.model.Weather
 import com.first.database.model.CityEntity
 import com.first.database.model.toEntity
 import com.first.database.model.toSimpleCities
@@ -12,11 +13,13 @@ interface CitiesDatabaseDatasource {
 
     fun addCity(city: City)
 
-    fun isCityExist(city: City): Boolean
+    fun isCityExist(cityName: String?): Boolean
 
     fun getAllCities(): Observable<List<City>>
 
     fun deleteCity(city: City)
+
+    fun update(weather: Weather)
 }
 
 internal class CitiesDatabaseDatasourceImpl(
@@ -31,8 +34,18 @@ internal class CitiesDatabaseDatasourceImpl(
         cityDao.insert(city.toEntity())
     }
 
-    override fun isCityExist(city: City): Boolean {
-        val cityName = city.name 
+    override fun update(weather: Weather) {
+        val city: CityEntity? = cityDao.getByName(weather.cityName)
+        if (city != null) {
+            val newCity = city.copy(
+                weather = weather.toEntity()
+            )
+            cityDao.update(newCity)
+        }
+
+    }
+
+    override fun isCityExist(cityName: String?): Boolean {
         return if (cityName == null) false
         else cityDao.getByName(cityName) != null
     }

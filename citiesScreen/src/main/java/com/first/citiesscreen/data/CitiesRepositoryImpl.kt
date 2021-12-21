@@ -26,7 +26,7 @@ internal class CitiesRepositoryImpl(
     }
 
     override fun isCityExist(city: City): Boolean {
-        return this.database.isCityExist(city)
+        return this.database.isCityExist(city.name)
     }
 
     override fun loadWeather(city: City): Single<Weather> {

@@ -1,5 +1,6 @@
 package com.first.database.model
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.first.common.model.City
@@ -10,7 +11,9 @@ internal data class CityEntity(
     val latitude: Double,
     val longitude: Double,
     @PrimaryKey
-    val name: String
+    val name: String,
+    @Embedded
+    val weather: WeatherEntity?
 )
 
 internal fun List<City>.toEntities(): List<CityEntity> = map { city ->
@@ -20,7 +23,8 @@ internal fun List<City>.toEntities(): List<CityEntity> = map { city ->
 internal fun City.toEntity() = CityEntity(
     latitude = coordinates?.latitude ?: 0.0,
     longitude = coordinates?.longitude ?: 0.0,
-    name = name ?: ""
+    name = name ?: "",
+    weather = null
 )
 
 // С ссылкой на функцию - map(CityEntity::toSimpleCity)
