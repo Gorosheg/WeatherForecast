@@ -2,7 +2,7 @@ package com.first.network.model
 
 import com.google.gson.annotations.SerializedName
 
-class SkyConditionsResponse(
+internal class SkyConditionsResponse(
     /**
      * Состояние неба.
      * Варианты:

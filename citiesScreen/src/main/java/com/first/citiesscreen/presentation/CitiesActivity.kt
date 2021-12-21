@@ -29,9 +29,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
 
-
 class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermissionsResultCallback {
-
 
     private val swipeRefresh: SwipeRefreshLayout by lazy { findViewById(id.citiesRefresh) }
     private val recyclerView: RecyclerView by lazy { findViewById(id.cityList) }
@@ -48,7 +46,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
             .get(CitiesViewModel::class.java)
     }
 
-    private val locationManager: LocationManager by lazy {
+    private val locationManager: LocationManager by lazy { // TODO: exception - выключен gps
         getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
 

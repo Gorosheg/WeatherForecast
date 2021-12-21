@@ -2,7 +2,7 @@ package com.first.network.model
 
 import com.google.gson.annotations.SerializedName
 
-class DegreesResponse(
+internal class DegreesResponse(
     @SerializedName("temp")
     val degree: Double,
 

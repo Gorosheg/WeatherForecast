@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.first.common.model.City
 import com.first.weatherScreen.domain.WeatherInteractor
 
-class WeatherViewModelFactory(
+internal class WeatherViewModelFactory(
     private val interactor: WeatherInteractor,
     private val city: City
 ) : ViewModelProvider.Factory {

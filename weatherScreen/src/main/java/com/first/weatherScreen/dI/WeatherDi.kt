@@ -16,7 +16,7 @@ class WeatherDi(private val networkDataSource: WeatherDatasource) {
     private val repository: WeatherRepository
         get() = WeatherRepositoryImpl(networkDataSource)
 
-    fun getViewModelFactory(city: City): WeatherViewModelFactory {
+    internal fun getViewModelFactory(city: City): WeatherViewModelFactory {
         return WeatherViewModelFactory(interactor, city)
     }
 

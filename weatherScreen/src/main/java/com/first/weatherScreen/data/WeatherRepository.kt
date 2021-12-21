@@ -4,6 +4,6 @@ import com.first.common.model.City
 import com.first.common.model.Weather
 import io.reactivex.Single
 
-interface WeatherRepository {
+internal interface WeatherRepository {
     fun loadWeather(city: City): Single<Weather>
 }
