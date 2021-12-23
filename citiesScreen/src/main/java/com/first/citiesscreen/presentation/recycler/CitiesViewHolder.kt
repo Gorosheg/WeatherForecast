@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.first.citiesscreen.R
 import com.first.common.model.City
 
-class CitiesViewHolder(
+internal class CitiesViewHolder(
     cityView: View,
     private val onCityClick: (City) -> Unit,
     private val removeButtonClick: (City) -> Unit

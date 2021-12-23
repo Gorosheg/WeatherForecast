@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.first.citiesscreen.R
 import com.first.common.model.City
 
-class CitiesAdapter(
+internal class CitiesAdapter(
     val items: MutableList<City>,
     private val onCityClick: (City) -> Unit,
     private val removeCity: (City) -> Unit

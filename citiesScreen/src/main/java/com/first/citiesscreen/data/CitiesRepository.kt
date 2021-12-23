@@ -5,7 +5,7 @@ import com.first.common.model.Weather
 import io.reactivex.Observable
 import io.reactivex.Single
 
-interface CitiesRepository {
+internal interface CitiesRepository {
 
     val cities: Observable<List<City>>
 
