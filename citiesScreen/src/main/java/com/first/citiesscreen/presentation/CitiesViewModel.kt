@@ -3,8 +3,6 @@ package com.first.citiesscreen.presentation
 import androidx.lifecycle.ViewModel
 import com.first.citiesscreen.domain.CitiesInteractor
 import com.first.common.model.City
-import com.first.common.model.Coordinates
-import com.first.common.model.Weather
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -18,8 +16,8 @@ internal class CitiesViewModel(private val interactor: CitiesInteractor) : ViewM
     private val _error = PublishSubject.create<UiCityExceptions>()
     val error: Observable<UiCityExceptions> = _error
 
-    private var _IsEmpty = PublishSubject.create<Boolean>()
-    val isEmpty: Observable<Boolean> = _IsEmpty
+    private var _isEmpty = PublishSubject.create<Boolean>()
+    val isEmpty: Observable<Boolean> = _isEmpty
 
     val cities: Observable<List<City>>
         get() = interactor.cities
@@ -33,12 +31,6 @@ internal class CitiesViewModel(private val interactor: CitiesInteractor) : ViewM
         disposable += interactor.loadWeather(city = city)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSuccess {
-                val newCity = copyCity(city, it)
-                if (!isCityExist(newCity)) {
-                    addCity(newCity)
-                }
-            }
             .doOnError {
                 when (it) {
                     is HttpException -> UiCityExceptions.NotFound
@@ -51,30 +43,6 @@ internal class CitiesViewModel(private val interactor: CitiesInteractor) : ViewM
             .subscribe()
     }
 
-    private fun copyCity(
-        city: City,
-        response: Weather
-    ): City {
-        return if (city.name == null) {
-            city.copy(
-                name = response.cityName
-            )
-        } else {
-            city.copy(
-                coordinates = Coordinates(response.latitude, response.longitude)
-            )
-        }
-    }
-
-    private fun addCity(city: City) {
-        interactor.addCity(city)
-        isEmpty()
-    }
-
-    private fun isCityExist(city: City): Boolean {
-        return interactor.isCityExist(city)
-    }
-
     fun removeCity(city: City) {
         interactor.removeCity(city)
         isEmpty()
@@ -85,6 +53,6 @@ internal class CitiesViewModel(private val interactor: CitiesInteractor) : ViewM
     }
 
     fun isEmpty() {
-        _IsEmpty.onNext(interactor.isEmpty())
+        _isEmpty.onNext(interactor.isEmpty())
     }
 }

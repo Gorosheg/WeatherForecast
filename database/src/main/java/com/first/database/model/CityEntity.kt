@@ -8,8 +8,8 @@ import com.first.common.model.Coordinates
 
 @Entity
 internal data class CityEntity(
-    val latitude: Double, // TODO: чек интернета
-    val longitude: Double, // TODO: отображение старых или новых данных в зависимости от интернета
+    val latitude: Double,
+    val longitude: Double,
     @PrimaryKey
     val name: String,
     @Embedded
