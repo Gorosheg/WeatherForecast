@@ -46,7 +46,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
             .get(CitiesViewModel::class.java)
     }
 
-    private val locationManager: LocationManager by lazy { // TODO: exception - выключен gps
+    private val locationManager: LocationManager by lazy {
         getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
 
@@ -89,7 +89,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         )
 
         recyclerView.adapter = adapter
-        userLocation.enableMyLocation(this)
+        loaderChange(userLocation.enableMyLocation(this))
         addCityActionButton.setOnClickListener { showCityDialog() }
         addCityButton.setOnClickListener { showCityDialog() }
 
@@ -134,7 +134,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
             return
         }
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            userLocation.enableMyLocation(this)
+            loaderChange(userLocation.enableMyLocation(this))
         } else {
             loaderChange(false)
         }
