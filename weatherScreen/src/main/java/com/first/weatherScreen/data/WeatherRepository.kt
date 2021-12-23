@@ -6,4 +6,6 @@ import io.reactivex.Single
 
 internal interface WeatherRepository {
     fun loadWeather(city: City): Single<Weather>
+
+    fun getSavingCity(city: City): Weather?
 }

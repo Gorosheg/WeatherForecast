@@ -14,4 +14,8 @@ internal class WeatherViewModel(
     fun loadWeather(): Single<Weather> {
         return interactor.loadWeather(city)
     }
+
+    fun getSavingData(): Weather? {
+        return interactor.getSavingData(city)
+    }
 }

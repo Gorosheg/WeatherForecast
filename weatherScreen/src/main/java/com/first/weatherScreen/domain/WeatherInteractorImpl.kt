@@ -11,4 +11,8 @@ internal class WeatherInteractorImpl(private val repository: WeatherRepository) 
         return repository.loadWeather(city)
     }
 
+    override fun getSavingData(city: City): Weather? {
+        return repository.getSavingCity(city)
+    }
+
 }

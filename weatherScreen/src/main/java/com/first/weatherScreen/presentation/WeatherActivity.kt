@@ -1,6 +1,8 @@
 package com.first.weatherScreen.presentation
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -19,6 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
+
 
 class WeatherActivity : AppCompatActivity() {
     private lateinit var swipeRefresh: SwipeRefreshLayout
@@ -56,15 +59,25 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun loadWeather() {
-        disposable += viewModel.loadWeather()
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSuccess {
-                handleWeatherResponse(it)
-                swipeRefresh.isRefreshing = false
-            }
-            .doOnError(::makeToast)
-            .subscribe()
+        if (isNetworkConnected()) {
+            disposable += viewModel.loadWeather()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess {
+                    handleWeatherResponse(it)
+                    swipeRefresh.isRefreshing = false
+                }
+                .doOnError(::makeToast)
+                .subscribe()
+        } else {
+            viewModel.getSavingData()?.let { handleWeatherResponse(it) }
+        }
+    }
+
+    private fun isNetworkConnected(): Boolean {
+        val cm: ConnectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
     }
 
     private fun makeToast(it: Throwable) {

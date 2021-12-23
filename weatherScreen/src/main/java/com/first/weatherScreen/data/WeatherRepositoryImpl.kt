@@ -19,4 +19,8 @@ internal class WeatherRepositoryImpl(
         database.update(weather)
     }
 
+    override fun getSavingCity(city: City): Weather? {
+        return database.getCity(city)
+    }
+
 }

@@ -2,8 +2,7 @@ package com.first.database
 
 import com.first.common.model.City
 import com.first.common.model.Weather
-import com.first.database.model.CityEntity
-import com.first.database.model.toEntity
+import com.first.database.model.*
 import com.first.database.model.toSimpleCities
 import io.reactivex.Observable
 
@@ -14,6 +13,8 @@ interface CitiesDatabaseDatasource {
     fun addCity(city: City)
 
     fun isCityExist(cityName: String?): Boolean
+
+    fun getCity(city: City): Weather?
 
     fun getAllCities(): Observable<List<City>>
 
@@ -47,6 +48,17 @@ internal class CitiesDatabaseDatasourceImpl(
     override fun isCityExist(cityName: String?): Boolean {
         return if (cityName == null) false
         else cityDao.getByName(cityName) != null
+    }
+
+    override fun getCity(city: City): Weather? {
+        val cityName = city.name
+        if (cityName != null) {
+            val saveCity = cityDao.getByName(cityName)?.weather?.toSimpleWeather()
+            if (saveCity != null) {
+                return saveCity
+            }
+        }
+        return null
     }
 
     override fun getAllCities(): Observable<List<City>> {

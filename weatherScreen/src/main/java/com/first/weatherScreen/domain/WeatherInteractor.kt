@@ -6,4 +6,6 @@ import io.reactivex.Single
 
 internal interface WeatherInteractor {
     fun loadWeather(city: City): Single<Weather>
+
+    fun getSavingData(city: City): Weather?
 }
