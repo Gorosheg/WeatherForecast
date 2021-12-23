@@ -42,7 +42,6 @@ internal class CitiesDatabaseDatasourceImpl(
             )
             cityDao.update(newCity)
         }
-
     }
 
     override fun isCityExist(cityName: String?): Boolean {

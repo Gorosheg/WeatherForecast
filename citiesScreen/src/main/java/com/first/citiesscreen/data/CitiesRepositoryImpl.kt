@@ -15,26 +15,30 @@ internal class CitiesRepositoryImpl(
 ) : CitiesRepository {
 
     override val cities: Observable<List<City>>
-        get() = this.database.getAllCities()
+        get() = database.getAllCities()
 
     override fun isEmpty(): Boolean {
-        return this.database.isEmpty()
+        return database.isEmpty()
     }
 
     override fun addCity(city: City) {
-        this.database.addCity(city)
+        database.addCity(city)
     }
 
     override fun isCityExist(city: City): Boolean {
-        return this.database.isCityExist(city.name)
+        return database.isCityExist(city.name)
     }
 
     override fun loadWeather(city: City): Single<Weather> {
-        return networkDataSource.loadingWeather(city)
+        return networkDataSource.loadingWeather(city).doOnSuccess { saveWeather(it) }
+    }
+
+    private fun saveWeather(weather: Weather) {
+        database.update(weather)
     }
 
     override fun removeCity(city: City) {
-        this.database.deleteCity(city)
+        database.deleteCity(city)
     }
 
     override fun isFirstLaunch(): Boolean? {

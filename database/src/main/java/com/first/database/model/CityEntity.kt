@@ -7,9 +7,9 @@ import com.first.common.model.City
 import com.first.common.model.Coordinates
 
 @Entity
-internal data class CityEntity( // TODO: Добавлять в бд с обоих экранов, чек интернета, отображение старых или новых данных
-    val latitude: Double,
-    val longitude: Double,
+internal data class CityEntity( // TODO: Добавлять в бд с обоих экранов
+    val latitude: Double, // TODO: чек интернета
+    val longitude: Double, // TODO: отображение старых или новых данных в зависимости от интернета
     @PrimaryKey
     val name: String,
     @Embedded

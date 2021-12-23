@@ -17,7 +17,7 @@ class App : Application() {
         databaseDi = DatabaseDi(this)
         sharedPrefDi = SharedPreferenceDi(this)
 
-        WeatherDi.instance = WeatherDi(networkDi.networkDataSource)
+        WeatherDi.instance = WeatherDi(networkDi.networkDataSource, databaseDi.datasource)
 
         val navigator = NavigatorImpl()
 
