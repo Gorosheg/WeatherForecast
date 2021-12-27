@@ -18,8 +18,14 @@ internal class WeatherResponse(
     val cityName: String,
 
     @SerializedName("coord")
-    val coordinates: CoordinatesResponse
+    val coordinates: CoordinatesResponse,
+
+    @SerializedName("wind")
+    val wind: WindResponse
 ) {
+
+    val windSpeed: Double
+        get() = wind.speed
 
     val latitude: Double
         get() = coordinates.latitude

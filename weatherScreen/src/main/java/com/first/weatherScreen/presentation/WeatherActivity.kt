@@ -98,7 +98,7 @@ class WeatherActivity : AppCompatActivity() {
         town.text = weather.cityName
 
         degrees.text = weather.degree.toString() + "°C"
-        maxMin.text = "${weather.tempMax}/${weather.tempMin}"
+        maxMin.text = "Max: ${weather.tempMax} / Min: ${weather.tempMin}"
 
         feelDegrees.text = weather.feelsLike.toString() + "°C"
         humidityParam.text = weather.humidity.toString() + "%"

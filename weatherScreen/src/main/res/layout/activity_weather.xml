@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
 
@@ -33,7 +31,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/black"
+            android:background="@color/white"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:context="com.first.weatherScreen.presentation.WeatherActivity">
 
@@ -42,7 +40,7 @@
                 android:layout_width="380dp"
                 android:layout_height="380dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/rect_with_round_corners"
                 android:scaleType="centerCrop"
@@ -52,167 +50,270 @@
                 app:srcCompat="@drawable/clear_sky" />
 
             <TextView
+                android:id="@+id/town"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/SkyImage"
+                app:layout_constraintStart_toStartOf="@+id/SkyImage"
+                app:layout_constraintTop_toTopOf="@+id/SkyImage"
+                tools:text="Санкт-Петербург" />
+
+            <TextView
                 android:id="@+id/degrees"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="80sp"
-                android:visibility="visible"
+                android:textSize="72sp"
                 app:layout_constraintBottom_toBottomOf="@+id/SkyImage"
                 app:layout_constraintLeft_toLeftOf="@+id/SkyImage"
                 app:layout_constraintRight_toRightOf="@+id/SkyImage"
-                app:layout_constraintTop_toTopOf="@+id/SkyImage" />
-
-            <TextView
-                android:id="@+id/minMax"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/degrees" />
+                app:layout_constraintTop_toTopOf="@+id/SkyImage"
+                tools:text="26" />
 
             <TextView
                 android:id="@+id/skyCondition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/SkyImage"
+                app:layout_constraintStart_toStartOf="@+id/SkyImage"
+                app:layout_constraintTop_toBottomOf="@+id/degrees"
+                tools:text="sunny" />
+
+            <TextView
+                android:id="@+id/minMax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:textColor="@color/white"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/SkyImage"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/town"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/SkyImage"
-                tools:text="Санкт-Петербург" />
+                app:layout_constraintEnd_toEndOf="@+id/SkyImage"
+                app:layout_constraintStart_toStartOf="@+id/SkyImage"
+                tools:text="16/23" />
 
             <View
-                android:id="@+id/feelsLike"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rect_with_round_corners"
-                app:layout_constraintEnd_toStartOf="@+id/humidity"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/town" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/feels_like"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/feelDegrees"
-                app:layout_constraintEnd_toEndOf="@+id/feelsLike"
-                app:layout_constraintStart_toStartOf="@+id/feelsLike"
-                app:layout_constraintTop_toTopOf="@+id/feelsLike" />
-
-            <TextView
-                android:id="@+id/feelDegrees"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/feelsLike"
-                app:layout_constraintEnd_toEndOf="@+id/feelsLike"
-                app:layout_constraintStart_toStartOf="@+id/feelsLike"
-                app:layout_constraintTop_toTopOf="@+id/feelsLike" />
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                app:layout_constraintEnd_toEndOf="@+id/feelsLike"
-                app:layout_constraintStart_toStartOf="@+id/feelsLike"
-                app:layout_constraintTop_toBottomOf="@+id/feelDegrees"
-                app:srcCompat="@drawable/ic_temperature" />
-
-            <View
-                android:id="@+id/humidity"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/rect_with_round_corners"
-                app:layout_constraintEnd_toStartOf="@+id/pressure"
-                app:layout_constraintStart_toEndOf="@+id/feelsLike"
-                app:layout_constraintTop_toBottomOf="@+id/town" />
-
-            <TextView
-                android:id="@+id/humidityParam"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/humidity"
-                app:layout_constraintEnd_toEndOf="@+id/humidity"
-                app:layout_constraintStart_toStartOf="@+id/humidity"
-                app:layout_constraintTop_toTopOf="@+id/humidity"
-                tools:text="50%" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/humidity"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/humidityParam"
-                app:layout_constraintEnd_toEndOf="@+id/humidity"
-                app:layout_constraintStart_toStartOf="@+id/humidity"
-                app:layout_constraintTop_toTopOf="@+id/humidity" />
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                app:layout_constraintEnd_toEndOf="@+id/humidity"
-                app:layout_constraintStart_toStartOf="@+id/humidity"
-                app:layout_constraintTop_toBottomOf="@+id/humidityParam"
-                app:srcCompat="@drawable/ic_weather_humidity" />
-
-            <View
-                android:id="@+id/pressure"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/rect_with_round_corners"
+                android:layout_marginBottom="16dp"
+                android:background="@color/mediumGray"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/humidity"
-                app:layout_constraintTop_toBottomOf="@+id/town" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/SkyImage" />
 
-            <TextView
-                android:id="@+id/pressureParam"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/feelsLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/pressure"
-                app:layout_constraintEnd_toEndOf="@+id/pressure"
-                app:layout_constraintStart_toStartOf="@+id/pressure"
-                app:layout_constraintTop_toTopOf="@+id/pressure" />
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginStart="64dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/separator">
 
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                app:layout_constraintEnd_toEndOf="@+id/pressure"
-                app:layout_constraintStart_toStartOf="@+id/pressure"
-                app:layout_constraintTop_toBottomOf="@+id/pressureParam"
-                app:srcCompat="@drawable/ic_pressure" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <TextView
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        app:srcCompat="@drawable/ic_temperature" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/feelDegrees"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:textColor="@color/mediumGray"
+                            tools:text="23" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/feels_like"
+                            android:textColor="@color/mediumGray" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/humidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pressure"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/pressureParam"
-                app:layout_constraintEnd_toEndOf="@+id/pressure"
-                app:layout_constraintStart_toStartOf="@+id/pressure"
-                app:layout_constraintTop_toTopOf="@+id/pressure" />
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/minMax"
+                app:layout_constraintTop_toBottomOf="@+id/separator">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        app:srcCompat="@drawable/ic_weather_humidity" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/humidityParam"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:textColor="@color/mediumGray"
+                            tools:text="50%" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/humidity"
+                            android:textColor="@color/mediumGray" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/wind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="64dp"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/feelsLike">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        app:srcCompat="@drawable/ic_wind" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/windSpeed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:textColor="@color/mediumGray"
+                            tools:text="2.5" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/wind"
+                            android:textColor="@color/mediumGray" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/pressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/minMax"
+                app:layout_constraintTop_toBottomOf="@+id/humidity">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        app:srcCompat="@drawable/ic_pressure" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/pressureParam"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:textColor="@color/mediumGray"
+                            tools:text="755" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/pressure"
+                            android:textColor="@color/mediumGray" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

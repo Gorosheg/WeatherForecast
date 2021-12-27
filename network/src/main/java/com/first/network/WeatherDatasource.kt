@@ -47,6 +47,7 @@ internal class NetworkDataSource(private val api: WeatherApi) : WeatherDatasourc
             feelsLike = feelsLike,
             humidity = humidity,
             pressure = pressure,
+            windSpeed = windSpeed,
             skyCondition = skyCondition,
             skyImage = skyImage
         )

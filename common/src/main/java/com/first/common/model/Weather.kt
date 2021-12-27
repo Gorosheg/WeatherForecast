@@ -10,6 +10,7 @@ data class Weather(
     val feelsLike: Int,
     val humidity: Int,
     val pressure: Int,
+    val windSpeed: Double,
     val skyCondition: SkyCondition,
     val skyImage: SkyImage
 )

@@ -13,6 +13,7 @@ internal data class WeatherEntity(
     val feelsLike: Int,
     val humidity: Int,
     val pressure: Int,
+    val windSpeed: Double,
     val skyCondition: SkyCondition,
     val skyImage: SkyImage,
     val cityName: String
@@ -27,6 +28,7 @@ internal fun Weather.toEntity() = WeatherEntity(
     feelsLike = feelsLike,
     humidity = humidity,
     pressure = pressure,
+    windSpeed = windSpeed,
     skyCondition = skyCondition,
     skyImage = skyImage,
     cityName = cityName
@@ -46,6 +48,7 @@ internal fun WeatherEntity.toSimpleWeather() = Weather(
     feelsLike = feelsLike,
     humidity = humidity,
     pressure = pressure,
+    windSpeed = windSpeed,
     skyCondition = skyCondition,
     skyImage = skyImage,
     cityName = cityName
