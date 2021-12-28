@@ -94,6 +94,7 @@ class WeatherActivity : AppCompatActivity() {
         val feelDegrees: TextView = findViewById(R.id.feelDegrees)
         val humidityParam: TextView = findViewById(R.id.humidityParam)
         val pressureParam: TextView = findViewById(R.id.pressureParam)
+        val windSpeed: TextView = findViewById(R.id.windSpeed)
 
         town.text = weather.cityName
 
@@ -103,6 +104,7 @@ class WeatherActivity : AppCompatActivity() {
         feelDegrees.text = weather.feelsLike.toString() + "°C"
         humidityParam.text = weather.humidity.toString() + "%"
         pressureParam.text = weather.pressure.toString()
+        windSpeed.text = weather.windSpeed.toString()
         skyCondition.setText(weather.skyCondition.text)
 
         Glide // Добавление изображения из интернета

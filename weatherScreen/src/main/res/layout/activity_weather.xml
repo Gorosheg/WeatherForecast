@@ -110,210 +110,138 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/SkyImage" />
 
-            <com.google.android.material.card.MaterialCardView
+            <ImageView
+                android:id="@+id/temperaturePicture"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintStart_toStartOf="@id/separator"
+                app:layout_constraintTop_toBottomOf="@+id/windPicture"
+                app:srcCompat="@drawable/ic_temperature" />
+
+            <TextView
+                android:id="@+id/feelDegrees"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/mediumGray"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/temperaturePicture"
+                app:layout_constraintTop_toBottomOf="@+id/windPicture"
+                tools:text="23" />
+
+            <TextView
                 android:id="@+id/feelsLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/feels_like"
+                android:textColor="@color/mediumGray"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/temperaturePicture"
+                app:layout_constraintTop_toBottomOf="@+id/feelDegrees" />
+
+            <ImageView
+                android:id="@+id/windPicture"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="22dp"
                 android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/white"
-                android:layout_marginStart="64dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/separator">
+                app:layout_constraintStart_toStartOf="@+id/separator"
+                app:layout_constraintTop_toBottomOf="@+id/separator"
+                app:srcCompat="@drawable/ic_wind" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        app:srcCompat="@drawable/ic_temperature" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/feelDegrees"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:textColor="@color/mediumGray"
-                            tools:text="23" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:text="@string/feels_like"
-                            android:textColor="@color/mediumGray" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/humidity"
+            <TextView
+                android:id="@+id/windSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/minMax"
-                app:layout_constraintTop_toBottomOf="@+id/separator">
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/mediumGray"
+                app:layout_constraintStart_toEndOf="@+id/windPicture"
+                app:layout_constraintTop_toBottomOf="@id/separator"
+                tools:text="2.5" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        app:srcCompat="@drawable/ic_weather_humidity" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/humidityParam"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:textColor="@color/mediumGray"
-                            tools:text="50%" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:text="@string/humidity"
-                            android:textColor="@color/mediumGray" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
+            <TextView
                 android:id="@+id/wind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/wind"
+                android:textColor="@color/mediumGray"
+                app:layout_constraintStart_toEndOf="@+id/windPicture"
+                app:layout_constraintTop_toBottomOf="@+id/windSpeed" />
+
+            <ImageView
+                android:id="@+id/pressurePicture"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="64dp"
-                app:cardBackgroundColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/feelsLike">
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toStartOf="@id/pressure"
+                app:layout_constraintTop_toBottomOf="@id/separator"
+                app:srcCompat="@drawable/ic_pressure" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+            <TextView
+                android:id="@+id/pressureParam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/mediumGray"
+                app:layout_constraintStart_toEndOf="@+id/pressurePicture"
+                app:layout_constraintTop_toBottomOf="@id/separator"
+                tools:text="755" />
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        app:srcCompat="@drawable/ic_wind" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/windSpeed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:textColor="@color/mediumGray"
-                            tools:text="2.5" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:text="@string/wind"
-                            android:textColor="@color/mediumGray" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
+            <TextView
                 android:id="@+id/pressure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/minMax"
-                app:layout_constraintTop_toBottomOf="@+id/humidity">
+                android:layout_marginEnd="22dp"
+                android:text="@string/pressure"
+                android:textColor="@color/mediumGray"
+                app:layout_constraintEnd_toEndOf="@+id/separator"
+                app:layout_constraintTop_toBottomOf="@+id/pressureParam" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/humidityPicture"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toStartOf="@+id/humidity"
+                app:layout_constraintTop_toBottomOf="@+id/pressurePicture"
+                app:srcCompat="@drawable/ic_weather_humidity" />
 
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        app:srcCompat="@drawable/ic_pressure" />
+            <TextView
+                android:id="@+id/humidityParam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/mediumGray"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/humidityPicture"
+                app:layout_constraintTop_toBottomOf="@+id/pressure"
+                tools:text="50%" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/pressureParam"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:textColor="@color/mediumGray"
-                            tools:text="755" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:text="@string/pressure"
-                            android:textColor="@color/mediumGray" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="29dp"
+                android:text="@string/humidity"
+                android:textColor="@color/mediumGray"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/separator"
+                app:layout_constraintTop_toBottomOf="@+id/humidityParam" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
