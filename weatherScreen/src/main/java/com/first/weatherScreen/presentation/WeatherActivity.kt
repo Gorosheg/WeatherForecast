@@ -22,7 +22,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
 
-
+/**
+ * https://www.figma.com/file/TSTEoXB2ojyMxQLdnX9fLa/Weather-Mobile-App-Design-(Community)?node-id=11%3A436
+ */
 class WeatherActivity : AppCompatActivity() {
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var city: City
@@ -88,9 +90,10 @@ class WeatherActivity : AppCompatActivity() {
     private fun handleWeatherResponse(weather: Weather) {
         val town: TextView = findViewById(R.id.town)
         val degrees: TextView = findViewById(R.id.degrees)
-        val maxMin: TextView = findViewById(R.id.minMax)
+        val min: TextView = findViewById(R.id.min)
+        val max: TextView = findViewById(R.id.max)
         val skyCondition: TextView = findViewById(R.id.skyCondition)
-        val skyImage: ImageView = findViewById(R.id.SkyImage)
+        val skyImage: ImageView = findViewById(R.id.skyImage)
         val feelDegrees: TextView = findViewById(R.id.feelDegrees)
         val humidityParam: TextView = findViewById(R.id.humidityParam)
         val pressureParam: TextView = findViewById(R.id.pressureParam)
@@ -98,10 +101,11 @@ class WeatherActivity : AppCompatActivity() {
 
         town.text = weather.cityName
 
-        degrees.text = weather.degree.toString() + "°C"
-        maxMin.text = "Max: ${weather.tempMax} / Min: ${weather.tempMin}"
+        degrees.text = weather.degree.toString() + "°"
+        min.text = "Min: ${weather.tempMin}"
+        max.text = "Max: ${weather.tempMax}"
 
-        feelDegrees.text = weather.feelsLike.toString() + "°C"
+        feelDegrees.text = weather.feelsLike.toString() + "°"
         humidityParam.text = weather.humidity.toString() + "%"
         pressureParam.text = weather.pressure.toString()
         windSpeed.text = weather.windSpeed.toString()
