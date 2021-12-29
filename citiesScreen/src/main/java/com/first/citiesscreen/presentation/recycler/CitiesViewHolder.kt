@@ -1,7 +1,7 @@
 package com.first.citiesscreen.presentation.recycler
 
 import android.view.View
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +16,7 @@ internal class CitiesViewHolder(
 
     private var cityText: TextView = cityView.findViewById(R.id.city)
     private var rootLayout: LinearLayout = cityView.findViewById(R.id.rootLayout)
-    private var removeCity: Button = cityView.findViewById(R.id.deleteButton)
+    private var removeCity: ImageView = cityView.findViewById(R.id.deleteButton)
     private var city: City? = null
 
     init {

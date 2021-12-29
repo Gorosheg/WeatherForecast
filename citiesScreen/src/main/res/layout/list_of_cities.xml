@@ -8,49 +8,46 @@
     android:background="?selectableItemBackground"
     android:orientation="vertical">
 
-<!--
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/humidity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardBackgroundColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/minMax"
-        app:layout_constraintTop_toBottomOf="@+id/separator">
--->
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="@color/mediumGray">
 
-        <TextView
-            android:id="@+id/city"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            tools:text="Moscow" />
-
-        <Button
-            android:id="@+id/deleteButton"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="8"
-            android:gravity="center_vertical"
-            android:background="@android:drawable/ic_menu_delete" />
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                tools:text="Moscow" />
+
+            <ImageView
+                android:id="@+id/deleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                app:srcCompat="@drawable/ic_trash" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <View
         android:id="@+id/separator"
