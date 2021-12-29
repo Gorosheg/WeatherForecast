@@ -22,6 +22,7 @@
     <string name="feels_like">Feels like</string>
     <string name="humidity">Humidity</string>
     <string name="pressure">Pressure</string>
+    <string name="wind">Wind</string>
 
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
@@ -32,4 +33,6 @@
     <string name="wrongCoordinates">wrong coordinates</string>
     <string name="incorrect_latitude">incorrect latitude</string>
     <string name="incorrect_longitude">incorrect longitude</string>
+    <string name="add_city">add city</string>
+    <string name="no_cities">No cities</string>
 </resources>
