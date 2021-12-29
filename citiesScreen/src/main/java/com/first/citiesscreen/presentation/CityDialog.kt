@@ -12,6 +12,8 @@ import androidx.fragment.app.DialogFragment
 import com.first.citiesscreen.R
 import com.first.citiesscreen.R.layout
 import com.first.citiesscreen.R.string
+import com.first.common.model.City
+import com.first.common.model.Coordinates
 import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 

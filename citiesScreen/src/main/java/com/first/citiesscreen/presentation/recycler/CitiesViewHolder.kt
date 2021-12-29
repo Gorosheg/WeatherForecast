@@ -2,7 +2,6 @@ package com.first.citiesscreen.presentation.recycler
 
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.first.citiesscreen.R
@@ -15,12 +14,11 @@ internal class CitiesViewHolder(
 ) : RecyclerView.ViewHolder(cityView) {
 
     private var cityText: TextView = cityView.findViewById(R.id.city)
-    private var rootLayout: LinearLayout = cityView.findViewById(R.id.rootLayout)
     private var removeCity: ImageView = cityView.findViewById(R.id.deleteButton)
     private var city: City? = null
 
     init {
-        rootLayout.setOnClickListener {
+        cityView.setOnClickListener {
             city?.let(onCityClick::invoke)
         }
         removeCity.setOnClickListener {

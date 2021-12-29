@@ -58,12 +58,12 @@
                 app:srcCompat="@drawable/clear_sky" />
 
             <TextView
-                android:id="@+id/min"
+                android:id="@+id/dayOfWeek"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:layout_marginBottom="16dp"
                 android:layout_marginEnd="11dp"
+                android:layout_marginBottom="16dp"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/dataSeparator"
@@ -81,7 +81,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/skyImage" />
 
             <TextView
-                android:id="@+id/max"
+                android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="11dp"
@@ -104,7 +104,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
 
-                app:layout_constraintTop_toBottomOf="@+id/min"
+                app:layout_constraintTop_toBottomOf="@+id/dayOfWeek"
                 tools:text="26" />
 
             <TextView

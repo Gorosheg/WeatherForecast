@@ -11,7 +11,7 @@ import io.reactivex.Single
 
 internal class CitiesRepositoryImpl(
     private val database: CitiesDatabaseDatasource,
-    private val networkDataSource: WeatherDatasource,
+    private val network: WeatherDatasource,
     private val PreferenceDatasource: PreferenceDatasource
 ) : CitiesRepository {
 
@@ -19,7 +19,7 @@ internal class CitiesRepositoryImpl(
         get() = database.getAllCities()
 
     override fun loadWeather(city: City): Single<Weather> {
-        return networkDataSource.loadingWeather(city).doOnSuccess {
+        return network.loadingWeather(city).doOnSuccess {
             val newCity = copyCity(city, it)
             if (!isCityExist(newCity)) {
                 addCity(newCity)

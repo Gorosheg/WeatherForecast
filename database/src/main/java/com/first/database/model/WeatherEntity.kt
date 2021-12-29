@@ -16,7 +16,9 @@ internal data class WeatherEntity(
     val windSpeed: Double,
     val skyCondition: SkyCondition,
     val skyImage: SkyImage,
-    val cityName: String
+    val cityName: String,
+    val currentDate: String,
+    val currentDay: String
 )
 
 internal fun Weather.toEntity() = WeatherEntity(
@@ -31,7 +33,9 @@ internal fun Weather.toEntity() = WeatherEntity(
     windSpeed = windSpeed,
     skyCondition = skyCondition,
     skyImage = skyImage,
-    cityName = cityName
+    cityName = cityName,
+    currentDate = currentDate,
+    currentDay = currentDay
 )
 
 // С ссылкой на функцию - map(WeatherEntity::toSimpleWeather)
@@ -51,5 +55,7 @@ internal fun WeatherEntity.toSimpleWeather() = Weather(
     windSpeed = windSpeed,
     skyCondition = skyCondition,
     skyImage = skyImage,
-    cityName = cityName
+    cityName = cityName,
+    currentDate = currentDate,
+    currentDay = currentDay
 )

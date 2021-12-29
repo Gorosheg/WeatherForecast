@@ -5,6 +5,7 @@ import com.first.common.model.Weather
 import com.first.database.model.*
 import com.first.database.model.toSimpleCities
 import io.reactivex.Observable
+import java.util.*
 
 interface CitiesDatabaseDatasource {
 
@@ -38,7 +39,8 @@ internal class CitiesDatabaseDatasourceImpl(
     override fun update(weather: Weather) {
         val city: CityEntity? = cityDao.getByName(weather.cityName)
         if (city != null) {
-            val newCity = city.copy(
+
+            val newCity: CityEntity = city.copy(
                 weather = weather.toEntity()
             )
             cityDao.update(newCity)

@@ -5,6 +5,8 @@ import com.first.common.model.Coordinates
 import com.first.common.model.Weather
 import com.first.network.model.WeatherResponse
 import io.reactivex.Single
+import java.text.SimpleDateFormat
+import java.util.*
 
 interface WeatherDatasource {
     fun loadingWeather(city: City): Single<Weather>
@@ -37,6 +39,8 @@ internal class NetworkDataSource(private val api: WeatherApi) : WeatherDatasourc
     }
 
     private fun WeatherResponse.toWeather(): Weather {
+        val currentDate: String = SimpleDateFormat("MMM dd", Locale.ENGLISH).format(Date())
+        val currentDay: String = SimpleDateFormat("EEEE", Locale.ENGLISH).format(Date())
         return Weather(
             cityName = cityName,
             latitude = latitude,
@@ -49,7 +53,9 @@ internal class NetworkDataSource(private val api: WeatherApi) : WeatherDatasourc
             pressure = pressure,
             windSpeed = windSpeed,
             skyCondition = skyCondition,
-            skyImage = skyImage
+            skyImage = skyImage,
+            currentDate = currentDate,
+            currentDay = currentDay
         )
     }
 }

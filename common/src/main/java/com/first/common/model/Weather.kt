@@ -12,5 +12,7 @@ data class Weather(
     val pressure: Int,
     val windSpeed: Double,
     val skyCondition: SkyCondition,
-    val skyImage: SkyImage
+    val skyImage: SkyImage,
+    val currentDate: String,
+    val currentDay: String
 )

@@ -21,6 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 /**
  * https://www.figma.com/file/TSTEoXB2ojyMxQLdnX9fLa/Weather-Mobile-App-Design-(Community)?node-id=11%3A436
@@ -90,8 +91,8 @@ class WeatherActivity : AppCompatActivity() {
     private fun handleWeatherResponse(weather: Weather) {
         val town: TextView = findViewById(R.id.town)
         val degrees: TextView = findViewById(R.id.degrees)
-        val min: TextView = findViewById(R.id.min)
-        val max: TextView = findViewById(R.id.max)
+        val dayOfWeek: TextView = findViewById(R.id.dayOfWeek)
+        val date: TextView = findViewById(R.id.date)
         val skyCondition: TextView = findViewById(R.id.skyCondition)
         val skyImage: ImageView = findViewById(R.id.skyImage)
         val feelDegrees: TextView = findViewById(R.id.feelDegrees)
@@ -100,10 +101,9 @@ class WeatherActivity : AppCompatActivity() {
         val windSpeed: TextView = findViewById(R.id.windSpeed)
 
         town.text = weather.cityName
-
         degrees.text = weather.degree.toString() + "°"
-        min.text = "Min: ${weather.tempMin}"
-        max.text = "Max: ${weather.tempMax}"
+        dayOfWeek.text = weather.currentDay
+        date.text = weather.currentDate
 
         feelDegrees.text = weather.feelsLike.toString() + "°"
         humidityParam.text = weather.humidity.toString() + "%"
