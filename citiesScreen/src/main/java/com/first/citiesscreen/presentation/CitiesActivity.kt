@@ -153,18 +153,8 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         viewModel.removeCity(city)
     }
 
-    override fun onCityAdd(latitude: Double?, longitude: Double?, name: String?) {
-        if (name != null) {
-            val newCity = City(
-                name = name
-            )
-            loadWeatherByCity(newCity)
-        } else if (latitude != null && longitude != null) {
-            val newCity = City(
-                coordinates = Coordinates(latitude, longitude)
-            )
-            loadWeatherByCity(newCity)
-        }
+    override fun onCityAdd(city: City) {
+        loadWeatherByCity(city)
     }
 
     private fun loadWeatherByLocation(location: Location) {

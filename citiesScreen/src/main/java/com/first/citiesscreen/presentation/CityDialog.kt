@@ -72,12 +72,16 @@ internal class CityDialog : DialogFragment() {
 
         if (cityName != "") {
             (activity as CityAddListener).onCityAdd(
-                name = cityName
+                city = City(name = cityName)
             )
         } else if (latitude != "" && longitude != "") {
             (activity as CityAddListener).onCityAdd(
-                latitude = latitude.toDouble(),
-                longitude = longitude.toDouble()
+                city = City(
+                    coordinates = Coordinates(
+                        latitude = latitude.toDouble(),
+                        longitude = longitude.toDouble()
+                    )
+                )
             )
         }
         dialog.dismiss()
