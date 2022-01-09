@@ -2,7 +2,7 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/citiesRefresh"
-    android:background="@color/dark_blue"
+    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,8 +19,8 @@
                 android:id="@+id/cityList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:background="@color/dark_blue"
+                android:layout_marginTop="56dp"
+                android:background="@color/background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="32dp"
                 android:text="@string/no_cities"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,9 +52,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_margin="32dp"
-                android:background="@color/white"
+                android:background="@drawable/rect_with_round_corners"
                 android:text="@string/add_city"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -66,10 +66,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="32dp"
-            android:background="@color/white"
+            android:background="@color/medium"
             android:contentDescription="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:backgroundTint="@color/text_color"
             app:srcCompat="@drawable/ic_plus_add" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_blue"
+    android:background="@color/background"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -31,14 +31,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/dark_blue">
+            android:background="@color/background">
 
             <TextView
                 android:id="@+id/town"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="11dp"
                 android:layout_marginBottom="16dp"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/dataSeparator"
                 app:layout_constraintTop_toBottomOf="@+id/skyImage"
@@ -75,7 +75,7 @@
                 android:layout_width="2dp"
                 android:layout_height="19dp"
                 android:layout_marginTop="32dp"
-                android:background="@color/white"
+                android:background="@color/text_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/skyImage" />
@@ -87,7 +87,7 @@
                 android:layout_marginStart="11dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/dataSeparator"
                 app:layout_constraintTop_toBottomOf="@+id/skyImage"
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:textSize="72sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +111,7 @@
                 android:id="@+id/skyCondition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +125,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@color/white"
+                android:background="@color/text_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/skyCondition" />
@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="24dp"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/temperaturePicture"
                 app:layout_constraintTop_toBottomOf="@+id/windPicture"
@@ -160,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:text="@string/feels_like"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/temperaturePicture"
                 app:layout_constraintTop_toBottomOf="@+id/feelDegrees" />
@@ -182,7 +182,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 app:layout_constraintStart_toEndOf="@+id/windPicture"
                 app:layout_constraintTop_toBottomOf="@id/separator"
                 tools:text="2.5" />
@@ -193,7 +193,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:text="@string/wind"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 app:layout_constraintStart_toEndOf="@+id/windPicture"
                 app:layout_constraintTop_toBottomOf="@+id/windSpeed" />
 
@@ -214,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="12dp"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 app:layout_constraintStart_toEndOf="@+id/pressurePicture"
                 app:layout_constraintTop_toBottomOf="@id/separator"
                 tools:text="755" />
@@ -225,7 +225,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="44dp"
                 android:text="@string/pressure"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 app:layout_constraintEnd_toEndOf="@+id/separator"
                 app:layout_constraintTop_toBottomOf="@+id/pressureParam" />
 
@@ -246,7 +246,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/humidityPicture"
                 app:layout_constraintTop_toBottomOf="@+id/pressure"
@@ -258,7 +258,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="50dp"
                 android:text="@string/humidity"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="@+id/separator"
                 app:layout_constraintTop_toBottomOf="@+id/humidityParam" />
