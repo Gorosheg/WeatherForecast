@@ -23,17 +23,37 @@
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/drawable/ic_trash_bin_icon_icons_com_67981.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/activity_cities.xml" value="0.264" />
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/fragment_city_dialog.xml" value="0.25416666666666665" />
-        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/list_of_cities.xml" value="0.13761467889908258" />
+        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/list_of_cities.xml" value="0.264" />
         <entry key="..\:/Weatherforecast/common/src/main/res/drawable/gradient_drawable.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_ash.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_cloud.xml" value="0.1609375" />
+        <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_mist.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_rain.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_sandstorm.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_snow.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_squal.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_sun.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_thunderstorm.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_tornado.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/common/src/main/res/drawable/rect_with_round_corners.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_ash.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_humidity.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1574074074074074" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_mist.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_pressure.xml" value="0.1" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_rain.xml" value="0.25625" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_sadsmiley_85787.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_snow.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_squal.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_sun.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_temperature.xml" value="0.1" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_thunderstorm.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_tornado.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_weather_humidity.xml" value="0.1" />
         <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_wind.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/rect_with_round_corners.xml" value="0.1" />
+        <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/toolbar.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/layout/activity_weather.xml" value="0.264" />
       </map>
     </option>

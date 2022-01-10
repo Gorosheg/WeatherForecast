@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_drawable"
+    android:background="@color/background"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -16,8 +16,8 @@
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             android:layout_width="match_parent"
+            app:titleTextColor="@color/text_color"
             android:layout_height="?attr/actionBarSize">
-
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -31,7 +31,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient_drawable">
+            android:background="@color/background">
 
             <TextView
                 android:id="@+id/town"
@@ -51,11 +51,11 @@
                 android:layout_height="240dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/rect_with_round_corners"
-                android:scaleType="centerCrop"
+                android:scaleType="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/town"
-                app:srcCompat="@drawable/clear_sky" />
+                app:srcCompat="@drawable/ic_sun" />
 
             <TextView
                 android:id="@+id/dayOfWeek"
@@ -103,7 +103,6 @@
                 android:textSize="72sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-
                 app:layout_constraintTop_toBottomOf="@+id/dayOfWeek"
                 tools:text="26" />
 
