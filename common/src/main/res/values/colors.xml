@@ -7,10 +7,10 @@
     <color name="teal_700">@color/darkGray</color>
     <color name="black">#FF000000</color>
     <color name="gray">#E8E8E8</color>
+    <color name="text_color">#FFFFFF</color>
     <color name="darkGray">#252525</color>
     <color name="red">#E53935</color>
-    <color name="background">#7279D8</color>
-    <color name="medium">#4C57D8</color>
-    <color name="text_color">#081073</color>
-
+    <color name="background">#1C5782</color>
+    <color name="gradient_start">#174159</color>
+    <color name="gradient_end">#4899C6</color>
 </resources>
