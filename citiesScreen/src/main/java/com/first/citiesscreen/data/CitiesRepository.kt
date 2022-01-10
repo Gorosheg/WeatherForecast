@@ -9,16 +9,16 @@ internal interface CitiesRepository {
 
     val cities: Observable<List<City>>
 
-    fun isEmpty():Boolean
+    val isNoItems: Boolean
+
+    val isFirstLaunch: Boolean
 
     fun addCity(city: City)
 
-    fun isCityExist(city: City):Boolean
+    fun isCityExist(city: City): Boolean
 
     fun loadWeather(city: City): Single<Weather>
 
     fun removeCity(city: City)
-
-    fun isFirstLaunch(): Boolean?
 
 }

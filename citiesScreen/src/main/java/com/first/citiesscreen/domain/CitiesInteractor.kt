@@ -9,7 +9,7 @@ interface CitiesInteractor {
 
     val cities: Observable<List<City>>
 
-    fun isEmpty():Boolean
+    val isNoItems: Boolean
 
     fun addCity(city: City)
 
@@ -19,7 +19,7 @@ interface CitiesInteractor {
 
     fun removeCity(city: City)
 
-    fun isFirstLaunch(): Boolean?
+    val isFirstLaunch: Boolean
 
 
 }

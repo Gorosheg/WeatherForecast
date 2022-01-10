@@ -12,15 +12,20 @@ import io.reactivex.subjects.PublishSubject
 import retrofit2.HttpException
 
 internal class CitiesViewModel(private val interactor: CitiesInteractor) : ViewModel() {
+
     private var disposable = CompositeDisposable()
+
     private val _error = PublishSubject.create<UiCityExceptions>()
     val error: Observable<UiCityExceptions> = _error
 
-    private var _isEmpty = PublishSubject.create<Boolean>()
-    val isEmpty: Observable<Boolean> = _isEmpty
+    private var _isNoItems = PublishSubject.create<Boolean>()
+    val isNoItems: Observable<Boolean> = _isNoItems
 
     val cities: Observable<List<City>>
         get() = interactor.cities
+
+    val isFirstLaunch: Boolean
+        get() = interactor.isFirstLaunch
 
     override fun onCleared() {
         super.onCleared()
@@ -31,28 +36,27 @@ internal class CitiesViewModel(private val interactor: CitiesInteractor) : ViewM
         disposable += interactor.loadWeather(city = city)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {
-                when (it) {
-                    is HttpException -> UiCityExceptions.NotFound
-                    else -> UiCityExceptions.Unknown
-                }
-                _error.onNext(UiCityExceptions.NotFound)
-            }
+            .doOnError(::handleError)
             .ignoreElement()
             .onErrorComplete()
             .subscribe()
     }
 
+    private fun handleError(throwable: Throwable) {
+        when (throwable) {
+            is HttpException -> UiCityExceptions.NotFound
+            else -> UiCityExceptions.Unknown
+        }
+
+        _error.onNext(UiCityExceptions.NotFound)
+    }
+
     fun removeCity(city: City) {
         interactor.removeCity(city)
-        isEmpty()
+        checkIsEmpty()
     }
 
-    fun isFirstLaunch(): Boolean? {
-        return interactor.isFirstLaunch()
-    }
-
-    fun isEmpty() {
-        _isEmpty.onNext(interactor.isEmpty())
+    fun checkIsEmpty() {
+        _isNoItems.onNext(interactor.isNoItems)
     }
 }

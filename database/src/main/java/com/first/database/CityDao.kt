@@ -7,8 +7,8 @@ import io.reactivex.Observable
 @Dao
 internal interface CityDao {
 
-    @Query("SELECT COUNT(*) FROM CityEntity")
-    fun count(): Int
+    @get:Query("SELECT COUNT(*) FROM CityEntity")
+    val count: Int
 
     @Query("SELECT * FROM CityEntity")
     fun cities(): Observable<List<CityEntity>>

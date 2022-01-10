@@ -11,9 +11,11 @@ internal class CitiesInteractorImpl(private val repository: CitiesRepository) : 
     override val cities: Observable<List<City>>
         get() = repository.cities
 
-    override fun isEmpty(): Boolean {
-        return repository.isEmpty()
-    }
+    override val isNoItems: Boolean
+        get() = repository.isNoItems
+
+    override val isFirstLaunch: Boolean
+        get() = repository.isFirstLaunch
 
     override fun addCity(city: City) {
         repository.addCity(city)
@@ -29,9 +31,5 @@ internal class CitiesInteractorImpl(private val repository: CitiesRepository) : 
 
     override fun removeCity(city: City) {
         repository.removeCity(city)
-    }
-
-    override fun isFirstLaunch(): Boolean? {
-        return repository.isFirstLaunch()
     }
 }

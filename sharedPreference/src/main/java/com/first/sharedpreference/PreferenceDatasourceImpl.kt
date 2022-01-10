@@ -16,11 +16,10 @@ internal class PreferenceDatasourceImpl(private val sharedPref: SharedPreference
         }
 
 
-    override val isFirstLaunch: Boolean?
+    override val isFirstLaunch: Boolean
         get() = when (firstLaunchEnum) {
-            FirstLaunchEnum.DEFAULT -> null
             FirstLaunchEnum.TRUE -> true
-            FirstLaunchEnum.FALSE -> false
+            else -> false
         }
 
     companion object {

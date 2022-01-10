@@ -18,6 +18,12 @@ internal class CitiesRepositoryImpl(
     override val cities: Observable<List<City>>
         get() = database.getAllCities()
 
+    override val isNoItems: Boolean
+        get() = database.isNoItems
+
+    override val isFirstLaunch: Boolean
+        get() = PreferenceDatasource.isFirstLaunch
+
     override fun loadWeather(city: City): Single<Weather> {
         return network.loadingWeather(city).doOnSuccess {
             val newCity = copyCity(city, it)
@@ -57,14 +63,5 @@ internal class CitiesRepositoryImpl(
 
     override fun removeCity(city: City) {
         database.deleteCity(city)
-    }
-
-    override fun isEmpty(): Boolean {
-        return database.isEmpty()
-    }
-
-    override fun isFirstLaunch(): Boolean? {
-        return PreferenceDatasource.isFirstLaunch
-
     }
 }

@@ -9,7 +9,7 @@ import java.util.*
 
 interface CitiesDatabaseDatasource {
 
-    fun isEmpty(): Boolean
+    val isNoItems: Boolean
 
     fun addCity(city: City)
 
@@ -28,9 +28,8 @@ internal class CitiesDatabaseDatasourceImpl(
     private val cityDao: CityDao
 ) : CitiesDatabaseDatasource {
 
-    override fun isEmpty(): Boolean {
-        return cityDao.count() == 0
-    }
+    override val isNoItems: Boolean
+        get() = cityDao.count == 0
 
     override fun addCity(city: City) {
         cityDao.insert(city.toEntity())

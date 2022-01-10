@@ -54,8 +54,8 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         UserLocation(locationManager, ::loaderChange, ::loadWeatherByLocation)
     }
 
-    private var adapter: CitiesAdapter? = null
     private var disposable = CompositeDisposable()
+    private var adapter: CitiesAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,18 +65,18 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         disposable += viewModel.cities
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                updateCitiesToList(it)
-                viewModel.isEmpty()
+            .subscribe { cities ->
+                updateCitiesToList(cities)
+                viewModel.checkIsEmpty()
             }
 
         disposable += viewModel.error
             .subscribe(::makeToast)
 
-        disposable += viewModel.isEmpty
+        disposable += viewModel.isNoItems
             .subscribe(::noCities)
 
-        if (viewModel.isFirstLaunch() == true) {
+        if (viewModel.isFirstLaunch) {
             firstLaunchToast()
         }
 
@@ -100,18 +100,11 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         disposable.dispose()
     }
 
-    private fun noCities(empty: Boolean) {
-        if (empty) {
-            addCityActionButton.isGone = true
-            addCityButton.isVisible = true
-            noCitiesImage.isVisible = true
-            noCitiesText.isVisible = true
-        } else {
-            addCityActionButton.isVisible = true
-            addCityButton.isGone = true
-            noCitiesImage.isGone = true
-            noCitiesText.isGone = true
-        }
+    private fun noCities(isEmpty: Boolean) {
+        addCityActionButton.isGone = isEmpty
+        addCityButton.isVisible = isEmpty
+        noCitiesImage.isVisible = isEmpty
+        noCitiesText.isVisible = isEmpty
     }
 
     private fun updateCitiesToList(cities: List<City>) {
