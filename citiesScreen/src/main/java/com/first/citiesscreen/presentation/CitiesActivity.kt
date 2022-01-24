@@ -22,6 +22,7 @@ import com.first.citiesscreen.R.id
 import com.first.citiesscreen.R.layout
 import com.first.citiesscreen.dI.CitiesDi
 import com.first.citiesscreen.presentation.recycler.CitiesAdapter
+import com.first.citiesscreen.presentation.recycler.CitiesItemTouchHelper
 import com.first.common.model.City
 import com.first.common.model.Coordinates
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -57,7 +58,14 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
     }
 
     private var disposable = CompositeDisposable()
-    private var adapter: CitiesAdapter? = null
+
+    private val adapter: CitiesAdapter by lazy {
+        CitiesAdapter(
+            items = mutableListOf(),
+            onCityClick = ::navigateToWeatherScreen,
+            removeCity = viewModel::removeCity
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,41 +92,17 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        adapter = CitiesAdapter(
-            items = mutableListOf(),
-            onCityClick = ::navigateToWeatherScreen,
-            removeCity = ::onTrashClick
-        )
-
         recyclerView.adapter = adapter
         loaderChange(userLocation.enableMyLocation(this))
         addCityActionButton.setOnClickListener { showCityDialog() }
         addCityButton.setOnClickListener { showCityDialog() }
-        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+        val itemTouchHelper = ItemTouchHelper(CitiesItemTouchHelper(::removeCity))
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
-    private var simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object :
-        ItemTouchHelper.SimpleCallback(
-            0,
-            ItemTouchHelper.LEFT
-        ) {
-        override fun onMove(
-            recyclerView: RecyclerView,
-            viewHolder: RecyclerView.ViewHolder,
-            target: RecyclerView.ViewHolder
-        ): Boolean {
-            return false
-        }
-
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
-            //Remove swiped item from list and notify the RecyclerView
-            val position = viewHolder.adapterPosition
-            val removingCity = adapter?.items?.get(position)
-            if (removingCity != null) {
-                viewModel.removeCity(removingCity)
-            }
-        }
+    private fun removeCity(position: Int) {
+        val removingCity = adapter.items[position]
+        viewModel.removeCity(removingCity)
     }
 
     override fun onDestroy() {
@@ -166,10 +150,6 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
 
     private fun navigateToWeatherScreen(city: City) {
         di.navigator.navigateToWeatherScreen(this, city)
-    }
-
-    private fun onTrashClick(city: City) {
-        viewModel.removeCity(city)
     }
 
     override fun onCityAdd(city: City) {
