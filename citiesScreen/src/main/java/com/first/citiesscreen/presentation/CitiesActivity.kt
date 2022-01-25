@@ -61,7 +61,6 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
 
     private val adapter: CitiesAdapter by lazy {
         CitiesAdapter(
-            items = mutableListOf(),
             onCityClick = ::navigateToWeatherScreen,
             removeCity = viewModel::removeCity
         )
@@ -76,7 +75,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { cities ->
-                updateCitiesToList(cities)
+                adapter.items = cities
                 viewModel.checkIsEmpty()
             }
 
@@ -96,6 +95,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         loaderChange(userLocation.enableMyLocation(this))
         addCityActionButton.setOnClickListener { showCityDialog() }
         addCityButton.setOnClickListener { showCityDialog() }
+
         val itemTouchHelper = ItemTouchHelper(CitiesItemTouchHelper(::removeCity))
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
@@ -115,16 +115,6 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         addCityButton.isVisible = isEmpty
         noCitiesImage.isVisible = isEmpty
         noCitiesText.isVisible = isEmpty
-    }
-
-    private fun updateCitiesToList(cities: List<City>) {
-        val adapter = adapter ?: return
-        //    val previousItemCount = adapter.itemCount
-        adapter.items.clear()
-        adapter.items += cities
-        adapter.notifyDataSetChanged()
-        //      adapter.notifyItemRangeRemoved(0, previousItemCount)
-        //      adapter.notifyItemRangeInserted(previousItemCount - 1, adapter.itemCount - previousItemCount)
     }
 
     override fun onRequestPermissionsResult(
