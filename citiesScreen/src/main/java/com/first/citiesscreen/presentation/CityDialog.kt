@@ -53,17 +53,24 @@ internal class CityDialog : DialogFragment() {
                 setResult(latitude.text.toString(), longitude.text.toString())
             }
         }
+
         clearButton.setOnClickListener {
             dialog.dismiss()
         }
     }
 
     private fun latitudeValidation(it: String): Boolean {
-        return it.isNotBlank() && (it.toDouble() > 90)
+        return it.contains(',')
+                || it.contains('-')
+                || it.contains(' ')
+                || it.isNotBlank() && (it.toDouble() > 90)
     }
 
     private fun longitudeValidation(it: String): Boolean {
-        return it.isNotBlank() && (it.toDouble() > 180)
+        return it.contains(',')
+                || it.contains('-')
+                || it.contains(' ') || it.isNotBlank()
+                && (it.toDouble() > 180)
     }
 
     private fun setResult(latitude: String, longitude: String) {

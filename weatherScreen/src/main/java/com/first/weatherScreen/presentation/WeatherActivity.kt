@@ -1,35 +1,35 @@
 package com.first.weatherScreen.presentation
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.bumptech.glide.Glide
 import com.first.common.CITY_KEY
 import com.first.common.model.City
 import com.first.common.model.Weather
+import com.first.common.util.showToast
 import com.first.weatherScreen.R
 import com.first.weatherScreen.dI.WeatherDi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
-import java.util.*
 
 /**
  * https://www.figma.com/file/TSTEoXB2ojyMxQLdnX9fLa/Weather-Mobile-App-Design-(Community)?node-id=11%3A436
  */
 class WeatherActivity : AppCompatActivity() {
-    private lateinit var swipeRefresh: SwipeRefreshLayout
+
+    private val swipeRefresh: SwipeRefreshLayout by lazy {
+        findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
+    }
     private lateinit var city: City
     private var disposable = CompositeDisposable()
+
     private val viewModel: WeatherViewModel by lazy {
         ViewModelProvider(this, WeatherDi.instance.getViewModelFactory(city))
             .get(WeatherViewModel::class.java)
@@ -39,9 +39,10 @@ class WeatherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
@@ -49,11 +50,7 @@ class WeatherActivity : AppCompatActivity() {
         city = intent.getSerializableExtra(CITY_KEY) as City
         loadWeather()
 
-        swipeRefresh = findViewById(R.id.swipeRefreshLayout)
-        swipeRefresh.setOnRefreshListener {
-            loadWeather()
-        }
-
+        swipeRefresh.setOnRefreshListener { loadWeather() }
     }
 
     override fun onDestroy() {
@@ -73,18 +70,12 @@ class WeatherActivity : AppCompatActivity() {
                 .doOnError(::makeToast)
                 .subscribe()
         } else {
-            viewModel.getSavingData()?.let { handleWeatherResponse(it) }
+            viewModel.getSavingData()?.let(::handleWeatherResponse)
         }
     }
 
-    private fun isNetworkConnected(): Boolean {
-        val cm: ConnectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
-    }
-
-    private fun makeToast(it: Throwable) {
-        Toast.makeText(this@WeatherActivity, it.message, Toast.LENGTH_SHORT).show()
+    private fun makeToast(throwable: Throwable) {
+        showToast(throwable.message.toString())
     }
 
     @SuppressLint("SetTextI18n")
@@ -110,12 +101,6 @@ class WeatherActivity : AppCompatActivity() {
         pressureParam.text = weather.pressure.toString()
         windSpeed.text = weather.windSpeed.toString()
         skyCondition.setText(weather.skyCondition.text)
-
-        Glide // Добавление изображения из интернета
-            .with(this) // context
-            .load(weather.skyImage.image) // Ссылка на изображение
-            .into(skyImage) // View
-
-        skyImage.clipToOutline = true
+        skyImage.setImageResource(weather.skyImage.image)
     }
 }

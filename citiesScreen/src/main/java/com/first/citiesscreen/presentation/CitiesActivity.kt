@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback
 import androidx.core.view.isGone
@@ -18,28 +17,27 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.first.citiesscreen.R.id
-import com.first.citiesscreen.R.layout
+import com.first.citiesscreen.R
 import com.first.citiesscreen.dI.CitiesDi
 import com.first.citiesscreen.presentation.recycler.CitiesAdapter
 import com.first.citiesscreen.presentation.recycler.CitiesItemTouchHelper
 import com.first.common.model.City
 import com.first.common.model.Coordinates
+import com.first.common.util.showToast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
 
-
 class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermissionsResultCallback {
 
-    private val swipeRefresh: SwipeRefreshLayout by lazy { findViewById(id.citiesRefresh) }
-    private val recyclerView: RecyclerView by lazy { findViewById(id.cityList) }
-    private val addCityActionButton: FloatingActionButton by lazy { findViewById(id.add_action_button) }
-    private val addCityButton: Button by lazy { findViewById(id.dialog_button) }
-    private val noCitiesImage: ImageView by lazy { findViewById(id.no_cities_image) }
-    private val noCitiesText: TextView by lazy { findViewById(id.no_cities_text) }
+    private val swipeRefresh: SwipeRefreshLayout by lazy { findViewById(R.id.citiesRefresh) }
+    private val recyclerView: RecyclerView by lazy { findViewById(R.id.cityList) }
+    private val addCityActionButton: FloatingActionButton by lazy { findViewById(R.id.add_action_button) }
+    private val addCityButton: Button by lazy { findViewById(R.id.dialog_button) }
+    private val noCitiesImage: ImageView by lazy { findViewById(R.id.no_cities_image) }
+    private val noCitiesText: TextView by lazy { findViewById(R.id.no_cities_text) }
     private val di by lazy { CitiesDi.instance }
 
     // получим доступ к провайдеру, который хранит все ViewModel для этого Activity.
@@ -68,9 +66,62 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout.activity_cities)
+        setContentView(R.layout.activity_cities)
         swipeRefresh.isEnabled = false
 
+        subscribeOnViewModel()
+
+        if (viewModel.isFirstLaunch) {
+            firstLaunchToast()
+        }
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
+        loaderChange(userLocation.enableMyLocation(this))
+        addCityActionButton.setOnClickListener { showCityDialog() }
+        addCityButton.setOnClickListener { showCityDialog() }
+
+        val itemTouchHelper = ItemTouchHelper(CitiesItemTouchHelper(::removeCity))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.dispose()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            return
+        }
+
+        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            loaderChange(userLocation.enableMyLocation(this))
+        } else {
+            loaderChange(false)
+        }
+    }
+
+    override fun onCityAdd(city: City) {
+        loadWeatherByCity(city)
+    }
+
+    private fun loadWeatherByLocation(location: Location) {
+        val city = City(coordinates = Coordinates(location.latitude, location.longitude))
+        loadWeatherByCity(city)
+        loaderChange(false)
+    }
+
+    private fun loaderChange(it: Boolean) {
+        swipeRefresh.isRefreshing = it
+    }
+
+    private fun subscribeOnViewModel() {
         disposable += viewModel.cities
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -84,30 +135,6 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
 
         disposable += viewModel.isNoItems
             .subscribe(::noCities)
-
-        if (viewModel.isFirstLaunch) {
-            firstLaunchToast()
-        }
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        recyclerView.adapter = adapter
-        loaderChange(userLocation.enableMyLocation(this))
-        addCityActionButton.setOnClickListener { showCityDialog() }
-        addCityButton.setOnClickListener { showCityDialog() }
-
-        val itemTouchHelper = ItemTouchHelper(CitiesItemTouchHelper(::removeCity))
-        itemTouchHelper.attachToRecyclerView(recyclerView)
-    }
-
-    private fun removeCity(position: Int) {
-        val removingCity = adapter.items[position]
-        viewModel.removeCity(removingCity)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable.dispose()
     }
 
     private fun noCities(isEmpty: Boolean) {
@@ -117,67 +144,37 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         noCitiesText.isVisible = isEmpty
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-            return
-        }
-        if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            loaderChange(userLocation.enableMyLocation(this))
-        } else {
-            loaderChange(false)
-        }
-    }
-
-    private fun showCityDialog() {
-        val cityDialog = CityDialog()
-        cityDialog.show(supportFragmentManager, CityDialog::class.qualifiedName)
+    private fun firstLaunchToast() {
+        showToast(R.string.first_launch.toString())
     }
 
     private fun navigateToWeatherScreen(city: City) {
         di.navigator.navigateToWeatherScreen(this, city)
     }
 
-    override fun onCityAdd(city: City) {
-        loadWeatherByCity(city)
+    private fun showCityDialog() {
+        CityDialog().show(supportFragmentManager, CityDialog::class.qualifiedName)
     }
 
-    private fun loadWeatherByLocation(location: Location) {
-        loadWeatherByCity(
-            City(coordinates = Coordinates(location.latitude, location.longitude))
-        )
-        loaderChange(false)
+    private fun removeCity(position: Int) {
+        val removingCity = adapter.items[position]
+        viewModel.removeCity(removingCity)
     }
 
     private fun loadWeatherByCity(city: City) {
         viewModel.loadWeather(city)
     }
 
-    private fun loaderChange(it: Boolean) {
-        swipeRefresh.isRefreshing = it
-    }
-
     private fun makeToast(throwable: UiCityExceptions) {
         when (throwable) {
-            UiCityExceptions.NotFound -> Toast.makeText(
-                this,
-                "City is not found",
-                Toast.LENGTH_LONG
-            ).show()
-            UiCityExceptions.Unknown -> Toast.makeText(
-                this,
-                "Something went wrong",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-    }
+            UiCityExceptions.NotFound -> {
+                showToast(R.string.city_not_found.toString())
+            }
 
-    private fun firstLaunchToast() {
-        Toast.makeText(this, "It is first time you open the application", Toast.LENGTH_LONG).show()
+            UiCityExceptions.Unknown -> {
+                showToast(R.string.unknown_error.toString())
+            }
+        }
     }
 
     companion object {

@@ -20,31 +20,40 @@ internal class UserLocation(
 
     fun enableMyLocation(activity: Activity): Boolean {
         onStart.invoke(true)
+
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED
         ) {
             // показываем город по координатам
-            return if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            val providerEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+            if (providerEnabled) {
                 locationManager.requestLocationUpdates(
                     LocationManager.NETWORK_PROVIDER,
-                    10, 1000f, mLocationListener
+                    10,
+                    1000f,
+                    mLocationListener
                 )
-                true
-            } else {
-                false
             }
+
+            return providerEnabled
         } else {
-            ActivityCompat.requestPermissions(
-                activity,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE
-            )
+            requestPermissions(activity)
         }
+
         return true
     }
 
     private fun handleLocation(location: Location) {
         onResult.invoke(location)
         locationManager.removeUpdates(mLocationListener)
+    }
+
+    private fun requestPermissions(activity: Activity) {
+        ActivityCompat.requestPermissions(
+            activity,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            LOCATION_PERMISSION_REQUEST_CODE
+        )
     }
 }

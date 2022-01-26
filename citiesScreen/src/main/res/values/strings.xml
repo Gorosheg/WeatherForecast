@@ -1,0 +1,5 @@
+<resources>
+    <string name="unknown_error">Something went wrong</string>
+    <string name="city_not_found">City is not found</string>
+    <string name="first_launch">It is first time you open the application</string>
+</resources>
