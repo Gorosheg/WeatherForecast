@@ -1,18 +1,21 @@
 package com.first.weatherforecast
 
-import android.app.Activity
-import android.content.Intent
-import com.first.common.CITY_KEY
-import com.first.common.Navigator
+import androidx.fragment.app.FragmentActivity
+import com.first.common.CityNavigator
+import com.first.common.WeatherNavigator
 import com.first.common.model.City
-import com.first.weatherScreen.presentation.WeatherActivity
+import com.first.weatherScreen.presentation.WeatherFragment
 
-class NavigatorImpl : Navigator {
+class NavigatorImpl : CityNavigator, WeatherNavigator {
 
-    override fun navigateToWeatherScreen(activity: Activity, city: City) {
-        val intent = Intent(activity, WeatherActivity::class.java)
-        intent.putExtra(CITY_KEY, city)
-        activity.startActivity(intent)
+    override fun navigateToWeatherScreen(activity: FragmentActivity, city: City) {
+        val act: MainActivity = activity as MainActivity
+        val fragment = WeatherFragment(city) // todo через интент с бандлом
+        act.createWeatherFragment(fragment)
+    }
+
+    override fun closeScreen(activity: FragmentActivity?) {
+        activity?.supportFragmentManager?.popBackStack()
     }
 
 }

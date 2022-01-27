@@ -2,13 +2,13 @@ package com.first.weatherScreen.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.first.common.CITY_KEY
 import com.first.common.model.City
 import com.first.common.model.Weather
 import com.first.common.util.showToast
@@ -22,11 +22,15 @@ import io.reactivex.schedulers.Schedulers
 /**
  * https://www.figma.com/file/TSTEoXB2ojyMxQLdnX9fLa/Weather-Mobile-App-Design-(Community)?node-id=11%3A436
  */
-class WeatherActivity : AppCompatActivity() {
+class WeatherFragment(city: City) : Fragment(R.layout.activity_weather) {
+
+    private val rootView by lazy { requireNotNull(view) }
+    private val di by lazy { WeatherDi.instance }
 
     private val swipeRefresh: SwipeRefreshLayout by lazy {
-        findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
+        rootView.findViewById(R.id.swipeRefreshLayout)
     }
+
     private lateinit var city: City
     private var disposable = CompositeDisposable()
 
@@ -35,19 +39,16 @@ class WeatherActivity : AppCompatActivity() {
             .get(WeatherViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_weather)
-
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+//        setSupportActionBar(toolbar)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true) // TODO: Отобразить ActionBar
 
         toolbar.setNavigationOnClickListener {
-            onBackPressed()
+            di.weatherNavigator.closeScreen(activity)
         }
 
-        city = intent.getSerializableExtra(CITY_KEY) as City
+//        city = intent.getSerializableExtra(CITY_KEY) as City // TODO: Передать city из другого фрагмента
         loadWeather()
 
         swipeRefresh.setOnRefreshListener { loadWeather() }
@@ -59,7 +60,7 @@ class WeatherActivity : AppCompatActivity() {
     }
 
     private fun loadWeather() {
-        if (isNetworkConnected()) {
+        if (requireActivity().isNetworkConnected()) {
             disposable += viewModel.loadWeather()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -80,16 +81,16 @@ class WeatherActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun handleWeatherResponse(weather: Weather) {
-        val town: TextView = findViewById(R.id.town)
-        val degrees: TextView = findViewById(R.id.degrees)
-        val dayOfWeek: TextView = findViewById(R.id.dayOfWeek)
-        val date: TextView = findViewById(R.id.date)
-        val skyCondition: TextView = findViewById(R.id.skyCondition)
-        val skyImage: ImageView = findViewById(R.id.skyImage)
-        val feelDegrees: TextView = findViewById(R.id.feelDegrees)
-        val humidityParam: TextView = findViewById(R.id.humidityParam)
-        val pressureParam: TextView = findViewById(R.id.pressureParam)
-        val windSpeed: TextView = findViewById(R.id.windSpeed)
+        val town: TextView = rootView.findViewById(R.id.town)
+        val degrees: TextView = rootView.findViewById(R.id.degrees)
+        val dayOfWeek: TextView = rootView.findViewById(R.id.dayOfWeek)
+        val date: TextView = rootView.findViewById(R.id.date)
+        val skyCondition: TextView = rootView.findViewById(R.id.skyCondition)
+        val skyImage: ImageView = rootView.findViewById(R.id.skyImage)
+        val feelDegrees: TextView = rootView.findViewById(R.id.feelDegrees)
+        val humidityParam: TextView = rootView.findViewById(R.id.humidityParam)
+        val pressureParam: TextView = rootView.findViewById(R.id.pressureParam)
+        val windSpeed: TextView = rootView.findViewById(R.id.windSpeed)
 
         town.text = weather.cityName
         degrees.text = weather.degree.toString() + "°"

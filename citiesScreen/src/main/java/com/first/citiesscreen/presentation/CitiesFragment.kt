@@ -5,13 +5,14 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,14 +31,15 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
 
-class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermissionsResultCallback {
+class CitiesFragment : Fragment(R.layout.activity_cities), CityAddListener, OnRequestPermissionsResultCallback {
 
-    private val swipeRefresh: SwipeRefreshLayout by lazy { findViewById(R.id.citiesRefresh) }
-    private val recyclerView: RecyclerView by lazy { findViewById(R.id.cityList) }
-    private val addCityActionButton: FloatingActionButton by lazy { findViewById(R.id.add_action_button) }
-    private val addCityButton: Button by lazy { findViewById(R.id.dialog_button) }
-    private val noCitiesImage: ImageView by lazy { findViewById(R.id.no_cities_image) }
-    private val noCitiesText: TextView by lazy { findViewById(R.id.no_cities_text) }
+    private val rootView by lazy { requireNotNull(view) }
+    private val swipeRefresh: SwipeRefreshLayout by lazy { rootView.findViewById(R.id.citiesRefresh) }
+    private val recyclerView: RecyclerView by lazy { rootView.findViewById(R.id.cityList) }
+    private val addCityActionButton: FloatingActionButton by lazy { rootView.findViewById(R.id.add_action_button) }
+    private val addCityButton: Button by lazy { rootView.findViewById(R.id.dialog_button) }
+    private val noCitiesImage: ImageView by lazy { rootView.findViewById(R.id.no_cities_image) }
+    private val noCitiesText: TextView by lazy { rootView.findViewById(R.id.no_cities_text) }
     private val di by lazy { CitiesDi.instance }
 
     // получим доступ к провайдеру, который хранит все ViewModel для этого Activity.
@@ -48,7 +50,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
     }
 
     private val locationManager: LocationManager by lazy {
-        getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
 
     private val userLocation: UserLocation by lazy {
@@ -64,9 +66,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cities)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         swipeRefresh.isEnabled = false
 
         subscribeOnViewModel()
@@ -75,14 +75,15 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
             firstLaunchToast()
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
-        loaderChange(userLocation.enableMyLocation(this))
+        activity?.let { loaderChange(userLocation.enableMyLocation(it)) }
         addCityActionButton.setOnClickListener { showCityDialog() }
         addCityButton.setOnClickListener { showCityDialog() }
 
         val itemTouchHelper = ItemTouchHelper(CitiesItemTouchHelper(::removeCity))
         itemTouchHelper.attachToRecyclerView(recyclerView)
+
     }
 
     override fun onDestroy() {
@@ -101,7 +102,7 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
         }
 
         if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            loaderChange(userLocation.enableMyLocation(this))
+            activity?.let { loaderChange(userLocation.enableMyLocation(it)) }
         } else {
             loaderChange(false)
         }
@@ -149,11 +150,16 @@ class CitiesActivity : AppCompatActivity(), CityAddListener, OnRequestPermission
     }
 
     private fun navigateToWeatherScreen(city: City) {
-        di.navigator.navigateToWeatherScreen(this, city)
+        activity?.let { di.cityNavigator.navigateToWeatherScreen(it, city) }
     }
 
     private fun showCityDialog() {
-        CityDialog().show(supportFragmentManager, CityDialog::class.qualifiedName)
+        activity?.let {
+            CityDialog().show(
+                it.supportFragmentManager,
+                CityDialog::class.qualifiedName
+            )
+        }
     }
 
     private fun removeCity(position: Int) {

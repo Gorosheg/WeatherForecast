@@ -8,7 +8,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.first.citiesscreen.presentation.CitiesActivity.Companion.LOCATION_PERMISSION_REQUEST_CODE
+import com.first.citiesscreen.presentation.CitiesFragment.Companion.LOCATION_PERMISSION_REQUEST_CODE
 
 internal class UserLocation(
     private val locationManager: LocationManager,

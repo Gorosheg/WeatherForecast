@@ -5,7 +5,7 @@ import com.first.citiesscreen.data.CitiesRepositoryImpl
 import com.first.citiesscreen.domain.CitiesInteractor
 import com.first.citiesscreen.domain.CitiesInteractorImpl
 import com.first.citiesscreen.presentation.CitiesViewModelFactory
-import com.first.common.Navigator
+import com.first.common.CityNavigator
 import com.first.database.CitiesDatabaseDatasource
 import com.first.network.WeatherDatasource
 import com.first.sharedpreference.PreferenceDatasource
@@ -14,7 +14,7 @@ class CitiesDi(
     private val datasource: CitiesDatabaseDatasource,
     private val networkDataSource: WeatherDatasource,
     private val preferenceDatasource: PreferenceDatasource,
-    val navigator: Navigator
+    val cityNavigator: CityNavigator
 ) {
 
     private val interactor: CitiesInteractor

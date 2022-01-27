@@ -1,5 +1,6 @@
 package com.first.weatherScreen.dI
 
+import com.first.common.WeatherNavigator
 import com.first.common.model.City
 import com.first.database.CitiesDatabaseDatasource
 import com.first.network.WeatherDatasource
@@ -11,7 +12,8 @@ import com.first.weatherScreen.presentation.WeatherViewModelFactory
 
 class WeatherDi(
     private val networkDataSource: WeatherDatasource,
-    private val datasource: CitiesDatabaseDatasource
+    private val datasource: CitiesDatabaseDatasource,
+    val weatherNavigator: WeatherNavigator
 ) {
 
     private val interactor: WeatherInteractor

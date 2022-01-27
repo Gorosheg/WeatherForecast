@@ -17,21 +17,21 @@ class App : Application() {
         databaseDi = DatabaseDi(this)
         sharedPrefDi = SharedPreferenceDi(this)
 
-        WeatherDi.instance = WeatherDi(networkDi.networkDataSource, databaseDi.datasource)
-
         val navigator = NavigatorImpl()
+
+        WeatherDi.instance = WeatherDi(networkDi.networkDataSource, databaseDi.datasource, navigator)
 
         CitiesDi.instance = CitiesDi(
             datasource = databaseDi.datasource,
             networkDataSource = networkDi.networkDataSource,
             preferenceDatasource = sharedPrefDi.preferenceDatasource,
-            navigator = navigator
+            cityNavigator = navigator
         )
 
         initIsFirstLaunchPref(sharedPrefDi.mutablePreferenceDatasource)
     }
 
-    private fun initIsFirstLaunchPref(preferences: com.first.sharedpreference.MutablePreferenceDatasource) {
+    private fun initIsFirstLaunchPref(preferences: com.first.sharedpreference.MutablePreferenceDatasource) {//todo
         if (preferences.firstLaunchEnum == FirstLaunchEnum.DEFAULT) {
             preferences.firstLaunchEnum = FirstLaunchEnum.TRUE
         } else if (preferences.firstLaunchEnum == FirstLaunchEnum.TRUE) {
