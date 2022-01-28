@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,8 @@ import com.first.citiesscreen.presentation.recycler.CitiesAdapter
 import com.first.citiesscreen.presentation.recycler.CitiesItemTouchHelper
 import com.first.common.model.City
 import com.first.common.model.Coordinates
+import com.first.common.util.DIALOG_KEY
+import com.first.common.util.EXTRA_DIALOG_KEY
 import com.first.common.util.showToast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -31,7 +34,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.schedulers.Schedulers
 
-class CitiesFragment : Fragment(R.layout.activity_cities), CityAddListener, OnRequestPermissionsResultCallback {
+class CitiesFragment : Fragment(R.layout.activity_cities), OnRequestPermissionsResultCallback {
 
     private val rootView by lazy { requireNotNull(view) }
     private val swipeRefresh: SwipeRefreshLayout by lazy { rootView.findViewById(R.id.citiesRefresh) }
@@ -84,6 +87,10 @@ class CitiesFragment : Fragment(R.layout.activity_cities), CityAddListener, OnRe
         val itemTouchHelper = ItemTouchHelper(CitiesItemTouchHelper(::removeCity))
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
+        setFragmentResultListener(DIALOG_KEY) { _, bundle ->
+            val selectedSort = bundle.getSerializable(EXTRA_DIALOG_KEY) as City
+            onCityAdd(selectedSort)
+        }
     }
 
     override fun onDestroy() {
@@ -108,7 +115,7 @@ class CitiesFragment : Fragment(R.layout.activity_cities), CityAddListener, OnRe
         }
     }
 
-    override fun onCityAdd(city: City) {
+    private fun onCityAdd(city: City) {
         loadWeatherByCity(city)
     }
 

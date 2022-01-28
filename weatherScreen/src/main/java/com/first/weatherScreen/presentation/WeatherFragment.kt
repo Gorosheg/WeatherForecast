@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.first.common.model.City
 import com.first.common.model.Weather
+import com.first.common.util.CITY_KEY
 import com.first.common.util.showToast
 import com.first.weatherScreen.R
 import com.first.weatherScreen.dI.WeatherDi
@@ -22,7 +24,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * https://www.figma.com/file/TSTEoXB2ojyMxQLdnX9fLa/Weather-Mobile-App-Design-(Community)?node-id=11%3A436
  */
-class WeatherFragment(city: City) : Fragment(R.layout.activity_weather) {
+class WeatherFragment() : Fragment(R.layout.activity_weather) {
 
     private val rootView by lazy { requireNotNull(view) }
     private val di by lazy { WeatherDi.instance }
@@ -31,7 +33,9 @@ class WeatherFragment(city: City) : Fragment(R.layout.activity_weather) {
         rootView.findViewById(R.id.swipeRefreshLayout)
     }
 
-    private lateinit var city: City
+    private val city: City by lazy {
+        arguments?.getSerializable(CITY_KEY) as City
+    }
     private var disposable = CompositeDisposable()
 
     private val viewModel: WeatherViewModel by lazy {
@@ -41,14 +45,13 @@ class WeatherFragment(city: City) : Fragment(R.layout.activity_weather) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-//        setSupportActionBar(toolbar)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true) // TODO: Отобразить ActionBar
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         toolbar.setNavigationOnClickListener {
-            di.weatherNavigator.closeScreen(activity)
+            di.weatherNavigator.closeScreen(this, requireActivity())
         }
 
-//        city = intent.getSerializableExtra(CITY_KEY) as City // TODO: Передать city из другого фрагмента
         loadWeather()
 
         swipeRefresh.setOnRefreshListener { loadWeather() }

@@ -7,13 +7,17 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import com.first.citiesscreen.R
 import com.first.citiesscreen.R.layout
 import com.first.citiesscreen.R.string
 import com.first.common.model.City
 import com.first.common.model.Coordinates
+import com.first.common.util.DIALOG_KEY
+import com.first.common.util.EXTRA_DIALOG_KEY
 import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 
@@ -24,7 +28,7 @@ internal class CityDialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Objects.requireNonNull(dialog)?.window!!.requestFeature(Window.FEATURE_NO_TITLE)
+        Objects.requireNonNull(dialog)?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         return inflater.inflate(layout.fragment_city_dialog, null, false)
     }
 
@@ -78,19 +82,27 @@ internal class CityDialog : DialogFragment() {
         val cityName: String = dialog.findViewById<EditText>(R.id.name).text.toString()
 
         if (cityName != "") {
-            (activity as CityAddListener).onCityAdd(
-                city = City(name = cityName)
+            setFragmentResult(
+                DIALOG_KEY, bundleOf(
+                    Pair<String, Any?>(EXTRA_DIALOG_KEY, City(name = cityName))
+                )
             )
+
         } else if (latitude != "" && longitude != "") {
-            (activity as CityAddListener).onCityAdd(
-                city = City(
-                    coordinates = Coordinates(
-                        latitude = latitude.toDouble(),
-                        longitude = longitude.toDouble()
+            setFragmentResult(
+                DIALOG_KEY, bundleOf(
+                    Pair<String, Any?>(
+                        EXTRA_DIALOG_KEY, City(
+                            Coordinates(
+                                latitude = latitude.toDouble(), longitude = longitude.toDouble()
+                            )
+                        )
                     )
                 )
             )
         }
+
         dialog.dismiss()
+
     }
 }

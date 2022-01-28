@@ -1,13 +1,14 @@
 package com.first.weatherforecast
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.first.citiesscreen.presentation.CitiesFragment
-//1 прокидывать только fragmentHolder
-//2 прокидывать не через активити а через интерейс
-//3 createCitiesFragment тоже унести в NavigatorImpl через новый интерфейс MainNavigator
-class MainActivity : FragmentActivity() {
+
+class MainActivity : AppCompatActivity() {
+
+    private val navigatorDi by lazy { NavigatorDi.instance }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -16,10 +17,7 @@ class MainActivity : FragmentActivity() {
     }
 
     private fun createCitiesFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().run {
-            add(R.id.fragmentHolder, fragment)
-            commit()
-        }
+        navigatorDi.mainNavigator.openCitiesScreen(this, fragment)
     }
 
     fun createWeatherFragment(fragment: Fragment) {

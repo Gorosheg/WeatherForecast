@@ -6,6 +6,7 @@ import com.first.citiesscreen.dI.CitiesDi
 import com.first.database.DatabaseDi
 import com.first.network.NetworkDi
 import com.first.sharedpreference.FirstLaunchEnum
+import com.first.sharedpreference.MutablePreferenceDatasource
 import com.first.sharedpreference.SharedPreferenceDi
 import com.first.weatherScreen.dI.WeatherDi
 
@@ -18,6 +19,7 @@ class App : Application() {
         sharedPrefDi = SharedPreferenceDi(this)
 
         val navigator = NavigatorImpl()
+        NavigatorDi.instance = NavigatorDi(navigator)
 
         WeatherDi.instance = WeatherDi(networkDi.networkDataSource, databaseDi.datasource, navigator)
 
@@ -31,7 +33,7 @@ class App : Application() {
         initIsFirstLaunchPref(sharedPrefDi.mutablePreferenceDatasource)
     }
 
-    private fun initIsFirstLaunchPref(preferences: com.first.sharedpreference.MutablePreferenceDatasource) {//todo
+    private fun initIsFirstLaunchPref(preferences: MutablePreferenceDatasource) {
         if (preferences.firstLaunchEnum == FirstLaunchEnum.DEFAULT) {
             preferences.firstLaunchEnum = FirstLaunchEnum.TRUE
         } else if (preferences.firstLaunchEnum == FirstLaunchEnum.TRUE) {
