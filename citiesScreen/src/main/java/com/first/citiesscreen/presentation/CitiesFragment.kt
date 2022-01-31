@@ -192,8 +192,9 @@ class CitiesFragment : Fragment(R.layout.activity_cities), OnRequestPermissionsR
 
     companion object {
 
-        const val LOCATION_PERMISSION_REQUEST_CODE = 1
+        internal const val LOCATION_PERMISSION_REQUEST_CODE = 1
 
+        fun newInstance() = CitiesFragment()
     }
 
 }

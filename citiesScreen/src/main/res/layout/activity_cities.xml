@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/citiesRefresh"
-    android:background="@color/background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -21,7 +22,9 @@
                 android:layout_height="match_parent"
                 android:background="@color/background"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="3"
+                tools:listitem="@layout/list_of_cities" />
 
             <TextView
                 android:id="@+id/no_cities_text"
@@ -39,10 +42,10 @@
                 android:id="@+id/no_cities_image"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:srcCompat="@drawable/ic_no_cities" />
 
             <Button
@@ -66,9 +69,9 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="32dp"
             android:contentDescription="@null"
+            app:backgroundTint="@color/accent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:backgroundTint="@color/accent"
             app:srcCompat="@drawable/ic_plus_add" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

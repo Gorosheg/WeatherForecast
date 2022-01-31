@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.first.common.model.City
 import com.first.common.model.Weather
-import com.first.common.util.CITY_KEY
 import com.first.common.util.showToast
 import com.first.weatherScreen.R
 import com.first.weatherScreen.dI.WeatherDi
@@ -24,7 +23,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * https://www.figma.com/file/TSTEoXB2ojyMxQLdnX9fLa/Weather-Mobile-App-Design-(Community)?node-id=11%3A436
  */
-class WeatherFragment() : Fragment(R.layout.activity_weather) {
+class WeatherFragment : Fragment(R.layout.activity_weather) {
 
     private val rootView by lazy { requireNotNull(view) }
     private val di by lazy { WeatherDi.instance }
@@ -36,6 +35,7 @@ class WeatherFragment() : Fragment(R.layout.activity_weather) {
     private val city: City by lazy {
         arguments?.getSerializable(CITY_KEY) as City
     }
+
     private var disposable = CompositeDisposable()
 
     private val viewModel: WeatherViewModel by lazy {
@@ -49,7 +49,7 @@ class WeatherFragment() : Fragment(R.layout.activity_weather) {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         toolbar.setNavigationOnClickListener {
-            di.weatherNavigator.closeScreen(this, requireActivity())
+            di.weatherNavigator.back(requireActivity())
         }
 
         loadWeather()
@@ -106,5 +106,16 @@ class WeatherFragment() : Fragment(R.layout.activity_weather) {
         windSpeed.text = weather.windSpeed.toString()
         skyCondition.setText(weather.skyCondition.text)
         skyImage.setImageResource(weather.skyImage.image)
+    }
+
+    companion object {
+
+        private const val CITY_KEY = "CITY_KEY"
+
+        fun newInstance(city: City) = WeatherFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(CITY_KEY, city)
+            }
+        }
     }
 }

@@ -1,44 +1,42 @@
 package com.first.weatherforecast
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.first.citiesscreen.presentation.CitiesFragment
 import com.first.common.CityNavigator
 import com.first.common.WeatherNavigator
 import com.first.common.model.City
-import com.first.common.util.CITY_KEY
 import com.first.weatherScreen.presentation.WeatherFragment
+
+private const val WEATHER_SCREEN = "WeatherScreen"
+private const val CITIES_SCREEN = "CitiesScreen"
 
 class NavigatorImpl : CityNavigator, WeatherNavigator, MainNavigator {
 
-//    override var fragmentCount = 0
-
     override fun navigateToWeatherScreen(activity: FragmentActivity, city: City) {
-        val act: MainActivity = activity as MainActivity
-        val bundle = Bundle()
-        bundle.putSerializable(CITY_KEY, city)
-        val fragment = WeatherFragment()
-        fragment.arguments = bundle
-        act.createWeatherFragment(fragment)
+        val fragment = WeatherFragment.newInstance(city)
+        activity.navigateToWeatherFragment(fragment)
     }
 
-    // todo в активити трекать онбекпрессед. возможно тогда отсюда убрать ремув и вызывать онбекпрес активити
-    override fun closeScreen(fragment: Fragment, activity: FragmentActivity) {
+    private fun FragmentActivity.navigateToWeatherFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().run {
+            add(R.id.fragmentHolder, fragment)
+            addToBackStack(WEATHER_SCREEN)
+            commit()
+        }
+    }
+
+    override fun navigateToCitiesScreen(activity: FragmentActivity) {
+        val citiesFragment = CitiesFragment.newInstance()
+
         activity.supportFragmentManager
             .beginTransaction()
-            .remove(fragment)
+            .add(R.id.fragmentHolder, citiesFragment)
+            .addToBackStack(CITIES_SCREEN)
             .commit()
     }
 
-    override fun openCitiesScreen(activity: FragmentActivity, fragment: Fragment) {
-        activity.supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragmentHolder, fragment)
-            .addToBackStack("CitiesScreen")
-            .commit()
-    }
-
-    override fun closeWeatherScreen(activity: FragmentActivity) {
+    override fun back(activity: FragmentActivity) {
         activity.supportFragmentManager.popBackStack()
     }
 }
