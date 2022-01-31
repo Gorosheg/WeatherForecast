@@ -11,6 +11,8 @@ import com.first.weatherScreen.presentation.WeatherFragment
 
 class NavigatorImpl : CityNavigator, WeatherNavigator, MainNavigator {
 
+//    override var fragmentCount = 0
+
     override fun navigateToWeatherScreen(activity: FragmentActivity, city: City) {
         val act: MainActivity = activity as MainActivity
         val bundle = Bundle()
@@ -32,6 +34,11 @@ class NavigatorImpl : CityNavigator, WeatherNavigator, MainNavigator {
         activity.supportFragmentManager
             .beginTransaction()
             .add(R.id.fragmentHolder, fragment)
+            .addToBackStack("CitiesScreen")
             .commit()
+    }
+
+    override fun closeWeatherScreen(activity: FragmentActivity) {
+        activity.supportFragmentManager.popBackStack()
     }
 }

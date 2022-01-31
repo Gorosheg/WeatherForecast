@@ -7,4 +7,6 @@ interface MainNavigator {
 
     fun openCitiesScreen(activity: FragmentActivity, fragment: Fragment)
 
+    fun closeWeatherScreen(activity: FragmentActivity)
+
 }

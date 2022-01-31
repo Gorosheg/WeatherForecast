@@ -16,6 +16,15 @@ class MainActivity : AppCompatActivity() {
         createCitiesFragment(citiesFragment)
     }
 
+    override fun onBackPressed() {
+        val supportFragmentManager = supportFragmentManager
+        val openFragments = supportFragmentManager.fragments
+
+        if (openFragments.size == 2) {
+            navigatorDi.mainNavigator.closeWeatherScreen(this)
+        } else finish()
+    }
+
     private fun createCitiesFragment(fragment: Fragment) {
         navigatorDi.mainNavigator.openCitiesScreen(this, fragment)
     }
@@ -23,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     fun createWeatherFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().run {
             add(R.id.fragmentHolder, fragment)
+            addToBackStack("WeatherScreen")
             commit()
         }
     }
