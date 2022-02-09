@@ -3,7 +3,6 @@ package com.first.citiesscreen.presentation.recycler
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.first.citiesscreen.R
 import com.first.common.model.City
@@ -43,6 +42,8 @@ internal class CitiesViewHolder(
     fun bind(city: City) {
         this.city = city
         cityText.text = city.name
-        favorite.isVisible = city.favorite
+
+        if (city.favorite) favorite.setImageResource(R.drawable.ic_favourite_true)
+        else favorite.setImageResource(R.drawable.ic_favourite_false)
     }
 }

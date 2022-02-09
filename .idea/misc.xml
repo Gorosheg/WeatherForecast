@@ -18,8 +18,12 @@
         <entry key="..\:/Weatherforecast/app/src/main/res/layout/fragment_city_dialog.xml" value="0.4" />
         <entry key="..\:/Weatherforecast/app/src/main/res/layout/list_of_cities.xml" value="0.4" />
         <entry key="..\:/Weatherforecast/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.175" />
+        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/drawable/ic__favorite.xml" value="0.201" />
+        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/drawable/ic_favourite.xml" value="0.201" />
+        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/drawable/ic_favourite_true.xml" value="0.201" />
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/drawable/ic_no_cities.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/drawable/ic_plus_add.xml" value="0.1" />
+        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/drawable/ic_star.xml" value="0.201" />
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/drawable/ic_trash.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/drawable/ic_trash_bin_icon_icons_com_67981.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/activity_cities.xml" value="0.264" />
