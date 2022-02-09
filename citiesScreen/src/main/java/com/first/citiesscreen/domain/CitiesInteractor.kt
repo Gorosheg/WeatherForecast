@@ -19,7 +19,7 @@ interface CitiesInteractor {
 
     fun removeCity(city: City)
 
-    fun makeCityFavorite(city: City)
+    fun changeFavoriteState(city: City)
 
     val isFirstLaunch: Boolean
 

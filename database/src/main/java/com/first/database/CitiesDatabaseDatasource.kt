@@ -20,7 +20,7 @@ interface CitiesDatabaseDatasource {
 
     fun deleteCity(city: City)
 
-    fun makeCityFavorite(city: City)
+    fun changeFavoriteState(city: City)
 
     fun update(weather: Weather)
 }
@@ -74,7 +74,7 @@ internal class CitiesDatabaseDatasourceImpl(
         }
     }
 
-    override fun makeCityFavorite(city: City) {
+    override fun changeFavoriteState(city: City) {
         val cityName = city.name
         if (cityName != null) {
             cityDao.updateFavorite(!city.favorite, cityName)

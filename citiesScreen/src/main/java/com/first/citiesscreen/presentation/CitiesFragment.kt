@@ -65,7 +65,7 @@ class CitiesFragment : Fragment(R.layout.activity_cities), OnRequestPermissionsR
     private val adapter: CitiesAdapter by lazy {
         CitiesAdapter(
             onCityClick = ::navigateToWeatherScreen,
-            onLongClick = viewModel::makeCityFavorite,
+            changeFavorite = viewModel::changeFavoriteState,
             removeCity = viewModel::removeCity
         )
     }

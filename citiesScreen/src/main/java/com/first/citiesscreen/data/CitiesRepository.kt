@@ -19,7 +19,7 @@ internal interface CitiesRepository {
 
     fun loadWeather(city: City): Single<Weather>
 
-    fun makeCityFavorite(city: City)
+    fun changeFavoriteState(city: City)
 
     fun removeCity(city: City)
 

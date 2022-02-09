@@ -34,8 +34,8 @@ internal class CitiesRepositoryImpl(
         }
     }
 
-    override fun makeCityFavorite(city: City) {
-        database.makeCityFavorite(city)
+    override fun changeFavoriteState(city: City) {
+        database.changeFavoriteState(city)
     }
 
     private fun copyCity(

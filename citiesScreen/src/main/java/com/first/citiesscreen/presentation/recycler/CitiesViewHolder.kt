@@ -11,7 +11,7 @@ import com.first.common.model.City
 internal class CitiesViewHolder(
     cityView: View,
     private val onCityClick: (City) -> Unit,
-    private val onLongClick: (City) -> Unit,
+    private val changeFavorite: (City) -> Unit,
     private val removeButtonClick: (City) -> Unit
 ) : RecyclerView.ViewHolder(cityView) {
 
@@ -26,13 +26,18 @@ internal class CitiesViewHolder(
         }
 
         cityView.setOnLongClickListener {
-            city?.let(onLongClick::invoke)
+            city?.let(changeFavorite::invoke)
             true
         }
 
         removeCity.setOnClickListener {
             city?.let(removeButtonClick::invoke)
         }
+
+        favorite.setOnClickListener {
+            city?.let(changeFavorite::invoke)
+        }
+
     }
 
     fun bind(city: City) {
