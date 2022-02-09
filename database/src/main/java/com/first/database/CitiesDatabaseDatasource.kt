@@ -37,28 +37,26 @@ internal class CitiesDatabaseDatasourceImpl(
     }
 
     override fun update(weather: Weather) {
-        val city: CityEntity? = cityDao.getByName(weather.cityName)
+        val city: CityEntity = cityDao.getByName(weather.cityName)
 
-        if (city != null) {
-            val newCity: CityEntity = city.copy(
-                weather = weather.toEntity()
-            )
+        val newCity: CityEntity = city.copy(
+            weather = weather.toEntity()
+        )
 
-            cityDao.update(newCity)
-        }
+        cityDao.update(newCity)
     }
 
     override fun isCityExist(cityName: String?): Boolean {
         return if (cityName == null) false
-        else cityDao.getByName(cityName) != null
+        else cityDao.checkForEmpty(cityName) != null
     }
 
     override fun getCity(city: City): Weather? {
         val cityName = city.name
         if (cityName != null) {
-            val saveCity = cityDao.getByName(cityName)?.weather?.toSimpleWeather()
-            if (saveCity != null) {
-                return saveCity
+            val requiredCity = cityDao.getByName(cityName).weather?.toSimpleWeather()
+            if (requiredCity != null) {
+                return requiredCity
             }
         }
         return null
@@ -77,14 +75,9 @@ internal class CitiesDatabaseDatasourceImpl(
     }
 
     override fun makeCityFavorite(city: City) {
-        val oldCity: CityEntity? = city.name?.let(cityDao::getByName)
-
-        if (oldCity != null) {
-            val newCity: CityEntity = oldCity.copy(
-                favorite = !city.favorite
-            )
-
-            cityDao.update(newCity)
+        val cityName = city.name
+        if (cityName != null) {
+            cityDao.updateFavorite(!city.favorite, cityName)
         }
     }
 }
