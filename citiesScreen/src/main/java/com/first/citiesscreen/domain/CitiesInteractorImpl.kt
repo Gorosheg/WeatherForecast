@@ -32,4 +32,8 @@ internal class CitiesInteractorImpl(private val repository: CitiesRepository) : 
     override fun removeCity(city: City) {
         repository.removeCity(city)
     }
+
+    override fun makeCityFavorite(city: City) {
+        repository.makeCityFavorite(city)
+    }
 }

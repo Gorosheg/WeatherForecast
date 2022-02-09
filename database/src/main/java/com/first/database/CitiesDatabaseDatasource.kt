@@ -3,7 +3,6 @@ package com.first.database
 import com.first.common.model.City
 import com.first.common.model.Weather
 import com.first.database.model.*
-import com.first.database.model.toSimpleCities
 import io.reactivex.Observable
 import java.util.*
 
@@ -20,6 +19,8 @@ interface CitiesDatabaseDatasource {
     fun getAllCities(): Observable<List<City>>
 
     fun deleteCity(city: City)
+
+    fun makeCityFavorite(city: City)
 
     fun update(weather: Weather)
 }
@@ -71,6 +72,17 @@ internal class CitiesDatabaseDatasourceImpl(
         val cityName = city.name
         if (cityName != null) {
             cityDao.delete(cityName)
+        }
+    }
+
+    override fun makeCityFavorite(city: City) {
+        val oldCity: CityEntity? = city.name?.let { cityDao.getByName(it) }
+
+        if (oldCity != null) {
+            val newCity: CityEntity = oldCity.copy(
+                favorite = city.favorite
+            )
+            cityDao.update(newCity)
         }
     }
 }

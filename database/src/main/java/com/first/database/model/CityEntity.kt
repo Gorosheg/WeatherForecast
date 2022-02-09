@@ -13,7 +13,8 @@ internal data class CityEntity(
     @PrimaryKey
     val name: String,
     @Embedded
-    val weather: WeatherEntity?
+    val weather: WeatherEntity?,
+    val favorite: Boolean
 )
 
 internal fun List<City>.toEntities(): List<CityEntity> = map { city ->
@@ -24,7 +25,8 @@ internal fun City.toEntity() = CityEntity(
     latitude = coordinates?.latitude ?: 0.0,
     longitude = coordinates?.longitude ?: 0.0,
     name = name ?: "",
-    weather = null
+    weather = null,
+    favorite = favorite
 )
 
 // С ссылкой на функцию - map(CityEntity::toSimpleCity)
@@ -34,5 +36,6 @@ internal fun List<CityEntity>.toSimpleCities(): List<City> = map { city ->
 
 internal fun CityEntity.toSimpleCity() = City(
     coordinates = Coordinates(latitude, longitude),
-    name = name
+    name = name,
+    favorite = favorite
 )

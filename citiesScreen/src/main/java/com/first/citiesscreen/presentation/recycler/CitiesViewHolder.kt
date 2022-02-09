@@ -3,6 +3,7 @@ package com.first.citiesscreen.presentation.recycler
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.first.citiesscreen.R
 import com.first.common.model.City
@@ -10,17 +11,26 @@ import com.first.common.model.City
 internal class CitiesViewHolder(
     cityView: View,
     private val onCityClick: (City) -> Unit,
+    private val onLongClick: (City) -> Unit,
     private val removeButtonClick: (City) -> Unit
 ) : RecyclerView.ViewHolder(cityView) {
 
-    private var cityText: TextView = cityView.findViewById(R.id.city)
-    private var removeCity: ImageView = cityView.findViewById(R.id.deleteButton)
+    private val cityText: TextView = cityView.findViewById(R.id.city)
+    private val removeCity: ImageView = cityView.findViewById(R.id.deleteButton)
+    private val favorite: ImageView = cityView.findViewById(R.id.favorite)
     private var city: City? = null
 
     init {
         cityView.setOnClickListener {
             city?.let(onCityClick::invoke)
         }
+
+        cityView.setOnLongClickListener {
+            favorite.isVisible = true
+            city?.let(onLongClick::invoke)
+            true
+        }
+
         removeCity.setOnClickListener {
             city?.let(removeButtonClick::invoke)
         }

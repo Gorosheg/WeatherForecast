@@ -65,6 +65,7 @@ class CitiesFragment : Fragment(R.layout.activity_cities), OnRequestPermissionsR
     private val adapter: CitiesAdapter by lazy {
         CitiesAdapter(
             onCityClick = ::navigateToWeatherScreen,
+            onLongClick = viewModel::makeCityFavorite,
             removeCity = viewModel::removeCity
         )
     }
@@ -120,7 +121,9 @@ class CitiesFragment : Fragment(R.layout.activity_cities), OnRequestPermissionsR
     }
 
     private fun loadWeatherByLocation(location: Location) {
-        val city = City(coordinates = Coordinates(location.latitude, location.longitude))
+        val city = City(
+            coordinates = Coordinates(location.latitude, location.longitude),
+            favorite = false)
         loadWeatherByCity(city)
         loaderChange(false)
     }

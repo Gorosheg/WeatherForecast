@@ -19,6 +19,8 @@ interface CitiesInteractor {
 
     fun removeCity(city: City)
 
+    fun makeCityFavorite(city: City)
+
     val isFirstLaunch: Boolean
 
 

@@ -34,6 +34,10 @@ internal class CitiesRepositoryImpl(
         }
     }
 
+    override fun makeCityFavorite(city: City) {
+        database.makeCityFavorite(city)
+    }
+
     private fun copyCity(
         city: City,
         response: Weather

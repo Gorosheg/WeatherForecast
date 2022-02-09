@@ -32,6 +32,15 @@
             tools:text="Moscow" />
 
         <ImageView
+            android:id="@+id/favorite"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:srcCompat="@android:drawable/btn_star_big_on" />
+
+        <ImageView
             android:id="@+id/deleteButton"
             android:layout_width="32dp"
             android:layout_height="32dp"
