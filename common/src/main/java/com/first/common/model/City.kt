@@ -5,5 +5,5 @@ import java.io.Serializable
 data class City(
     val coordinates: Coordinates? = null,
     val name: String? = null,
-    var favorite: Boolean = false
+    val favorite: Boolean = false
 ) : Serializable
