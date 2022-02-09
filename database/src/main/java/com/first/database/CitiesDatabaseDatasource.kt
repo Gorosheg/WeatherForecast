@@ -76,8 +76,9 @@ internal class CitiesDatabaseDatasourceImpl(
     }
 
     override fun makeCityFavorite(city: City) {
-        val oldCity: CityEntity? = city.name?.let { cityDao.getByName(it) }
+        city.favorite = !city.favorite
 
+        val oldCity: CityEntity? = city.name?.let { cityDao.getByName(it) }
         if (oldCity != null) {
             val newCity: CityEntity = oldCity.copy(
                 favorite = city.favorite

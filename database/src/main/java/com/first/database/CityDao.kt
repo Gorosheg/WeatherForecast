@@ -10,7 +10,7 @@ internal interface CityDao {
     @get:Query("SELECT COUNT(*) FROM CityEntity")
     val count: Int
 
-    @Query("SELECT * FROM CityEntity")
+    @Query("SELECT * FROM CityEntity ORDER BY favorite ASC, name ASC")
     fun cities(): Observable<List<CityEntity>>
 
     @Query("SELECT * FROM CityEntity WHERE name =:name")

@@ -26,7 +26,6 @@ internal class CitiesViewHolder(
         }
 
         cityView.setOnLongClickListener {
-            favorite.isVisible = true
             city?.let(onLongClick::invoke)
             true
         }
@@ -39,5 +38,6 @@ internal class CitiesViewHolder(
     fun bind(city: City) {
         this.city = city
         cityText.text = city.name
+        favorite.isVisible = city.favorite
     }
 }

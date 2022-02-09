@@ -57,9 +57,7 @@ internal class CitiesViewModel(private val interactor: CitiesInteractor) : ViewM
     }
 
     fun makeCityFavorite(city: City) {
-        if (!city.favorite) {
-            interactor.makeCityFavorite(city)
-        }
+        interactor.makeCityFavorite(city)
     }
 
     fun checkIsEmpty() {

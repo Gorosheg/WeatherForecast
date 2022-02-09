@@ -122,8 +122,7 @@ class CitiesFragment : Fragment(R.layout.activity_cities), OnRequestPermissionsR
 
     private fun loadWeatherByLocation(location: Location) {
         val city = City(
-            coordinates = Coordinates(location.latitude, location.longitude),
-            favorite = false)
+            coordinates = Coordinates(location.latitude, location.longitude))
         loadWeatherByCity(city)
         loaderChange(false)
     }

@@ -84,7 +84,7 @@ internal class CityDialog : DialogFragment() {
         if (cityName != "") {
             setFragmentResult(
                 DIALOG_KEY, bundleOf(
-                    Pair<String, Any?>(EXTRA_DIALOG_KEY, City(name = cityName, favorite = false))
+                    Pair<String, Any?>(EXTRA_DIALOG_KEY, City(name = cityName))
                 )
             )
 
@@ -95,7 +95,7 @@ internal class CityDialog : DialogFragment() {
                         EXTRA_DIALOG_KEY, City(
                             Coordinates(
                                 latitude = latitude.toDouble(), longitude = longitude.toDouble()
-                            ), favorite = false
+                            )
                         )
                     )
                 )
