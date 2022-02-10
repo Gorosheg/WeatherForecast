@@ -8,9 +8,9 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Weather forecast"
 include ':app'
-include ':database'
-include ':network'
-include ':citiesScreen'
-include ':weatherScreen'
+include ':dataSource:database'
+include ':dataSource:network'
+include ':dataSource:sharedPreference'
+include ':feature:citiesScreen'
+include ':feature:weatherScreen'
 include ':common'
-include ':sharedPreference'

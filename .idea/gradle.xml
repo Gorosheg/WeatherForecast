@@ -11,12 +11,14 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/citiesScreen" />
             <option value="$PROJECT_DIR$/common" />
-            <option value="$PROJECT_DIR$/database" />
-            <option value="$PROJECT_DIR$/network" />
-            <option value="$PROJECT_DIR$/sharedPreference" />
-            <option value="$PROJECT_DIR$/weatherScreen" />
+            <option value="$PROJECT_DIR$/dataSource" />
+            <option value="$PROJECT_DIR$/dataSource/database" />
+            <option value="$PROJECT_DIR$/dataSource/network" />
+            <option value="$PROJECT_DIR$/dataSource/sharedPreference" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/citiesScreen" />
+            <option value="$PROJECT_DIR$/feature/weatherScreen" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

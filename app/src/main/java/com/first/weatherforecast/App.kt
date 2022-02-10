@@ -2,13 +2,13 @@ package com.first.weatherforecast
 
 import android.annotation.SuppressLint
 import android.app.Application
-import com.first.citiesscreen.dI.CitiesDi
-import com.first.database.DatabaseDi
-import com.first.network.NetworkDi
-import com.first.sharedpreference.FirstLaunchEnum
-import com.first.sharedpreference.MutablePreferenceDatasource
-import com.first.sharedpreference.SharedPreferenceDi
-import com.first.weatherScreen.dI.WeatherDi
+import com.first.feature.citiesscreen.dI.CitiesDi
+import com.first.dataSource.database.DatabaseDi
+import com.first.dataSource.network.NetworkDi
+import com.first.dataSource.sharedpreference.FirstLaunchEnum
+import com.first.dataSource.sharedpreference.MutablePreferenceDatasource
+import com.first.dataSource.sharedpreference.SharedPreferenceDi
+import com.first.feature.weatherScreen.dI.WeatherDi
 
 @SuppressLint("StaticFieldLeak")
 class App : Application() {

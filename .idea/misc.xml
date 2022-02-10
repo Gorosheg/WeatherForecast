@@ -29,6 +29,7 @@
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/activity_cities.xml" value="0.264" />
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/fragment_city_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/list_of_cities.xml" value="0.264" />
+        <entry key="..\:/Weatherforecast/citiesScreen/src/main/res/layout/menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Weatherforecast/common/src/main/res/drawable/gradient_drawable.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_ash.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_cloud.xml" value="0.1609375" />
@@ -41,6 +42,9 @@
         <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_thunderstorm.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/common/src/main/res/drawable/ic_tornado.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/common/src/main/res/drawable/rect_with_round_corners.xml" value="0.2703125" />
+        <entry key="..\:/Weatherforecast/feature/citiesScreen/src/main/res/drawable/ic_favourite_false.xml" value="0.201" />
+        <entry key="..\:/Weatherforecast/feature/citiesScreen/src/main/res/layout/activity_cities.xml" value="0.25" />
+        <entry key="..\:/Weatherforecast/feature/citiesScreen/src/main/res/layout/list_of_cities.xml" value="0.25416666666666665" />
         <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_ash.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_humidity.xml" value="0.2703125" />
         <entry key="..\:/Weatherforecast/weatherScreen/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
