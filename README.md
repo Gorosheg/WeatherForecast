@@ -13,4 +13,10 @@ Android приложение для отображения прогноза по
 
 ![Фото второго экрана](https://github.com/Gorosheg/WeatherForecast/blob/master/app/src/main/res/drawable/weather2.jpg)
 
-Проект написан с использованием: Kotlin, Rxjava2, Room, Retrofit2, MVVM, DI, Сlean architecture, Recycler view.
+Проект написан с использованием: 
+- Rxjava2
+- Room
+- Retrofit2
+- MVVM
+- DI
+- Сlean architecture.
