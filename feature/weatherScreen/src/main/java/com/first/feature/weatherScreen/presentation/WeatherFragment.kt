@@ -13,8 +13,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.first.common.model.City
 import com.first.common.model.Weather
 import com.first.common.util.showToast
-import com.first.weatherScreen.R
 import com.first.feature.weatherScreen.dI.WeatherDi
+import com.first.weatherScreen.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign

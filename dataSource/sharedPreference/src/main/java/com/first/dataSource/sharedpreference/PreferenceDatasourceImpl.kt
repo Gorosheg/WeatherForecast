@@ -23,8 +23,9 @@ internal class PreferenceDatasourceImpl(private val sharedPref: SharedPreference
         }
 
     companion object {
-        private const val VISITED_KEY = "VISITED_KEY"
-    }
 
+        private const val VISITED_KEY = "VISITED_KEY"
+
+    }
 
 }
